@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.SjZhuCeMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.SjZhuCe" >
+    <id column="id" property="id" jdbcType="CHAR"/>
+    <result column="comPany" property="comPany"  jdbcType="VARCHAR"/>
+    <result column="tel" property="tel" jdbcType="VARCHAR"/>
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="passWord" property="passWord" jdbcType="VARCHAR" />
+    <result column="shiro" property="shiro"  jdbcType="INTEGER"/>
+    <result column="faDingRen" property="faDingRen" jdbcType="VARCHAR" />
+    <result column="zuoJiOne" property="zuoJiOne"  jdbcType="VARCHAR"/>
+    <result column="zuoJiTwo" property="zuoJiTwo"  jdbcType="VARCHAR"/>
+    <result column="zuoJiThree" property="zuoJiThree"  jdbcType="VARCHAR"/>
+    <result column="zuoJiFour" property="zuoJiFour" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email"  jdbcType="VARCHAR"/>
+    <result column="qq" property="qq"  jdbcType="VARCHAR"/>
+    <result column="chuanZhen" property="chuanZhen"  jdbcType="VARCHAR"/>
+    <result column="createTime" property="createTime"  jdbcType="TIMESTAMP"/>
+  	<result column="lastTime" property="lastTime" />
+  </resultMap>
+  <sql id="Base_Column_List " >
+    id,comPany,tel,userName,passWord,shiro,
+    faDingRen,zuoJiOne,zuoJiTwo,zuoJiThree,zuoJiFour,
+    address,email,qq,chuanZhen,
+   createTime,lastTime
+  </sql>
+  
+  <sql id="Base_Column_ss " >
+    id,comPany,tel,userName,passWord,shiro,
+    faDingRen,zuoJiOne,zuoJiTwo,zuoJiThree,zuoJiFour,
+    address,email,qq,chuanZhen,
+   createTime
+  </sql>
+  
+  <!-- 注册将数据插入数据库 -->
+  <insert id="insert" parameterType="com.zikezhi.entity.SjZhuCe" >
+	insert into sj_zhuce (id, comPany, tel, 
+      userName, passWord,shiro
+      )
+    values (#{id}, #{comPany}, #{tel}, 
+      #{userName}, #{passWord} , #{shiro}
+      )
+  </insert>
+  
+  <!-- <update id="updateAll" parameterType="com.zikezhi.entity.SjZhuCe" >
+	update  sj_zhuce set comPany = #{company},
+    					 tel = #{tel},
+    					 userName = #{username},
+    					 passWord = #{password},
+    					 shiro = #{shiro},
+    					 faDingRen = #{fadingren},
+    					 zuoJiOne = #{zuojione},
+    					 zuoJiTwo = #{zuojitwo},
+    					 zuoJiThree = #{zuojithree},
+    					 zuoJiFour = #{zuojifour},
+    					 address = #{address},
+    					 email = #{email},
+    					 qq = #{qq},
+    					 chuanZhen = #{chuanzhen},    				  					 		
+ 	where id = #{id} 
+  </update> -->
+ 
+ <!--商家 注册    测试名称是否已存在 --> 
+    <select id="testCompany" parameterType="java.lang.String" resultType="java.lang.Integer">
+  		select count(*) from sj_zhuce where comPany = #{comPany}  
+  	</select>
+  	<select id="testTel" parameterType="java.lang.String" resultType="java.lang.Integer">
+  		select count(*) from sj_zhuce where tel = #{tel}  
+  	</select>
+  	<select id="testUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+  		select count(*) from sj_zhuce where userName = #{userName}  
+  	</select>
+  	
+  	
+   	<select id="sjLogin" resultMap="BaseResultMap" parameterType="com.zikezhi.entity.SjZhuCe">
+	  	select id,comPany,tel,userName,passWord,shiro,
+		    faDingRen,zuoJiOne,zuoJiTwo,zuoJiThree,zuoJiFour,
+		    address,email,qq,chuanZhen, createTime from sj_zhuce where tel = #{tel}
+  	</select>
+  	
+	<select id="backSjIndex" resultMap="BaseResultMap" parameterType="com.zikezhi.entity.SjZhuCe">
+	  	select id,comPany,tel,userName,passWord,shiro,
+		    faDingRen,zuoJiOne,zuoJiTwo,zuoJiThree,zuoJiFour,
+		    address,email,qq,chuanZhen, createTime from sj_zhuce where id = #{id}
+  	</select>
+  	
+  	
+  	<select id="sj_ShenHe" resultMap="BaseResultMap" >
+	  	select id,comPany,tel,userName,passWord,shiro,
+		    faDingRen,zuoJiOne,zuoJiTwo,zuoJiThree,zuoJiFour,
+		    address,email,qq,chuanZhen, createTime from sj_zhuce where shiro = 1
+  	</select>
+  	
+  	<update id="updateSjById"  parameterType="com.zikezhi.entity.SjZhuCe" >
+    update sj_zhuce
+    <set >
+      <if test="faDingRen != null" >
+        faDingRen = #{faDingRen},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="zuoJiOne != null" >
+        zuoJiOne = #{zuoJiOne},
+      </if>
+      <if test="zuoJiTwo != null" >
+        zuoJiTwo = #{zuoJiTwo},
+      </if>
+      <if test="zuoJiThree != null" >
+        zuoJiThree = #{zuoJiThree},
+      </if>
+      <if test="zuoJiFour != null" >
+        zuoJiFour = #{zuoJiFour},
+      </if>
+      <if test="email != null" >
+        email = #{email},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq},
+      </if>
+      <if test="userName != null" >
+        userName = #{userName},
+      </if>
+      <if test="passWord != null" >
+        passWord = #{passWord},
+      </if>
+      <if test="chuanZhen != null" >
+        chuanZhen = #{chuanZhen}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+<update id="shiroShenHe"  parameterType="com.zikezhi.entity.SjZhuCe" >
+    update sj_zhuce
+    <set >
+      <if test="shiro != 1" >
+        shiro = #{shiro}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+ 
+</mapper>

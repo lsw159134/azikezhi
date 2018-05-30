@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.BiaoQianMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.BiaoQian" >
+    <id column="b_id" property="b_id"/>
+    <result column="b_content" property="b_content"/>
+    <result column="b_time" property="b_time"/>
+    <result column="b_img" property="b_img"/>
+    <result column="b_uid" property="b_uid"/>
+    <result column="b_eid" property="b_eid"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    b_id, b_content, b_time, b_img, b_uid
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.BiaoQian" >
+    insert into biaoqian
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="b_content != null" >
+        b_content,
+      </if>
+      <if test="b_img != null" >
+        b_img,
+      </if>
+      <if test="b_uid != null" >
+        b_uid,
+      </if>
+      <if test="b_eid != null" >
+        b_eid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="b_content != null" >
+        #{b_content},
+      </if>
+      <if test="b_img != null" >
+        #{b_img},
+      </if>
+      <if test="b_uid != null" >
+        #{b_uid},
+      </if>
+       <if test="b_eid != null" >
+        #{b_eid},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.BiaoQian" >
+    update cart
+    <set >
+      <if test="b_content != null" >
+        b_content = #{b_content},
+      </if>
+      <if test="b_img != null" >
+        b_img = #{b_img},
+      </if>
+    </set>
+    where b_id = #{b_id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询 -->
+  <select id="queryByUid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from biaoqian where b_uid=#{0} order by b_time desc limit 0,3
+  </select>
+  
+  <select id="getTotal" resultType="int" parameterType="java.lang.String">
+  	select count(*) from biaoqian where b_uid=#{0}
+  </select>
+  
+  <select id="queryByEid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from biaoqian where b_eid=#{0}
+  </select>
+  
+  <!-- 删除购物产品 -->
+ <!--  <delete id="deleteByPid" parameterType="java.lang.String">
+  	delete from pricetrend where pt_id='' and pt_id not in(select p.pt_id from(select * from pricetrend where pt_pid='' order by pt_time desc limit 0,20)p)
+  </delete> -->
+  
+</mapper>

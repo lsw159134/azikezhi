@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+.float_qq{ position:fixed; top:200px; right:0; width:50px; height:203px; z-index:6666;}
+.float_qq li{ width:auto; height:50px; z-index:20;}
+.float_qq li.float_qq1,.float_qq li.float_qq4{ position:absolute; left:0; width:62px;}
+.float_qq li.float_qq1{ top:0;}
+.float_qq li.float_qq2{ position:absolute; top:51px; left:0; width:126px;}
+.float_qq li.float_qq3{ position:absolute; top:102px; left:0; width:172px;}
+.float_qq li.float_qq4{ top:153px;width:172px;}
+.float_qq4{ position:absolute; top:153px; left:0;}
+.float_qq5{ position:absolute; top:204px; left:0;}
+.float_qq li a{ display:block; font-family:"Microsoft Yahei"; color:#FFF; font-size:14px; height:50px; line-height:50px; overflow:hidden; background-color:	#B0E0E6	; opacity:0.8;}
+.float_qq li a img{ display:block; float:left; vertical-align:middle; width:24px; height:24px; margin:12px 12px 14px 14px;}
+.float_qq li a:hover{ background-color:#f47900; opacity:1;}
+.float_shwx{ position:absolute; top:-170px; left:-216px; background:url(../images/float_wxbd.png) no-repeat bottom right; width:216px; height:216px; padding-bottom:9px; display:none;}
+.float_shwx img{ display:block; padding:14px; background-color:#FFF; width:188px; height:188px;}

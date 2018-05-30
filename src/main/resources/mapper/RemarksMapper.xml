@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.RemarksMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Remarks" >
+    <id column="remarks_id" property="remarks_id"/>
+    <result column="remarks_contest" property="remarks_contest" jdbcType="VARCHAR" />
+    <result column="remarks_suid" property="remarks_suid"/>
+    <result column="remarks_userid" property="remarks_userid"/>
+    <result column="remarks_time" property="remarks_time"/>
+    <association property="supplier" javaType="com.zikezhi.entity.Supplier">
+		<id column="SupplierUUID" property="supplieruuid" jdbcType="VARCHAR" />
+		<result column="SupplierName" property="suppliername" jdbcType="VARCHAR" />
+		<result column="SupplierPosition" property="supplierposition"
+			jdbcType="VARCHAR" />
+		<result column="RepoPosition" property="repoposition" jdbcType="VARCHAR" />
+		<result column="ValidityPeriod" property="validityperiod"
+			jdbcType="VARCHAR" />
+		<result column="Telphone4" property="telphone4" jdbcType="VARCHAR" />
+		<result column="Telphone3" property="telphone3" jdbcType="VARCHAR" />
+		<result column="Telphone2" property="telphone2" jdbcType="VARCHAR" />
+		<result column="Telphone1" property="telphone1" jdbcType="VARCHAR" />
+		<result column="Telphone" property="telphone" jdbcType="VARCHAR" />
+		<result column="Cellphone" property="cellphone" jdbcType="VARCHAR" />
+		<result column="Fax" property="fax" jdbcType="VARCHAR" />
+		<result column="Email" property="email" jdbcType="VARCHAR" />
+		<result column="BrandOperation" property="brandoperation"
+			jdbcType="VARCHAR" />
+		<result column="SupplierPhotos" property="supplierphotos"
+			jdbcType="VARCHAR" />
+		<result column="Qualification" property="qualification"
+			jdbcType="VARCHAR" />
+		<result column="Evaluate" property="evaluate" jdbcType="VARCHAR" />
+		<result column="IsCheck" property="ischeck" jdbcType="BIT" />
+		<result column="QQ" property="qq" jdbcType="CHAR" />
+		<result column="QQ2" property="qq2" jdbcType="CHAR" />
+		<result column="supplier_uid" property="supplier_uid" jdbcType="VARCHAR" />
+	</association>
+	<association property="user" javaType="com.zikezhi.entity.UserInfo">
+		<id column="useruid" property="useruid" jdbcType="VARCHAR" />
+		<result column="username" property="username"/>
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    remarks_id, remarks_contest, remarks_suid, remarks_userid,remarks_time
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Remarks" >
+    insert into Remarks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="remarks_contest != null" >
+        remarks_contest,
+      </if>
+      <if test="remarks_suid != null" >
+        remarks_suid,
+      </if>
+      <if test="remarks_userid != null" >
+        remarks_userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="remarks_contest != null" >
+        #{remarks_contest,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks_suid != null" >
+        #{remarks_suid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks_userid != null" >
+        #{remarks_userid},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Remarks" >
+    update Remarks
+    <set >
+      <if test="remarks_contest != null" >
+        remarks_contest = #{remarks_contest},
+      </if>
+    </set>
+    where remarks_id = #{remarks_id}
+  </update>
+  
+  <!-- 查询购物车是否有产品相同 -->
+  <select id="queryByPid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from remarks where remarks_suid=#{0} and remarks_userid=#{1}
+  </select>
+  
+  <!-- 删除购物产品 -->
+  <delete id="deleteByPid" parameterType="java.lang.String">
+  	delete from remarks where Remarks_id=#{0}
+  </delete>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select r.*,username,suppliername from remarks r left join supplier on remarks_suid=SupplierUUID left join user on useruid=remarks_userid
+  </select>
+  
+</mapper>

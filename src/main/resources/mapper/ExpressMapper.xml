@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zikezhi.dao.ExpressMapper">
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Express">
+    <id column="express" jdbcType="CHAR" property="express" />
+    <result column="panduan" jdbcType="VARCHAR" property="panduan" />
+    <result column="expressName" jdbcType="VARCHAR" property="expressname" />
+    <result column="expressNumber" jdbcType="VARCHAR" property="expressnumber" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="help" jdbcType="VARCHAR" property="help" />
+    <result column="useruid" jdbcType="VARCHAR" property="useruid"/>
+    <result column="product" jdbcType="VARCHAR" property="product" />
+    <result column="productuid" jdbcType="VARCHAR" property="productuid"/>
+    <result column="edate" property="edate"/>
+    <result column="fan" jdbcType="REAL" property="fan"/>
+    <result column="beizhu" property="beizhu"/>
+    <result column="eprice" jdbcType="REAL" property="eprice"/>
+    <result column="one" jdbcType="REAL" property="one"/>
+    <result column="e_invoice" property="e_invoice"/>
+    <result column="mode" property="mode"/>
+    <result column="Preferentialamount" property="preferentialamount"/>
+    <result column="Discountdescription" property="discountdescription"/>
+    <result column="discountprice" property="discountprice"/>
+    <result column="ordernumber" property="ordernumber"/>
+    <result column="express_profit" property="express_profit"/>
+    <result column="express_package" property="express_package"/>
+    <result column="express_sid" property="express_sid"/>
+    <result column="express_biaoqian" property="express_biaoqian"/>
+	<association property="p" javaType="com.zikezhi.entity.Product" column="productuid">
+		<id column="ProductUUID" jdbcType="VARCHAR" property="productuuid" />
+		<result column="Product" jdbcType="VARCHAR" property="product" />
+		<result column="Supplier" jdbcType="VARCHAR" property="supplier" />
+		<result column="encapsulation" jdbcType="VARCHAR" property="encapsulation" />
+		<result column="isgoodsinstock" property="isgoodsinstock" />
+		<collection property="pimgList" javaType="list" ofType="com.zikezhi.entity.PImg">
+			<id column="p_imgid" property="p_imgid" jdbcType="VARCHAR" />
+		    <result column="p_imgname" property="p_imgname" jdbcType="VARCHAR" />
+		    <result column="p_imgpid" property="p_imgpid" jdbcType="VARCHAR" />
+		    <result column="p_imgstauts" property="p_imgstauts" jdbcType="VARCHAR" />
+		</collection>
+	</association>
+	<association property="user" javaType="com.zikezhi.entity.UserInfo">
+		<id column="userUid" property="useruid" jdbcType="VARCHAR" />
+   		<result column="userName" property="username" jdbcType="VARCHAR" />
+   		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+	</association>
+	<association property="supplierlist" javaType="com.zikezhi.entity.Supplier">
+		<id column="SupplierUUID" property="supplieruuid" jdbcType="VARCHAR" />
+		<result column="SupplierName" property="suppliername" jdbcType="VARCHAR" />
+		<result column="SupplierPosition" property="supplierposition"
+			jdbcType="VARCHAR" />
+		<result column="RepoPosition" property="repoposition" jdbcType="VARCHAR" />
+		<result column="ValidityPeriod" property="validityperiod"
+			jdbcType="VARCHAR" />
+		<result column="Telphone4" property="telphone4" jdbcType="VARCHAR" />
+		<result column="Telphone3" property="telphone3" jdbcType="VARCHAR" />
+		<result column="Telphone2" property="telphone2" jdbcType="VARCHAR" />
+		<result column="Telphone1" property="telphone1" jdbcType="VARCHAR" />
+		<result column="Telphone" property="telphone" jdbcType="VARCHAR" />
+		<result column="Cellphone" property="cellphone" jdbcType="VARCHAR" />
+		<result column="Fax" property="fax" jdbcType="VARCHAR" />
+		<result column="Email" property="email" jdbcType="VARCHAR" />
+		<result column="BrandOperation" property="brandoperation"
+			jdbcType="VARCHAR" />
+		<result column="SupplierPhotos" property="supplierphotos"
+			jdbcType="VARCHAR" />
+		<result column="Qualification" property="qualification"
+			jdbcType="VARCHAR" />
+		<result column="Evaluate" property="evaluate" jdbcType="VARCHAR" />
+		<result column="IsCheck" property="ischeck" jdbcType="BIT" />
+		<result column="QQ" property="qq" jdbcType="CHAR" />
+		<result column="QQ2" property="qq2" jdbcType="CHAR" />
+		<result column="supplier_uid" property="supplier_uid" jdbcType="VARCHAR" />
+		<result column="supplier_label1" property="supplier_label1" jdbcType="VARCHAR" />
+		<result column="supplier_label2" property="supplier_label2" jdbcType="VARCHAR" />
+		<result column="supplier_label3" property="supplier_label3" jdbcType="VARCHAR" />
+		<result column="supplier_label4" property="supplier_label4" jdbcType="VARCHAR" />
+		<result column="supplier_label5" property="supplier_label5" jdbcType="VARCHAR" />
+		<result column="supplier_bieming" property="supplier_bieming" jdbcType="VARCHAR" />
+	</association>
+	<collection property="order" javaType="list" ofType="com.zikezhi.entity.OrderItme">  
+		<id column="o_id" property="o_id" jdbcType="VARCHAR" />
+	    <result column="o_product" property="o_product" jdbcType="VARCHAR" />
+	    <result column="o_number" property="o_number" jdbcType="VARCHAR" />
+	    <result column="o_price" property="o_price" jdbcType="REAL" />
+	    <result column="o_pid" property="o_pid" jdbcType="VARCHAR" />
+	    <result column="o_one" property="o_one" jdbcType="REAL" />
+	    <result column="o_package" property="o_package"/>
+	    <association property="supplier" javaType="com.zikezhi.entity.Supplier">
+			<id column="SupplierUUID" property="supplieruuid" jdbcType="VARCHAR" />
+			<result column="SupplierName" property="suppliername" jdbcType="VARCHAR" />
+			<result column="SupplierPosition" property="supplierposition"
+				jdbcType="VARCHAR" />
+			<result column="RepoPosition" property="repoposition" jdbcType="VARCHAR" />
+			<result column="ValidityPeriod" property="validityperiod"
+				jdbcType="VARCHAR" />
+			<result column="Telphone4" property="telphone4" jdbcType="VARCHAR" />
+			<result column="Telphone3" property="telphone3" jdbcType="VARCHAR" />
+			<result column="Telphone2" property="telphone2" jdbcType="VARCHAR" />
+			<result column="Telphone1" property="telphone1" jdbcType="VARCHAR" />
+			<result column="Telphone" property="telphone" jdbcType="VARCHAR" />
+			<result column="Cellphone" property="cellphone" jdbcType="VARCHAR" />
+			<result column="Fax" property="fax" jdbcType="VARCHAR" />
+			<result column="Email" property="email" jdbcType="VARCHAR" />
+			<result column="BrandOperation" property="brandoperation"
+				jdbcType="VARCHAR" />
+			<result column="SupplierPhotos" property="supplierphotos"
+				jdbcType="VARCHAR" />
+			<result column="Qualification" property="qualification"
+				jdbcType="VARCHAR" />
+			<result column="Evaluate" property="evaluate" jdbcType="VARCHAR" />
+			<result column="IsCheck" property="ischeck" jdbcType="BIT" />
+			<result column="QQ" property="qq" jdbcType="CHAR" />
+			<result column="QQ2" property="qq2" jdbcType="CHAR" />
+			<result column="supplier_uid" property="supplier_uid" jdbcType="VARCHAR" />
+			<result column="supplier_label1" property="supplier_label1" jdbcType="VARCHAR" />
+			<result column="supplier_label2" property="supplier_label2" jdbcType="VARCHAR" />
+			<result column="supplier_label3" property="supplier_label3" jdbcType="VARCHAR" />
+			<result column="supplier_label4" property="supplier_label4" jdbcType="VARCHAR" />
+			<result column="supplier_label5" property="supplier_label5" jdbcType="VARCHAR" />
+			<result column="supplier_bieming" property="supplier_bieming" jdbcType="VARCHAR" />
+		</association>
+	    <association property="p" javaType="com.zikezhi.entity.Product" column="o_pid">
+			<id column="ProductUUID" jdbcType="VARCHAR" property="productuuid" />
+			<result column="Product" jdbcType="VARCHAR" property="product" />
+			<result column="Supplier" jdbcType="VARCHAR" property="supplier" />
+			<result column="encapsulation" jdbcType="VARCHAR" property="encapsulation" />
+			<result column="isgoodsinstock" property="isgoodsinstock" />
+			<collection property="pimgList" javaType="list" ofType="com.zikezhi.entity.PImg">
+				<id column="p_imgid" property="p_imgid" jdbcType="VARCHAR" />
+			    <result column="p_imgname" property="p_imgname" jdbcType="VARCHAR" />
+			    <result column="p_imgpid" property="p_imgpid" jdbcType="VARCHAR" />
+			    <result column="p_imgstauts" property="p_imgstauts" jdbcType="VARCHAR" />
+			</collection>
+		</association>
+    </collection>  
+  </resultMap>
+  <sql id="Base_Column_List">
+    express, expressName, expressNumber, name, telphone, address, status, help, useruid, product, productuid,edate,fan,beizhu,eprice,one,e_invoice
+  </sql>
+
+
+  <select id="selectByAll" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from express
+  </select>
+  <select id="queryzdCountNoPay" parameterType="String" resultType="com.zikezhi.entity.Express">
+       	SELECT
+		*
+	FROM
+		express e
+	LEFT JOIN orderitme s ON express =s.o_eid left join supplier on supplieruuid=express_sid or supplieruuid=o_sid
+	where e.useruid=#{useruid, jdbcType=VARCHAR} and e.panduan is null and e.status='1'
+   			group by express ORDER BY edate desc
+  </select>
+  <select id="querybdCountNoPay" parameterType="String" resultType="com.zikezhi.entity.Express">
+       	SELECT
+		*
+	FROM
+		express e
+	LEFT JOIN orderitme s ON express =s.o_eid left join supplier on supplieruuid=express_sid or supplieruuid=o_sid
+	where e.useruid=#{useruid, jdbcType=VARCHAR} and e.panduan ='1' and e.status='1'
+   		group by express  ORDER BY edate desc
+  </select>
+<!-- 用户订单查询 -->
+  <select id="selectByUseruid" parameterType="Map" resultMap="BaseResultMap">
+   	SELECT
+		*
+	FROM
+		express e
+	LEFT JOIN orderitme s ON express =s.o_eid left join supplier on supplieruuid=express_sid or supplieruuid=o_sid
+	where e.useruid=#{useruid, jdbcType=VARCHAR} and e.panduan is null
+   			 ORDER BY edate desc
+	<if test="start!=null and size!=null">
+		limit #{start}, #{size}
+	</if>
+  </select>
+  <select id="selectBeiDongByUseruid" parameterType="Map" resultMap="BaseResultMap">
+   	SELECT
+		*
+	FROM
+		express e
+	LEFT JOIN orderitme s ON express =s.o_eid left join supplier on supplieruuid=express_sid or supplieruuid=o_sid
+	where e.useruid=#{useruid, jdbcType=VARCHAR} and e.panduan = '1'
+   			 ORDER BY edate desc
+	<if test="start!=null and size!=null">
+		limit #{start}, #{size}
+	</if>
+  </select>
+  <!-- 总记录数 -->
+  <select id="getTotal" parameterType="Map" resultType="Long">
+	select count(*) from express e where e.useruid=#{useruid, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from express
+    where express = #{express,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from express
+    where express = #{express,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zikezhi.entity.Express">
+    insert into express (express, expressName, expressNumber, 
+      name, telphone, address, 
+      status, help,useruid, product, productuid)
+    values (#{express,jdbcType=CHAR}, #{expressname,jdbcType=VARCHAR}, #{expressnumber,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{help,jdbcType=VARCHAR}, #{useruid, jdbcType=VARCHAR}, #{product, jdbcType=VARCHAR}, #{productuid, jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Express">
+    insert into express
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="express != null">
+        express,
+      </if>
+      <if test="expressname != null">
+        expressName,
+      </if>
+      <if test="expressnumber != null">
+        expressNumber,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="help != null">
+        help,
+      </if>
+      <if test="useruid != null">
+        useruid,
+      </if>
+      <if test="product != null">
+        product,
+      </if>
+      <if test="productuid != null">
+        productuid,
+      </if>
+      <if test="eprice != null">
+        eprice,
+      </if>
+      <if test="beizhu != null">
+        beizhu,
+      </if>
+      
+      <if test="edate != null">
+        edate,
+      </if>
+      <if test="one != null">
+        one,
+      </if>
+      <if test="e_invoice != null">
+        e_invoice,
+      </if>
+      <if test="ordernumber != null">
+        ordernumber,
+      </if>
+      <if test="express_package != null">
+        express_package,
+      </if>
+      <if test="express_sid != null">
+        express_sid,
+      </if>
+      <if test="discountdescription != null">
+        discountdescription,
+      </if>
+      <if test="express_biaoqian != null">
+        express_biaoqian,
+      </if>
+      <if test="panduan != null">
+        panduan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="express != null">
+        #{express,jdbcType=CHAR},
+      </if>
+      <if test="expressname != null">
+        #{expressname,jdbcType=VARCHAR},
+      </if>
+      <if test="expressnumber != null">
+        #{expressnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="help != null">
+        #{help,jdbcType=VARCHAR},
+      </if>
+      <if test="useruid != null">
+        #{useruid, jdbcType=VARCHAR},
+      </if>
+      <if test="product != null">
+        #{product, jdbcType=VARCHAR},
+      </if>
+      <if test="productuid != null">
+        #{productuid, jdbcType=VARCHAR},
+      </if>
+       <if test="eprice != null">
+        #{eprice, jdbcType=REAL},
+      </if>
+      <if test="beizhu != null">
+        #{beizhu},
+      </if>
+      <if test="edate != null">
+        #{edate},
+      </if>
+       <if test="one != null">
+        #{one},
+      </if>
+       <if test="e_invoice != null">
+        #{e_invoice},
+      </if>
+       <if test="ordernumber != null">
+        #{ordernumber},
+      </if>
+      <if test="express_package != null">
+        #{express_package},
+      </if>
+      <if test="express_sid != null">
+        #{express_sid},
+      </if>
+      <if test="discountdescription != null">
+        #{discountdescription},
+      </if>
+      <if test="express_biaoqian != null">
+        #{express_biaoqian},
+      </if>
+      <if test="panduan != null">
+         #{panduan},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Express">
+    update express
+    <set>
+      <if test="expressname != null">
+        expressName = #{expressname,jdbcType=VARCHAR},
+      </if>
+      <if test="expressnumber != null">
+        expressNumber = #{expressnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="help != null">
+        help = #{help,jdbcType=VARCHAR},
+      </if>
+      <if test="useruid != null">
+        useruid = #{useruid, jdbcType=VARCHAR},
+      </if>
+      <if test="product != null">
+        product = #{product, jdbcType=VARCHAR},
+      </if>
+      <if test="productuid != null">
+        productuid = #{productuid, jdbcType=VARCHAR},
+      </if>
+      <if test="fan != null">
+        fan = #{fan},
+      </if>
+      <if test="one != null">
+        one = #{one},
+      </if>
+      <if test="e_invoice != null">
+        e_invoice = #{e_invoice, jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu != null">
+        beizhu = #{beizhu, jdbcType=VARCHAR},
+      </if>
+      <if test="discountdescription != null">
+        Discountdescription = #{discountdescription, jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialamount != null">
+        Preferentialamount = #{preferentialamount},
+      </if>
+      <if test="discountprice != null">
+        discountprice = #{discountprice},
+      </if>
+      <if test="express_profit != null">
+        express_profit = #{express_profit},
+      </if>
+    </set>
+    where express = #{express,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.Express">
+    update express
+    set expressName = #{expressname,jdbcType=VARCHAR},
+      expressNumber = #{expressnumber,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      help = #{help,jdbcType=VARCHAR},
+      useruid = #{useruid, jdbcType=VARCHAR},
+      product = #{product, jdbcType=VARCHAR},
+      productuid = #{productuid, jdbcType=VARCHAR}
+    where express = #{express,jdbcType=CHAR}
+  </update>
+  <update id="upIndent" parameterType="com.zikezhi.entity.Express">
+  		update express set status=#{status,jdbcType=VARCHAR} <if test="mode!=null">
+  			,mode=#{mode}
+  		</if> where express=#{express,jdbcType=CHAR}
+  </update>
+  
+	<select id="selectAll" parameterType="Map" resultMap="BaseResultMap">
+	  select e.*,u.username username from express e LEFT join user u on u.useruid=e.useruid
+ 		<where>
+ 			<if test="username != null and username !=''">
+				username like #{username}
+			</if>
+			<if test="edate!=null and edate != ''">
+				and edate like #{edate}
+			</if>
+			<if test="telphone!=null and telphone!=''">
+				and telphone like #{telphone}
+			</if>
+			<if test="address!=null and address!=''">
+				and address like #{address}
+			</if>
+			<if test="product!=null and product!=''">
+				and product like #{product} or e.express in(select o_eid from orderitme where o_product like #{product})
+			</if>
+			<if test="status!=null and status!=''">
+				and status like #{status}
+			</if>
+ 		</where>
+	  	order by edate desc limit #{start},#{size}
+	</select>
+	
+	<!-- 查看订单详情 -->
+	<select id="queryById" parameterType="java.lang.String" resultMap="BaseResultMap">
+	  	SELECT e.*,u.userName,u.telephone
+	  		from express e,user u
+	  	where e.useruid=u.userUid and express=#{express,jdbcType=CHAR}
+	</select>
+	
+	<!-- 总记录数 -->
+  	<select id="getTotalAll" parameterType="Map" resultType="Long">
+		SELECT count(*)
+	  		from express e,user u
+	  	where e.useruid=u.userUid
+		  	<if test="username != null">
+				and username like #{username}
+			</if>
+			<if test="edate!=null">
+				and edate like #{edate}
+			</if>
+			<if test="telphone!=null">
+				and telphone like #{telphone}
+			</if>
+			<if test="address!=null">
+				and address like #{address}
+			</if>
+			<if test="product!=null">
+				and product like #{product}
+			</if>
+	</select>
+	
+	<!-- 返利总金额 -->
+  	<select id="selectFanBySum" parameterType="java.lang.String" resultType="Float">
+		SELECT sum(fan)
+	  		from express e
+	  	where useruid=#{uid,jdbcType=CHAR}
+	</select>
+  <select id="getStatusSum" resultType="Long">
+  	select count(0) from express where status=6
+  </select>
+  
+  <!-- 订单每月状态查询 -->
+  <select id="queryByEdate" resultType="java.lang.String">
+  	select status from express where date_format(edate,'%Y-%m')=date_format(now(),'%Y-%m')
+  </select>
+  
+  <!-- 订单状态查询 -->
+   <select id="queryByStatus" resultType="java.lang.String">
+  	select status from express
+  </select>
+ 
+  <select id="sj_searchMyOrder" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select s.* from
+
+	( SELECT e.* , o.* from express e  LEFT JOIN orderitme o ON e.express = o.o_eid
+	) s  LEFT JOIN product p ON s.o_pid = p.productuuid or s.productuid = p.productuuid
+	
+	WHERE p.supplieruuid = #{supplieruuid} ORDER BY edate desc
+  </select>
+  
+  <select id="user_Order" parameterType="java.lang.String" resultType="Long">
+	  	SELECT count(*) FROM 
+		(SELECT e.* , o.* from express e  LEFT JOIN orderitme o ON e.express = o.o_eid) s
+		WHERE s.useruid = #{useruid}
+  </select>
+  
+  <select id="queryByShuiji" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * from express where ordernumber=#{0}
+  </select>
+  <select id="queryByDateCount" parameterType="java.lang.String" resultType="int">
+  	select count(*) from express where edate like #{0}
+  </select>
+  
+  <select id="queryBypriceTotal" parameterType="java.lang.String" resultType="Float">
+	  	select sum((select COALESCE(sum(e.eprice),0) from(select status,eprice from express where date_format(edate,'%Y-%m')=date_format(now(),'%Y-%m') and Preferentialamount is null)e where e.`status`=2 or e.status=3 or e.`status`=4)+(select COALESCE(sum(e.eprice),0) from(select status,eprice from express where date_format(edate,'%Y-%m')=date_format(now(),'%Y-%m') and Preferentialamount is not null)e where e.`status`=2 or e.status=3 or e.`status`=4
+			)+(select COALESCE(sum(b.bom_price),0) from(select bom_price,bom_status from bomorder where date_format(bom_date,'%Y-%m')=date_format(now(),'%Y-%m') )b where b.bom_status=2 or b.bom_status=3 or b.bom_status=4
+			)
+		)
+  </select>
+  
+  <select id="queryBysuidTotal" parameterType="java.lang.String" resultType="Float">
+  	SELECT
+	sum(
+		(
+			SELECT
+				COALESCE (sum(e.eprice), 0)
+			FROM
+				(
+					SELECT
+						STATUS,
+						eprice
+					FROM
+						express e
+					WHERE
+						date_format(edate, '%Y-%m') = date_format(now(), '%Y-%m')
+					AND Preferentialamount IS NOT NULL
+					AND express_sid = '505a2498732f37d9ba9c1a9b0289dab9'
+				) e
+			WHERE
+				e.`status` = 2
+			OR e. STATUS = 3
+			OR e.`status` = 4
+		) + (
+			SELECT
+				COALESCE (sum(e.eprice), 0)
+			FROM
+				(
+					SELECT
+						STATUS,
+						eprice
+					FROM
+						express e
+					WHERE
+						date_format(edate, '%Y-%m') = date_format(now(), '%Y-%m')
+					AND express_sid = #{0}
+				) e
+			WHERE
+				e.`status` = 2
+			OR e. STATUS = 3
+			OR e.`status` = 4
+		) + (
+			SELECT
+				COALESCE (sum(e.o_price), 0)
+			FROM
+				(
+					SELECT
+						STATUS,
+						o_price
+					FROM
+						orderitme,
+						express
+					WHERE
+						o_eid = express
+					AND date_format(edate, '%Y-%m') = date_format(now(), '%Y-%m')
+					AND o_sid = #{0}
+				) e
+			WHERE
+				e.`status` = 2
+			OR e. STATUS = 3
+			OR e.`status` = 4
+		)
+	)
+  </select>
+  
+  <select id="queryselectFanli" parameterType="Map" resultMap="BaseResultMap">
+  	select * from(
+  		select fan,edate,"产品购买" as name from express where fan is not null and fan&lt;&gt;0 and useruid=#{uid}
+		union
+		select bom_fan fan,bom_date edate ,"bom表订单" as name from bomorder where bom_fan is not null and bom_fan&lt;&gt;0 and bom_userphone=(select telephone from user where useruid=#{uid})
+	)b order by b.edate desc limit #{start},#{size}
+
+  </select>
+  
+  <select id="queryselectFanliTotal" parameterType="Map" resultType="Long">
+  	select sum((select count(*) from express where fan is not null and fan&lt;&gt;0 and useruid=#{uid}
+)+(select count(*) from bomorder where bom_fan is not null and bom_fan&lt;&gt;0 and bom_userphone=(select telephone from user where useruid=#{uid})
+)
+)
+
+  </select>
+  
+  <select id="queryBychengjiao" resultMap="BaseResultMap">
+  	select p.product from(select product,edate from express where product is not null ORDER BY rand() LIMIT 30)p group by p.product limit 8,8
+  </select>
+  
+  <select id="queryByBookingOrder" resultMap="BaseResultMap" parameterType="Map">
+  select e.edate,p.product,p.encapsulation,o.o_number,e.expressnumber,p.isgoodsinstock,o.o_date from express e left join orderitme o on express=o.o_eid left join product p on e.productuid=p.productuuid or o_pid=p.productuuid where (productuid in(select productuuid from product where product_booking in(select booking_id from(select booking_id from booking where booking_uid=#{uid} and booking_status='6')as b)
+) or o.o_pid in(select productuuid from product where product_booking in(select booking_id from(select booking_id from booking where booking_uid=#{uid} and booking_status='6')as b)
+)) and (status=2 or status=3 or status=4) order by e.edate desc limit #{start},#{size}
+  </select>
+  
+  <select id="getBookingOrderTotal" resultType="int" parameterType="Map">
+  select count(*) from express e left join orderitme o on express=o.o_eid left join product p on e.productuid=p.productuuid or o_pid=p.productuuid where (productuid in(select productuuid from product where product_booking in(select booking_id from(select booking_id from booking where booking_uid=#{uid} and booking_status='6')as b)
+) or o.o_pid in(select productuuid from product where product_booking in(select booking_id from(select booking_id from booking where booking_uid=#{uid} and booking_status='6')as b)
+)) and (status=2 or status=3 or status=4)
+  </select>
+  
+  <select id="queryByprofit" resultMap="BaseResultMap" >
+  select * from(
+  		select express_profit fan,edate,"产品购买" as name,ordernumber from express where express_profit is not null and express_profit&lt;&gt;0 
+		union
+		select bom_profit fan,bom_date edate ,"bom表订单" as name,bom_identifier ordernumber from bomorder where bom_profit is not null and bom_profit&lt;&gt;0
+	)b order by b.edate desc 
+  </select>
+  
+  <select id="selectByProfitSum" resultType="Float" >
+  select sum(b.fan) from(
+  		select express_profit fan,edate,"产品购买" as name,ordernumber from express where express_profit is not null and express_profit&lt;&gt;0 
+		union
+		select bom_profit fan,bom_date edate ,"bom表订单" as name,bom_identifier ordernumber from bomorder where bom_profit is not null and bom_profit&lt;&gt;0
+	)b order by b.edate desc 
+  </select>
+  
+  <select id="queryByStar" resultType="int" parameterType="java.lang.String">
+  	select count(*) from express where useruid=#{0} and (status=2 or status=3 or status=4)
+  </select>
+  
+  <!-- 用户订单详情查询   -->
+ <!--  <select id="dingdanDetail" parameterType="java.lang.String" resultMap="BaseResultMap">
+	  	 select * from
+   			       (select * from express e  LEFT JOIN orderitme o on o.o_eid=e.express WHERE e.express = #{express} )s 
+   								LEFT JOIN   product p on  s.productuid=p.productuuid or s.o_pid=p.productuuid
+  </select> -->
+  
+  <update id="upStatusQut">
+  	update express set `status`=5 where TIMESTAMPDIFF(second,edate,now()) > 24*3600 and status=1
+  </update>
+  
+  <!-- 在线购商家订单查询 -->
+  <select id="seleOnlineExpress" resultMap="BaseResultMap" parameterType="Map">
+  	SELECT
+		*
+	FROM
+		express e
+	LEFT JOIN orderitme s ON express =s.o_eid left join user u on e.useruid=u.useruid
+	WHERE
+		(express_sid = #{sid}
+	OR s.o_sid = #{sid})
+	<if test="username != null and username!='' ">
+			and e.useruid in(select useruid from user where username = #{username})
+		</if>
+	ORDER BY 
+		edate DESC
+	<if test="start!=null and size!=null">
+		limit #{start}, #{size}
+	</if>
+  </select>
+  
+  <!-- 在线购商家订单总数 -->
+  <select id="getOnlineExpress" resultType="int" parameterType="Map">
+  	SELECT
+		count(*)
+	FROM
+		express e
+	LEFT JOIN (select * from orderitme where o_sid=#{sid} GROUP BY o_eid)s ON express =s.o_eid
+	WHERE
+		(express_sid = #{sid}
+	OR s.o_sid = #{sid})
+	<if test="username != null and username!='' ">
+		and e.useruid in(select useruid from user where username =#{username})
+	</if>
+  </select>
+  
+  <select id="selectByExpress" parameterType="String" resultType="String">
+  
+    select panduan from express where express = #{express,jdbcType=CHAR} 
+  
+  </select>
+</mapper>

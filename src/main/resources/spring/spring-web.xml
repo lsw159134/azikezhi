@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"	
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
+    http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/aop   
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- 扫描web相关的bean -->
+	<context:component-scan base-package="com.zikezhi.controller">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	
+	<bean id="SpringQtzJob" class="com.zikezhi.utils.SpringQtz" />
+	
+	<bean id="SpringQtzJob2" class="com.zikezhi.utils.SpringQtz2" />
+	  
+    <bean id="SpringQtzJobMethod"  
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject">  
+            <ref bean="SpringQtzJob" />  
+        </property>  
+        <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+            <value>execute</value>  
+        </property>  
+    </bean>
+    
+    <bean id="SpringQtzJobMethod2"  
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject">  
+            <ref bean="SpringQtzJob2" />  
+        </property>  
+        <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+            <value>execute</value>  
+        </property>  
+    </bean>
+      
+    <!-- ======================== 调度触发器 ======================== -->  
+    <bean id="CronTriggerFactoryBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+        <property name="jobDetail" ref="SpringQtzJobMethod"></property>  
+        <property name="cronExpression" value="59 59 23 * * ?"></property>  
+    </bean> 
+    
+    <!-- ======================== 调度触发器 ======================== -->  
+    <bean id="CronTriggerFactoryBean2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+        <property name="jobDetail" ref="SpringQtzJobMethod2"></property>  
+        <property name="cronExpression" value="0 */1 * * * ?"></property>  
+    </bean> 
+  
+    <!-- ======================== 调度工厂 ======================== -->  
+    <bean id="SpringJobSchedulerFactoryBean"  
+        class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+        <property name="triggers">  
+            <list>  
+                <ref bean="CronTriggerFactoryBean" />
+                <ref bean="CronTriggerFactoryBean2" />  
+            </list>  
+        </property>  
+    </bean>
+	
+	<!-- 配置SpringMVC -->
+	<!-- 1.开启SpringMVC注解模式 -->
+	<!-- 简化配置 (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
+		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 -->
+	<mvc:annotation-driven />
+
+	<!-- 2.静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 
+	<mvc:resources location="/static/" mapping="/static/*"/>
+	<mvc:resources location="/lib/" mapping="/lib/*" />
+	<mvc:resources location="/img/" mapping="/img/*" />
+	<mvc:resources location="/fonts/" mapping="/fonts/*"/>
+	<mvc:resources location="/wangEditor/" mapping="/wangEditor/*"/>-->
+	<mvc:default-servlet-handler />
+
+	<!-- 3.配置jsp显示viewResolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 避免IE执行Ajax时，返回JSON出现下载文件 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="25000000000"/>
+	</bean>
+</beans>

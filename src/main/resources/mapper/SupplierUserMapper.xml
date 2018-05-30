@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.SupplierUserMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.SupplierUser" >
+    <id column="SupplierUserUUID" property="supplieruseruuid" jdbcType="VARCHAR" />
+    <result column="SupplierName" property="suppliername" jdbcType="VARCHAR" />
+    <result column="IPAddress" property="ipaddress" jdbcType="VARCHAR" />
+    <result column="Passwd" property="passwd" jdbcType="VARCHAR" />
+    <result column="Cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="RegTime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="Sex" property="sex" jdbcType="TINYINT" />
+    <result column="LastLoginTime" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="RegIP" property="regip" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="CHAR" />
+    <result column="City" property="city" jdbcType="VARCHAR" />
+    <result column="BussinessLicence" property="bussinesslicence" jdbcType="VARCHAR" />
+    <result column="Credit" property="credit" jdbcType="REAL" />
+    <result column="SupplierUUID" property="supplieruuid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SupplierUserUUID, SupplierName, IPAddress, Passwd, Cellphone, Email, RegTime, Sex, 
+    LastLoginTime, RegIP, QQ, City, BussinessLicence, Credit, SupplierUUID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from supplieruser
+    where SupplierUserUUID = #{supplieruseruuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from supplieruser
+    where SupplierUserUUID = #{supplieruseruuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zikezhi.entity.SupplierUser" >
+    insert into supplieruser (SupplierUserUUID, SupplierName, IPAddress, 
+      Passwd, Cellphone, Email, 
+      RegTime, Sex, LastLoginTime, 
+      RegIP, QQ, City, BussinessLicence, 
+      Credit, SupplierUUID)
+    values (#{supplieruseruuid,jdbcType=VARCHAR}, #{suppliername,jdbcType=VARCHAR}, #{ipaddress,jdbcType=VARCHAR}, 
+      #{passwd,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{regtime,jdbcType=TIMESTAMP}, #{sex,jdbcType=TINYINT}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{regip,jdbcType=VARCHAR}, #{qq,jdbcType=CHAR}, #{city,jdbcType=VARCHAR}, #{bussinesslicence,jdbcType=VARCHAR}, 
+      #{credit,jdbcType=REAL}, #{supplieruuid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.SupplierUser" >
+    insert into supplieruser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplieruseruuid != null" >
+        SupplierUserUUID,
+      </if>
+      <if test="suppliername != null" >
+        SupplierName,
+      </if>
+      <if test="ipaddress != null" >
+        IPAddress,
+      </if>
+      <if test="passwd != null" >
+        Passwd,
+      </if>
+      <if test="cellphone != null" >
+        Cellphone,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="regtime != null" >
+        RegTime,
+      </if>
+      <if test="sex != null" >
+        Sex,
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime,
+      </if>
+      <if test="regip != null" >
+        RegIP,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="city != null" >
+        City,
+      </if>
+      <if test="bussinesslicence != null" >
+        BussinessLicence,
+      </if>
+      <if test="credit != null" >
+        Credit,
+      </if>
+      <if test="supplieruuid != null" >
+        SupplierUUID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplieruseruuid != null" >
+        #{supplieruseruuid,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliername != null" >
+        #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regip != null" >
+        #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=CHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="bussinesslicence != null" >
+        #{bussinesslicence,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=REAL},
+      </if>
+      <if test="supplieruuid != null" >
+        #{supplieruuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.SupplierUser" >
+    update supplieruser
+    <set >
+      <if test="suppliername != null" >
+        SupplierName = #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        IPAddress = #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        Passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        Cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        RegTime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null" >
+        Sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regip != null" >
+        RegIP = #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=CHAR},
+      </if>
+      <if test="city != null" >
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="bussinesslicence != null" >
+        BussinessLicence = #{bussinesslicence,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        Credit = #{credit,jdbcType=REAL},
+      </if>
+      <if test="supplieruuid != null" >
+        SupplierUUID = #{supplieruuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SupplierUserUUID = #{supplieruseruuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.SupplierUser" >
+    update supplieruser
+    set SupplierName = #{suppliername,jdbcType=VARCHAR},
+      IPAddress = #{ipaddress,jdbcType=VARCHAR},
+      Passwd = #{passwd,jdbcType=VARCHAR},
+      Cellphone = #{cellphone,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      RegTime = #{regtime,jdbcType=TIMESTAMP},
+      Sex = #{sex,jdbcType=TINYINT},
+      LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      RegIP = #{regip,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=CHAR},
+      City = #{city,jdbcType=VARCHAR},
+      BussinessLicence = #{bussinesslicence,jdbcType=VARCHAR},
+      Credit = #{credit,jdbcType=REAL},
+      SupplierUUID = #{supplieruuid,jdbcType=VARCHAR}
+    where SupplierUserUUID = #{supplieruseruuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

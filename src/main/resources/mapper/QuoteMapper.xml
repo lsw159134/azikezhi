@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.QuoteMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Quote" >
+    <id column="quote_id" property="quote_id" jdbcType="VARCHAR" />
+    <result column="quote_name" property="quote_name" jdbcType="VARCHAR" />
+    <result column="quote_status" property="quote_status"/>
+    <result column="quote_product" property="quote_product"/>
+    <result column="quote_brand" property="quote_brand"/>
+    <result column="quote_date" property="quote_date"/>
+    <result column="quote_lotnumber" property="quote_lotnumber"/>
+    <result column="quote_uid" property="quote_uid"/>
+    <result column="quote_package" property="quote_package"/>
+    <result column="quote_telephone" property="quote_telephone"/>
+    <result column="quote_number" property="quote_number"/>
+    <result column="quote_price" property="quote_price"/>
+    <result column="quote_utilnumber" property="quote_utilnumber"/>
+    <result column="quote_priceutil" property="quote_priceutil"/>
+    <result column="quote_quality" property="quote_quality"/>
+	<association property="user" javaType="com.zikezhi.entity.UserInfo">
+		<id column="userUid" property="useruid" jdbcType="VARCHAR" />
+   		<result column="userName" property="username" jdbcType="VARCHAR" />
+   		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    quote_id, quote_name, quote_status, quote_product,quote_brand,quote_date
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Quote" >
+    insert into quote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="quote_name != null" >
+        quote_name,
+      </if>
+      <if test="quote_status != null" >
+        quote_status,
+      </if>
+      <if test="quote_product != null" >
+        quote_product,
+      </if>
+      <if test="quote_date != null" >
+        quote_date,
+      </if>
+      <if test="quote_uid != null" >
+        quote_uid,
+      </if>
+      <if test="quote_brand != null" >
+        quote_brand,
+      </if>
+      <if test="quote_package != null" >
+        quote_package,
+      </if>
+      <if test="quote_lotnumber != null" >
+        quote_lotnumber,
+      </if>
+      <if test="quote_number != null" >
+        quote_number,
+      </if>
+      <if test="quote_price != null" >
+        quote_price,
+      </if>
+      <if test="quote_telephone != null" >
+        quote_telephone,
+      </if>
+      <if test="quote_priceutil != null" >
+        quote_priceutil,
+      </if>
+      <if test="quote_utilnumber != null" >
+        quote_utilnumber,
+      </if>
+      <if test="quote_quality != null" >
+        quote_quality,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="quote_name != null" >
+        #{quote_name},
+      </if>
+      <if test="quote_status != null" >
+        #{quote_status},
+      </if>
+      <if test="quote_product != null" >
+        #{quote_product},
+      </if>
+      <if test="quote_date != null" >
+        #{quote_date},
+      </if>
+      <if test="quote_uid != null" >
+        #{quote_uid},
+      </if>
+      <if test="quote_brand != null" >
+        #{quote_brand},
+      </if>
+      <if test="quote_package != null" >
+        #{quote_package},
+      </if>
+      <if test="quote_lotnumber != null" >
+        #{quote_lotnumber},
+      </if>
+      <if test="quote_number != null" >
+        #{quote_number},
+      </if>
+      <if test="quote_price != null" >
+        #{quote_price},
+      </if>
+      <if test="quote_telephone != null" >
+        #{quote_telephone},
+      </if>
+      <if test="quote_priceutil != null" >
+        #{quote_priceutil},
+      </if>
+      <if test="quote_utilnumber != null" >
+        #{quote_utilnumber},
+      </if>
+      <if test="quote_quality != null" >
+        #{quote_quality},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Quote" >
+    update quote
+    <set >
+      <if test="quote_name != null" >
+        quote_name=#{quote_name},
+      </if>
+      <if test="quote_status != null" >
+        quote_status= #{quote_status},
+      </if>
+      <if test="quote_product != null" >
+        quote_product=#{quote_product},
+      </if>
+      <if test="quote_brand != null" >
+        quote_brand=#{quote_brand},
+      </if>
+      <if test="quote_package != null" >
+        quote_package=#{quote_package},
+      </if>
+      <if test="quote_lotnumber != null" >
+        quote_lotnumber=#{quote_lotnumber},
+      </if>
+      <if test="quote_number != null" >
+        quote_number=#{quote_number},
+      </if>
+      <if test="quote_price != null" >
+        quote_price=#{quote_price},
+      </if>
+      <if test="quote_telephone != null" >
+        quote_telephone=#{quote_telephone},
+      </if>
+      <if test="quote_priceutil != null" >
+        quote_priceutil=#{quote_priceutil},
+      </if>
+      <if test="quote_utilnumber != null" >
+        quote_utilnumber=#{quote_utilnumber},
+      </if>
+      <if test="quote_quality != null" >
+        quote_quality=#{quote_quality},
+      </if>
+    </set>
+    where quote_id = #{quote_id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="queryByUser" parameterType="Map" resultMap="BaseResultMap">
+  	select * from quote
+  		<where>
+  			quote_uid=#{uid}
+  			<if test="product != null and product != ''">
+  				and (quote_product like CONCAT('%',#{product},'%') or quote_telephone like CONCAT('%',#{product},'%') or quote_name like CONCAT('%',#{product},'%'))
+  			</if>
+  			<if test="status !=null and status != '' and status!=0">
+  				and quote_status=#{status}
+  			</if>
+  			<if test="date1!=null and date1!='' and date2!=null and date2!=''">
+  				and quote_date &gt;= #{date1} and quote_date &lt;= DATE_ADD(#{date2},INTERVAL 1 DAY) 
+  			</if>
+  		</where>
+  		order by quote_date desc
+  		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+  </select>
+  
+  <select id="getTotal" resultType="int" parameterType="Map">
+  	select count(*) from quote
+  		<where>
+			quote_uid=#{uid}
+			<if test="product != null and product != ''">
+  				and (quote_product like CONCAT('%',#{product},'%') or quote_telephone like CONCAT('%',#{product},'%') or quote_name like CONCAT('%',#{product},'%'))
+  			</if>
+  			<if test="status !=null and status != '' and status!=0">
+  				and quote_status=#{status}
+  			</if>
+  			<if test="date1!=null and date1!='' and date2!=null and date2!=''">
+  				and quote_date &gt;= #{date1} and quote_date &lt;= DATE_ADD(#{date2},INTERVAL 1 DAY) 
+  			</if>
+		</where>
+  </select>
+  
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="Map">
+  	select q.*,u.username from quote q,user u 
+  	<where>
+		u.useruid=q.quote_uid 
+		<if test="product !=null and product != '' ">
+			and quote_product like CONCAT('%',#{product},'%')
+		</if>
+		<if test="status !=null and status != '' and status!=0">
+			and quote_status=#{status}
+		</if>
+	</where>
+  	order by quote_date desc
+  </select>
+  
+  
+</mapper>

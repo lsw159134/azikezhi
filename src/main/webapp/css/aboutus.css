@@ -1,0 +1,25 @@
+#conarct{
+	display: block;
+	margin-top: 100px;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	border-left: 1px #000000 solid;	
+	margin-left: 100px;
+	padding-left: 20px;
+}
+#conarct span{
+	display: block;
+	margin-top: 20px;
+}
+#conarct span img{
+	width: 100px;
+	height: 100px;
+}
+
+#aboutus-wechat{
+	vertical-align: middle;
+}
+
+#aboutus-wechat img{
+	vertical-align: middle;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.ProductdistinctMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Productdistinct" >
+    <id column="id" property="id"/>
+    <result column="product_name" property="product_name" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <delete id="deleterandomtext">
+  	delete from product_distinct
+  </delete>
+  
+  <select id="query" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	SELECT * from prdouct_distinct where product_name like CONCAT('%',#{product},'%') LIMIT 4
+  </select>
+  
+</mapper>

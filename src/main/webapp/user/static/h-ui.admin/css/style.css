@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* 你自己的样式 */
+#userinfo a{
+	font-family: "微软雅黑";
+	text-decoration: none;
+}
+#userinfo a:hover{
+	color: red;
+}
+#submit:hover{
+	font-family: "微软雅黑";
+	color: red;
+}
+/*.changepasswd a{
+	font-family: "微软雅黑";
+	text-decoration: none;
+}
+.changepasswd a:hover{
+	color: red;
+}
+.submitpasswd:hover{
+	color: red;;
+}*/

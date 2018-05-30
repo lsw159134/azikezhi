@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+	
+#bannerZC {position:absolute; width:700px; height:407px; border:1px solid none; overflow:hidden;border-top: none}
+#bannerZC_list img {border:0px;}
+#bannerZC_bg {position:absolute; bottom:0;background-color:#000;height:30px;filter: Alpha(Opacity=30);opacity:0.3;z-index:8;
+cursor:pointer; width:478px;}
+#bannerZC_info{position:absolute; bottom:0; left:5px;height:22px;color:#fff;z-index:9;cursor:pointer}
+#bannerZC_text {position:absolute;width:120px;z-index:10; right:3px; bottom:3px;}
+#bannerZC ul {position:absolute;list-style-type:none;filter: Alpha(Opacity=80);opacity:0.8; border:1px solid #fff;z-index:10;
+margin:0; padding:0; bottom:3px; right:5px;}
+#bannerZC ul li { padding:0px 8px;float:left;display:block;color:#FFF;border: 1px solid;background:#6f4f67;cursor:pointer}
+#bannerZC ul li.onZC { background:#900}
+#bannerZC_list a{position:absolute;} <!-- 让四张图片都可以重叠在一起-->

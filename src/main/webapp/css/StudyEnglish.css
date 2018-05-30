@@ -1,0 +1,35 @@
+table{
+    border: 1px solid #CCCCCC;
+    margin: 20px 50px 0px 50px;
+}
+td{
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+}
+#adver{
+    color: #2e89dc;
+    background: #cccc;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top:20px;
+    padding-bottom:20px;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 30px;
+}
+.td_1{
+    width: 100px;
+    text-align: center;
+}
+#table img{
+    width: 1100px;
+    margin: 50px 50px 100px 50px;
+}
+#englishimg{
+    margin-left:50px;
+}
+#englishimg img {
+    width: 250px;
+    margin: 30px 0px 0px 20px;
+}

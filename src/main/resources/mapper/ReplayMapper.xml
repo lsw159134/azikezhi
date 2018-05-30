@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.ReplayMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Replay" >
+    <id column="replayid" property="replayid"/>
+    <result column="replaycontent" property="replaycontent" jdbcType="VARCHAR" />
+    <result column="replayuserName" property="replayuseruid"/>
+    <result column="replayTime" property="replayTime"  />
+    <result column="replay_materialid" property="replay_materialid"  />
+    <association property="user" javaType="com.zikezhi.entity.UserInfo">
+    	<id column="userUid" property="useruid" jdbcType="VARCHAR" />
+   		<result column="userName" property="username" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    replayid,replaycontent,replayuserName,replayTime,replay_materialid
+  </sql>
+  
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="int">
+  	select
+  	<include refid="Base_Column_List" />,username
+  	from replay left join user on replayuserName=useruid
+  	where replay_materialid=#{0}
+  	order by replayTime asc 
+  </select>
+  
+  <insert id="insertService" parameterType="com.zikezhi.entity.Replay" >
+    insert into replay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="replaycontent != null" >
+        replaycontent,
+      </if>
+      <if test="replayuseruid != null" >
+        replayuserName,
+      </if>
+      <if test="replay_materialid != null" >
+        replay_materialid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="replaycontent != null" >
+        #{replaycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replayuseruid != null" >
+        #{replayuseruid},
+      </if>
+      <if test="replay_materialid != null" >
+        #{replay_materialid},
+      </if>
+    </trim>
+  </insert>
+  
+ <delete id="deletereplay" parameterType="int">
+ 	delete from replay where  replayid=#{0}
+ </delete>
+ 
+</mapper>

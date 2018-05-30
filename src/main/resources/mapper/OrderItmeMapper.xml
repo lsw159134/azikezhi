@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.OrderItmeMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.OrderItme" >
+    <id column="o_id" property="o_id" jdbcType="VARCHAR" />
+    <result column="o_product" property="o_product" jdbcType="VARCHAR" />
+    <result column="o_number" property="o_number" jdbcType="VARCHAR" />
+    <result column="o_price" property="o_price" jdbcType="REAL" />
+    <result column="o_eid" property="o_eid" jdbcType="VARCHAR" />
+    <result column="o_pid" property="o_pid" jdbcType="VARCHAR" />
+    <result column="o_one" property="o_one" jdbcType="REAL" />
+    <result column="o_date" property="o_date" jdbcType="REAL" />
+    <result column="o_package" property="o_package"/>
+    <result column="o_sid" property="o_sid"/>
+    <association property="supplier" javaType="com.zikezhi.entity.Supplier">
+		<id column="SupplierUUID" property="supplieruuid" jdbcType="VARCHAR" />
+		<result column="SupplierName" property="suppliername" jdbcType="VARCHAR" />
+		<result column="SupplierPosition" property="supplierposition"
+			jdbcType="VARCHAR" />
+		<result column="RepoPosition" property="repoposition" jdbcType="VARCHAR" />
+		<result column="ValidityPeriod" property="validityperiod"
+			jdbcType="VARCHAR" />
+		<result column="Telphone4" property="telphone4" jdbcType="VARCHAR" />
+		<result column="Telphone3" property="telphone3" jdbcType="VARCHAR" />
+		<result column="Telphone2" property="telphone2" jdbcType="VARCHAR" />
+		<result column="Telphone1" property="telphone1" jdbcType="VARCHAR" />
+		<result column="Telphone" property="telphone" jdbcType="VARCHAR" />
+		<result column="Cellphone" property="cellphone" jdbcType="VARCHAR" />
+		<result column="Fax" property="fax" jdbcType="VARCHAR" />
+		<result column="Email" property="email" jdbcType="VARCHAR" />
+		<result column="BrandOperation" property="brandoperation"
+			jdbcType="VARCHAR" />
+		<result column="SupplierPhotos" property="supplierphotos"
+			jdbcType="VARCHAR" />
+		<result column="Qualification" property="qualification"
+			jdbcType="VARCHAR" />
+		<result column="Evaluate" property="evaluate" jdbcType="VARCHAR" />
+		<result column="IsCheck" property="ischeck" jdbcType="BIT" />
+		<result column="QQ" property="qq" jdbcType="CHAR" />
+		<result column="QQ2" property="qq2" jdbcType="CHAR" />
+		<result column="supplier_uid" property="supplier_uid" jdbcType="VARCHAR" />
+		<result column="supplier_label1" property="supplier_label1" jdbcType="VARCHAR" />
+		<result column="supplier_label2" property="supplier_label2" jdbcType="VARCHAR" />
+		<result column="supplier_label3" property="supplier_label3" jdbcType="VARCHAR" />
+		<result column="supplier_label4" property="supplier_label4" jdbcType="VARCHAR" />
+		<result column="supplier_label5" property="supplier_label5" jdbcType="VARCHAR" />
+		<result column="supplier_bieming" property="supplier_bieming" jdbcType="VARCHAR" />
+	</association>
+    <association property="express" javaType="com.zikezhi.entity.Express" column="o_eid">
+		<id column="express" jdbcType="CHAR" property="express" />
+	    <result column="expressName" jdbcType="VARCHAR" property="expressname" />
+	    <result column="expressNumber" jdbcType="VARCHAR" property="expressnumber" />
+	    <result column="name" jdbcType="VARCHAR" property="name" />
+	    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+	    <result column="address" jdbcType="VARCHAR" property="address" />
+	    <result column="status" jdbcType="VARCHAR" property="status" />
+	    <result column="help" jdbcType="VARCHAR" property="help" />
+	    <result column="useruid" jdbcType="VARCHAR" property="useruid"/>
+	    <result column="product" jdbcType="VARCHAR" property="product" />
+	    <result column="productuid" jdbcType="VARCHAR" property="productuid"/>
+	    <result column="edate" property="edate"/>
+	    <result column="fan" jdbcType="REAL" property="fan"/>
+	    <result column="beizhu" property="beizhu"/>
+	    <result column="eprice" jdbcType="REAL" property="eprice"/>
+	    <result column="one" jdbcType="REAL" property="one"/>
+	    <result column="e_invoice" property="e_invoice"/>
+	</association>
+	<association property="p" javaType="com.zikezhi.entity.Product" column="o_pid">
+		<id column="ProductUUID" jdbcType="VARCHAR" property="productuuid" />
+		<result column="Product" jdbcType="VARCHAR" property="product" />
+		<result column="Supplier" jdbcType="VARCHAR" property="supplier" />
+		<result column="encapsulation" jdbcType="VARCHAR" property="encapsulation" />
+		<result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+		<result column="isgoodsinstock" jdbcType="VARCHAR" property="isgoodsinstock" />
+		<result column="lotnumber" jdbcType="VARCHAR" property="lotnumber" />
+		<result column="product_booking" jdbcType="VARCHAR" property="product_booking" />
+		<association property="brand" javaType="com.zikezhi.entity.Brand">
+			<id column="brand_id" property="brand_id" />
+		    <result column="brand_name" property="brand_name" jdbcType="VARCHAR" />
+		</association>
+		<collection property="pimgList" javaType="list" ofType="com.zikezhi.entity.PImg">
+			<id column="p_imgid" property="p_imgid" jdbcType="VARCHAR" />
+		    <result column="p_imgname" property="p_imgname" jdbcType="VARCHAR" />
+		    <result column="p_imgpid" property="p_imgpid" jdbcType="VARCHAR" />
+		    <result column="p_imgstauts" property="p_imgstauts" jdbcType="VARCHAR" />
+		</collection>
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    o_id, o_product, o_number, o_price, o_eid, o_pid,o_one
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.OrderItme" >
+    insert into orderItme
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="o_id != null" >
+        o_id,
+      </if>
+      <if test="o_product != null" >
+        o_product,
+      </if>
+      <if test="o_number != null" >
+        o_number,
+      </if>
+      <if test="o_price != null" >
+        o_price,
+      </if>
+      <if test="o_eid != null" >
+        o_eid,
+      </if>
+      <if test="o_pid != null" >
+        o_pid,
+      </if>
+       <if test="o_one != null" >
+        o_one,
+      </if>
+      <if test="o_date != null" >
+        o_date,
+      </if>
+      <if test="o_package != null" >
+        o_package,
+      </if>
+      <if test="o_sid != null" >
+        o_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="o_id != null" >
+        #{o_id,jdbcType=VARCHAR},
+      </if>
+      <if test="o_product != null" >
+        #{o_product,jdbcType=VARCHAR},
+      </if>
+      <if test="o_number != null" >
+        #{o_number,jdbcType=VARCHAR},
+      </if>
+      <if test="o_price != null" >
+        #{o_price,jdbcType=TIMESTAMP},
+      </if>
+      <if test="o_eid != null" >
+        #{o_eid,jdbcType=VARCHAR},
+      </if>
+      <if test="o_pid != null" >
+        #{o_pid,jdbcType=VARCHAR},
+      </if>
+      <if test="o_one != null" >
+        #{o_one,jdbcType=TIMESTAMP},
+      </if>
+      <if test="o_date != null" >
+        #{o_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="o_package != null" >
+        #{o_package},
+      </if>
+      <if test="o_sid != null" >
+        #{o_sid},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.OrderItme" >
+    update orderItme
+    <set >
+      <if test="o_product != null" >
+        #{o_product,jdbcType=VARCHAR},
+      </if>
+      <if test="o_number != null" >
+        #{o_number,jdbcType=VARCHAR},
+      </if>
+      <if test="o_price != null" >
+        #{o_price,jdbcType=TIMESTAMP},
+      </if>
+      <if test="o_eid != null" >
+        #{o_eid,jdbcType=VARCHAR},
+      </if>
+      <if test="o_pid != null" >
+        #{o_pid,jdbcType=VARCHAR},
+      </if>
+      <if test="o_pid != null" >
+        #{o_one,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where o_id = #{o_id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="queryByEid" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	 select * from orderItme o left join (SELECT * from product p LEFT JOIN p_img i on p.productuuid = i.p_imgpid left join brand on brand_id=Manufacturer)q  on o.o_pid=q.ProductUUID left join supplier s on s.supplieruuid=o.o_sid where o.o_eid=#{eid,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

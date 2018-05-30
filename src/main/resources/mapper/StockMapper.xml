@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.StockMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Stock" >
+    <id column="stock_id" property="stock_id" jdbcType="VARCHAR" />
+    <result column="stock_product" property="stock_product" jdbcType="VARCHAR" />
+    <result column="stock_brand" property="stock_brand"/>
+    <result column="stock_package" property="stock_package"/>
+    <result column="stock_lotnumber" property="stock_lotnumber"/>
+    <result column="stock_number" property="stock_number"/>
+    <result column="stock_price" property="stock_price"/>
+    <result column="stock_position" property="stock_position"/>
+    <result column="stock_addtime" property="stock_addtime"/>
+    <result column="stock_uptime" property="stock_uptime"/>
+    <result column="stock_danwei1" property="stock_danwei1"/>
+    <result column="stock_huoqi" property="stock_huoqi"/>
+    <result column="stock_beizhu" property="stock_beizhu"/>
+    <result column="stock_danwei2" property="stock_danwei2"/>
+    <result column="stock_baozhuangnum" property="stock_baozhuangnum"/>
+    <result column="stock_quality" property="stock_quality"/>
+    <result column="stock_uid" property="stock_uid"/>
+    <result column="stock_supplier" property="stock_supplier" />
+    <result column="stock_address" property="stock_address"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cart_id, cart_pid, cart_uid, cart_number,cart_date
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Stock" >
+    insert into stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stock_id != null" >
+        stock_id,
+      </if>
+      <if test="stock_product != null" >
+        stock_product,
+      </if>
+      <if test="stock_brand != null" >
+        stock_brand,
+      </if>
+      <if test="stock_package != null" >
+        stock_package,
+      </if>
+       <if test="stock_lotnumber != null" >
+        stock_lotnumber,
+      </if>
+      <if test="stock_number != null" >
+        stock_number,
+      </if>
+      <if test="stock_price != null" >
+        stock_price,
+      </if>
+      <if test="stock_position != null" >
+        stock_position,
+      </if>
+      <if test="stock_danwei1 != null" >
+        stock_danwei1,
+      </if>
+      <if test="stock_huoqi != null" >
+        stock_huoqi,
+      </if>
+      <if test="stock_beizhu != null" >
+        stock_beizhu,
+      </if>
+      <if test="stock_danwei2 != null" >
+        stock_danwei2,
+      </if>
+      <if test="stock_baozhuangnum != null" >
+        stock_baozhuangnum,
+      </if>
+      <if test="stock_quality != null" >
+        stock_quality,
+      </if>
+      <if test="stock_uid != null" >
+        stock_uid,
+      </if>
+      <if test="stock_supplier != null" >
+        stock_supplier,
+      </if>
+      <if test="stock_address != null" >
+        stock_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stock_id != null" >
+        #{stock_id},
+      </if>
+      <if test="stock_product != null" >
+        #{stock_product},
+      </if>
+      <if test="stock_brand != null" >
+        #{stock_brand},
+      </if>
+      <if test="stock_package != null" >
+        #{stock_package},
+      </if>
+       <if test="stock_lotnumber != null" >
+        #{stock_lotnumber},
+      </if>
+      <if test="stock_number != null" >
+        #{stock_number},
+      </if>
+      <if test="stock_price != null" >
+        #{stock_price},
+      </if>
+      <if test="stock_position != null" >
+        #{stock_position},
+      </if>
+      <if test="stock_danwei1 != null" >
+        #{stock_danwei1},
+      </if>
+      <if test="stock_huoqi != null" >
+        #{stock_huoqi},
+      </if>
+      <if test="stock_beizhu != null" >
+        #{stock_beizhu},
+      </if>
+      <if test="stock_danwei2 != null" >
+        #{stock_danwei2},
+      </if>
+      <if test="stock_baozhuangnum != null" >
+        #{stock_baozhuangnum},
+      </if>
+      <if test="stock_quality != null" >
+        #{stock_quality},
+      </if>
+      <if test="stock_uid != null" >
+        #{stock_uid},
+      </if>
+      <if test="stock_supplier != null" >
+        #{stock_supplier},
+      </if>
+      <if test="stock_address != null" >
+        #{stock_address},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Stock" >
+    update stock
+    <set >
+      <if test="stock_product != null" >
+        stock_product = #{stock_product},
+      </if>
+      <if test="stock_brand != null" >
+        stock_brand = #{stock_brand},
+      </if>
+      <if test="stock_package != null" >
+        stock_package = #{stock_package},
+      </if>
+       <if test="stock_lotnumber != null" >
+        stock_lotnumber = #{stock_lotnumber},
+      </if>
+      <if test="stock_number != null" >
+        stock_number = #{stock_number},
+      </if>
+      <if test="stock_price != null" >
+        stock_price = #{stock_price},
+      </if>
+      <if test="stock_position != null" >
+        stock_position = #{stock_position},
+      </if>
+      <if test="stock_danwei1 != null" >
+        stock_danwei1 = #{stock_danwei1},
+      </if>
+      <if test="stock_huoqi != null" >
+        stock_huoqi = #{stock_huoqi},
+      </if>
+      <if test="stock_beizhu != null" >
+        stock_beizhu = #{stock_beizhu},
+      </if>
+      <if test="stock_danwei2 != null" >
+        stock_danwei2 = #{stock_danwei2},
+      </if>
+      <if test="stock_baozhuangnum != null" >
+        stock_baozhuangnum = #{stock_baozhuangnum},
+      </if>
+      <if test="stock_quality != null" >
+        stock_quality = #{stock_quality},
+      </if>
+    </set>
+    where stock_id = #{stock_id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询购物车是否有产品相同 -->
+  <select id="queryByPid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from stock where stock_product=#{0} and stock_uid=#{1} limit 1
+  </select>
+  
+  <select id="seleByid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from stock where stock_id=#{0}
+  </select>
+ 
+  <select id="seleByxiangtong" resultMap="BaseResultMap" parameterType="com.zikezhi.entity.Stock">
+ 	select * from stock 
+ 	where stock_product=#{stock_product} 
+ 	and stock_brand like CONCAT(#{stock_brand},'%')
+ 	and stock_package like CONCAT(#{stock_package},'%')
+ 	and stock_lotnumber like CONCAT(#{stock_lotnumber},'%')
+ 	and stock_position like CONCAT(#{stock_position},'%')
+ 	and stock_supplier like CONCAT(#{stock_supplier},'%')
+ 	and stock_price like CONCAT(#{stock_price},'%')
+ 	and stock_quality like CONCAT(#{stock_quality},'%') limit 1
+ </select>
+ 
+ <select id="seleBycount" resultMap="BaseResultMap" parameterType="java.lang.String">
+ 	select ifnull(sum(stock_number),0)stock_number,stock_position from stock where stock_product=#{0} group by stock_position
+ </select>
+ 
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="Map" useCache="false">
+  	select * from stock where stock_uid=#{uid} and stock_number!=0
+  	<if test="product!=null">
+		and stock_product like CONCAT(#{product},'%')
+	</if>
+	order by stock_addtime desc
+  	<if test="start!=null and size!=null">
+		limit #{start},#{size}
+	</if>
+  </select>
+  <select id="countCart" parameterType="Map" resultType="int">
+  	select count(*) from stock where stock_uid = #{uid} and stock_number!=0
+  	<if test="product!=null">
+		and stock_product like CONCAT(#{product},'%')
+	</if>
+  </select>
+  
+  <select id="seleByXiaoshou" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from stock where stock_product like CONCAT(#{0},'%') and stock_uid=#{1} and stock_number!=0	
+  </select> 
+  
+</mapper>

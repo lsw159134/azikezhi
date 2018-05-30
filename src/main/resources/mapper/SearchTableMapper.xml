@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.SearchTableMapper">
+	<resultMap id="BaseResultMap" type="com.zikezhi.entity.SearchTable">
+		<id column="searchUUID" property="searchuuid" jdbcType="CHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="TIMESTAMP" />
+		<result column="IP" property="ip" jdbcType="VARCHAR" />
+		<result column="Count" property="count" jdbcType="VARCHAR"/>
+		<result column="search_uid" property="search_uid" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		searchUUID, content, time, IP
+	</sql>
+
+	<select id="select" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		DISTINCT <!-- count(0) AS count, -->time,content,ip
+		from search where ip not in(select ip_ip from ipguolv)
+		<!-- GROUP BY content -->
+		ORDER BY time DESC
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from search
+		where searchUUID = #{searchuuid,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from search
+		where searchUUID = #{searchuuid,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zikezhi.entity.SearchTable">
+		insert into search (searchUUID, content, time,
+		IP)
+		values (#{searchuuid,jdbcType=CHAR}, #{content,jdbcType=VARCHAR},
+		#{time,jdbcType=TIMESTAMP},
+		#{ip,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zikezhi.entity.SearchTable">
+		insert into search
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="searchuuid != null">
+				searchUUID,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="time != null">
+				time,
+			</if>
+			<if test="ip != null">
+				IP,
+			</if>
+			<if test="search_uid != null">
+				search_uid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="searchuuid != null">
+				#{searchuuid,jdbcType=CHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="search_uid != null">
+				#{search_uid},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.SearchTable">
+		update search
+		<set>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null">
+				time = #{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ip != null">
+				IP = #{ip,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where searchUUID = #{searchuuid,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.SearchTable">
+		update search
+		set content = #{content,jdbcType=VARCHAR},
+		time = #{time,jdbcType=TIMESTAMP},
+		IP = #{ip,jdbcType=VARCHAR}
+		where searchUUID = #{searchuuid,jdbcType=CHAR}
+	</update>
+	
+	<select id="queryBycount" parameterType="String" resultType="int">
+		select count(*) from search where IP=#{0} and IP not in(select ip_ip from ipguolv) and TO_DAYS(time) = TO_DAYS(NOW())
+	</select>
+	
+	<select id="selectByIp" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from search where IP = #{0}
+	</select>
+	
+</mapper>

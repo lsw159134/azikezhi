@@ -1,0 +1,252 @@
+
+#container{
+	margin-top: 50px;
+	padding: 20px;
+	border-radius: 20px;
+	box-shadow: inset 0 0 10px #d0d0d0;
+	margin-bottom: 40px;
+	overflow: hidden;
+}
+
+.tips{
+	border-top: 2px solid #dc929f;
+	border-bottom: 2px solid #dc929f;
+}
+#left{
+	padding-right: 10px;
+	border-right: 2px solid #ccc;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	float: left;
+	width: 250px;
+}
+#left #title{
+	color: #FFFCEF;
+	font-size: 16px;
+	margin: 2px;
+	padding: 5px;
+	padding-left: 10px;
+	background: #e71e48;
+}
+#left #supplierImg {
+	margin-left: 25px;
+	margin-top: 10px;
+}
+#left #supplierImg img{
+	height: 200px;
+	width: 200px;
+}
+#location{
+	margin-top: 4px;
+	font-size: 13px;
+}
+#repolocation{
+	font-size: 13px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+#left #content{
+	margin: 2px;
+	color: #FFFCEF;
+	font-size: 16px;
+	padding: 5px;
+	padding-left: 10px;
+	background: #e71e48;
+}
+#contentwechat{
+	margin-top: 20px;
+	font-size: 20px;
+}
+#left #contentImg img{
+	margin-left: 50px;
+	margin-top: 20px;
+	height: 150px;
+	width: 150px;
+}
+
+#right{
+	float: left;
+	margin-left: 30px;
+	width: 850px;
+}
+
+#contentUs{
+	background: linear-gradient(#fff, #e4e3e3);
+	font-family: "微软雅黑";
+	padding: 10px 0px;
+	padding-left: 30px;
+	font-weight: bold;
+	color: #d0143b;
+	font-size: 16px;
+}
+
+#about{
+	margin-top: 10px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #666;
+}
+
+#about .t{
+	width: 50px;
+	text-align: center;
+	background: #faf9f9;
+	padding: 5px 10px;
+}
+
+#evaluate{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	background: linear-gradient(#fff, #e4e3e3);
+	font-family: "微软雅黑";
+	padding: 10px 0px;
+	padding-left: 30px;
+	font-weight: bold;
+	color: #d0143b;
+	font-size: 16px;
+}
+
+#waring{
+	font-family: "宋体";
+	color: black;
+	font-weight: normal;
+	font-size: 10px;
+	padding-left: 20px;
+}
+.comments{
+	margin-bottom: 20px;
+	padding-left: 30px;
+	font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+}
+
+.indent{
+	padding-left: 20px;
+	display: inline-block;
+}
+.comments-userName{
+	color: #0F88EB;
+	font-size: 15px;
+	font-family: "微软雅黑";
+}
+.str{
+	color: #000;
+}
+.comments-content{
+	font-family: "宋体";
+	font-size: 15px;
+	margin-left: 20px;
+	padding-top: 5px;
+}
+.comments-time{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+}
+.comments-reply{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+	cursor: pointer;
+}
+.comments-reply:hover{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #191970;
+}
+.comments-like{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+	cursor: pointer;
+}
+.comments-like:hover{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #191970;
+}
+.comments-downvote{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+	cursor: pointer;
+}
+.comments-downvote:hover{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #191970;
+}
+.user-complaint:hover{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	cursor: pointer;
+	color: #191970;
+}
+.user-complaint{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+	cursor: pointer;
+}
+.replysubmit{
+	margin: 5px 10px;
+	padding: 5px 10px;
+	font-size: 14px;
+	float: right;
+	font-family: "微软雅黑";
+}
+
+#editor{
+	float: left;
+	margin-top: 20px;
+	width: 850px;
+}
+#wangEditor{
+	height: 200px;
+}
+#anonymou{
+	margin-top: 20px;
+	font-size: 18px;
+	margin-right: 20px;
+	float:right;
+}
+#submitComment{
+	margin-top: 10px;
+	float: right;
+	padding: 5px 15px;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	background-color: #7b72e9;
+	color: #ccc;
+}
+
+.user-complaint-layer{
+	display: block;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
+	text-align: center;
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+.user-complaint-layer-qq{
+	color: #1aa094;
+	margin-top: 5px;
+}
+.page li{
+	padding: 5px 0px;
+	margin-left: 5px;
+	display: inline-block;
+	background-color: #0a6999;
+	color: #fff;
+	width: 30px;
+	text-align: center;
+}
+.page li:hover{
+	padding: 5px 0px;
+	margin-left: 5px;
+	display: inline-block;
+	background-color: #125599;
+	color: #fff;
+	width: 30px;
+	text-align: center;
+}

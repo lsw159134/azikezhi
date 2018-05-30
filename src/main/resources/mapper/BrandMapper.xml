@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zikezhi.dao.BrandMapper" >
+	<cache  eviction="FIFO"  flushInterval="600000"  size="512"  readOnly="true"/>
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Brand" >
+    <id column="brand_id" property="brand_id"/>
+    <result column="brand_name" property="brand_name"/>
+    <result column="brand_time" property="brand_time"/>
+    <result column="brand_img" property="brand_img"/>
+    <result column="brand_sortimg" property="brand_sortimg"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    brand_id, brand_name, brand_time, brand_img,brand_sortimg
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Brand" >
+    insert into Brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="brand_name != null and brand_name !='' " >
+        brand_name,
+      </if>
+      <if test="brand_img != null and brand_img !='' " >
+        brand_img,
+      </if>
+      <if test="brand_sortimg != null and brand_sortimg !='' " >
+        brand_sortimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="brand_name != null and brand_name !=''" >
+        #{brand_name,jdbcType=VARCHAR},
+      </if>
+      <if test="brand_img != null and brand_img !=''" >
+        #{brand_img,jdbcType=VARCHAR},
+      </if>
+      <if test="brand_sortimg != null and brand_sortimg !=''" >
+        #{brand_sortimg},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Brand" >
+    update brand
+    <set >
+      <if test="brand_name != null" >
+        brand_name = #{brand_name},
+      </if>
+      <if test="brand_img != null and brand_img !=''" >
+        brand_img = #{brand_img,jdbcType=VARCHAR},
+      </if>
+       <if test="brand_sortimg != null and brand_sortimg !=''" >
+        brand_sortimg = #{brand_sortimg},
+      </if>
+    </set>
+    where brand_id = #{brand_id}
+  </update>
+  
+  <!-- 删除购物产品 -->
+  <delete id="deleteByid" parameterType="int">
+  	delete from brand where brand_id=#{0}
+  </delete>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select * from brand order by brand_sortimg asc
+  </select>
+  
+  <select id="queryByname" resultMap="BaseResultMap">
+  	select * from brand order by brand_name
+  </select>
+  
+  <select id="queryBy" resultType="int" parameterType="java.lang.String">
+  	select count(*)from brand where brand_name=#{0}
+  </select>
+  
+  <select id="getTotal" resultType="int">
+  	select count(*) from brand
+  </select>
+  
+  <select id="queryBydesc" resultMap="BaseResultMap">
+  	select b.brand_name,ifnull(p.a,0) brand_img from(select * from brand order by brand_sortimg asc) b left join (select count(*)a,Manufacturer from product group by Manufacturer)p on b.brand_id=p.Manufacturer order by brand_sortimg asc
+  </select>
+  
+  <select id="seleSort" resultType="int">
+  	select brand_sortimg from brand where brand_id=1
+  </select>
+  
+</mapper>

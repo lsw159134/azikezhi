@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.SecondMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Second" >
+    <id column="second_id" property="second_id" />
+    <result column="second_name" property="second_name" jdbcType="VARCHAR" />
+    <result column="second_addtime" property="second_addtime"/>
+    <result column="second_primaryid" property="second_primaryid"/>
+    <association property="product" javaType="com.zikezhi.entity.Product">
+		<id column="ProductUUID" jdbcType="VARCHAR" property="productuuid" />
+		<result column="Product" jdbcType="VARCHAR" property="product" />
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    second_id, second_name, second_addtime,second_primaryid
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Second" >
+    insert into second1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="second_name != null" >
+        second_name,
+      </if>
+      <if test="second_addtime != null" >
+        second_addtime,
+      </if>
+      <if test="second_primaryid != null" >
+        second_primaryid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="second_name != null" >
+        #{second_name,jdbcType=VARCHAR},
+      </if>
+      <if test="second_addtime != null" >
+        #{second_addtime},
+      </if>
+      <if test="second_primaryid != null" >
+        #{second_primaryid},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Second" >
+    update second1
+    <set >
+      <if test="second_name != null" >
+        second_name = #{second_name},
+      </if>
+    </set>
+    where second_id = #{second_id}
+  </update>
+  
+  <select id="queryAll" parameterType="int" resultMap="BaseResultMap">
+  	select * from second1 where second_primaryid=#{0}
+  </select>
+  
+  <select id="selectByid" parameterType="int" resultMap="BaseResultMap">
+  
+  </select>
+  
+  <select id="querybomuserphone" parameterType="java.lang.String" resultMap="BaseResultMap">
+  
+  </select>
+  
+  <select id="querySecondName" parameterType="com.zikezhi.entity.Second" resultType="int">
+  	select count(*) from second1 where second_name=#{second_name} and second_primaryid =#{second_primaryid}
+  </select>
+  
+  <delete id="deleteSecond" parameterType="int" >
+  	delete from second1 where second_id=#{0}
+  </delete>
+  <select id="select_second_name" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select product from product left join second1 on second_name=ProductUUID where second_primaryid=(select primary_id from primary1 where primary_name=#{0}) limit 0,20
+  </select>
+  <select id="detail_second_name" parameterType="int" resultType="java.lang.String">
+  	select second_name from second1 where second_id=#{second_id}
+  </select>
+</mapper>

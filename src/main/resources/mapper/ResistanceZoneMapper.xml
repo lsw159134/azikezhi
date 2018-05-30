@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.ResistanceZoneMapper">
+
+	<resultMap id="BaseResultMap" type="com.zikezhi.entity.Product">
+		<id column="ProductUUID" jdbcType="VARCHAR" property="productuuid" />
+		<result column="Product" jdbcType="VARCHAR" property="product" />
+		<result column="productName" jdbcType="VARCHAR" property="productName" />
+		<result column="Description" jdbcType="VARCHAR" property="description" />
+		<result column="Manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+		<result column="LotNumber" jdbcType="VARCHAR" property="lotnumber" />
+		<result column="Encapsulation" jdbcType="VARCHAR" property="encapsulation" />
+		<result column="IsGoodsInStock" jdbcType="VARCHAR" property="isgoodsinstock" />
+		<result column="Price" jdbcType="REAL" property="price" />
+		<result column="Quality" jdbcType="INTEGER" property="quality" />
+		<result column="p_data" jdbcType="VARCHAR" property="p_data" />
+		<result column="uptime" property="uptime" />
+		<result column="product_selling" property="product_selling" />
+		<result column="SupplierUUID" jdbcType="VARCHAR" property="supplieruuid" />
+		<result column="product_miaoshu" jdbcType="VARCHAR" property="product_miaoshu" />
+		<result column="complaintPrice" property="complaintprice"
+			jdbcType="INTEGER" />
+		<result column="complaintActuals" property="complaintactuals"
+			jdbcType="INTEGER" />
+		<result column="complaintOriginal" property="complaintoriginal"
+			jdbcType="INTEGER" />
+
+	</resultMap>
+
+	<select id="queryFengzhuang" resultType="com.zikezhi.entity.ResistanceResult">
+		select encapsulation,
+		count(*) num from product where productName = '贴片电阻' group by
+		encapsulation
+	</select>
+	<select id="queryZhuZhi" parameterType="String"
+		resultType="com.zikezhi.entity.ResistanceResult">
+		select zhuzhi,count(*) num from product where productName
+		=
+		'贴片电阻' and encapsulation
+		=#{encapsulation}
+		group by zhuzhi
+	</select>
+	<select id="queryZhuZhiByCanshu" parameterType="com.zikezhi.entity.QueryResistanceVo"
+		resultType="com.zikezhi.entity.ResistanceResult">
+		select zhuzhi,count(*) num from product where productName
+		=
+		'贴片电阻' and encapsulation
+		=${encapsulation}
+		and zhuzhi like
+		CONCAT('%',#{sousuo},'%') group by
+		zhuzhi
+	</select>
+	<select id="queryGonglv" parameterType="com.zikezhi.entity.QueryResistanceVo"
+		resultType="com.zikezhi.entity.ResistanceResult">
+		select jingquedu, count(*) num from product where
+		productName = '贴片电阻' and
+		encapsulation = #{encapsulation} and zhuzhi =
+		#{zhuzhi} group by
+		jingquedu
+	</select>
+
+	<select id="queryPinpai" parameterType="String"
+		resultType="com.zikezhi.entity.ResistanceResult">
+		<![CDATA[ select Manufacturer, count(*) num from product where productName = '贴片电阻' and
+		encapsulation = #{0} and zhuzhi = #{1} and jingquedu = #{2} group by Manufacturer ]]>
+	</select>
+
+   <select id="queryBaozhuang" parameterType="String"
+		resultType="com.zikezhi.entity.ResistanceResult">
+		<![CDATA[ select baozhuang, count(*) num from product where productName = '贴片电阻' and
+		encapsulation = #{0} and zhuzhi = #{1} and jingquedu = #{2} and Manufacturer=#{3} group by baozhuang ]]>
+	</select>
+	
+	<select id="seleResistince" parameterType="map"
+		resultType="com.zikezhi.entity.ResistanceResult">
+		select * from product where productName = '贴片电阻' limit
+		${start} ,${size}
+	</select>
+
+	<select id="getTotal" resultType="int">
+		select count(*) from product
+		where productName = '贴片电阻'
+	</select>
+
+	<select id="queryResistanceList" parameterType="com.zikezhi.entity.QueryResistanceVo"
+		resultType="com.zikezhi.entity.ResistanceResult">
+		select * from product where productName = '贴片电阻'
+		<if test="encapsulation != null">
+			and encapsulation = #{encapsulation}
+		</if>
+		<if test="sousuo != null and sousuo !='' ">
+			and zhuzhi like CONCAT('%',#{sousuo},'%')
+		</if>
+		<if test="zhuzhi != null">
+			and zhuzhi = #{zhuzhi}
+		</if>
+		<if test="jingquedu != null">
+			and jingquedu = #{jingquedu}
+		</if>
+		<if test="manufacturer != null">
+			and Manufacturer = #{manufacturer}
+		</if>
+		<if test="baozhuang != null">
+			and baozhuang = #{baozhuang}
+		</if>
+		limit ${start} ,${size}
+	</select>
+	<select id="queryResistice" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+		ProductUUID,
+		Product,
+		Description,
+		Manufacturer,
+		LotNumber,
+		Encapsulation,
+		IsGoodsInStock,
+		Price,
+		product_selling,
+		Quality,
+		SupplierUUID,
+		ifnull(complaintPrice, 0) complaintPrice,
+		ifnull(total, 0)
+		AS complaintActuals,
+		complaintOriginal,
+		p_data,
+		product_miaoshu,
+		uptime,
+		sort_miaoshu
+		productName
+		FROM
+		(SELECT
+		ProductUUID,
+		Product,
+		Supplier,
+		Description,
+		Manufacturer,
+		Price,
+		LotNumber,
+		Encapsulation,
+		IsGoodsInStock,
+		Quality,
+		SupplierUUID,
+		complaintPrice,
+		complaintOriginal,
+		p_data,
+		product_miaoshu,
+		uptime,
+		product_primary,
+		product_selling,
+		sort_miaoshu,
+		productName
+		FROM
+		product WHERE productName = '贴片电阻'
+		<if test="product != null and product!=''">
+			and Product = #{product}
+		</if>
+		<if test="encapsulation != null and encapsulation!=''">
+			and Encapsulation like CONCAT('%',#{encapsulation},'%')
+		</if>
+		<if test="manufacturer != null and manufacturer != ''">
+			and manufacturer like CONCAT('%',#{manufacturer},'%')
+		</if>
+		) p
+		left JOIN (
+		SELECT
+		*
+		FROM
+		(
+		SELECT
+		ps.productuid,
+		sum(ps.total) total
+		FROM
+		(
+		SELECT
+		productuid,
+		product,
+		count(*) total
+		FROM
+		express
+		WHERE
+		productuid IS
+		NOT NULL
+		GROUP BY
+		productuid
+		UNION ALL
+		SELECT
+		o_pid productuid,
+		o_product
+		product,
+		count(*) total
+		FROM
+		orderitme
+		WHERE
+		o_eid IN (SELECT express FROM
+		express)
+		GROUP BY
+		o_pid
+		) ps
+		GROUP BY
+		ps.productuid
+		) b
+		) e ON p.ProductUUID
+		= e.productuid
+
+	</select>
+
+	<select id="getTotalAll" parameterType="Map" resultType="java.lang.Long">
+		select count(*) from product where productName = '贴片电阻'
+		<if test="product != null and product!=''">
+			and product like CONCAT('%',#{product},'%')
+		</if>
+		<if test="supplier != null and supplier!=''">
+			and Supplier like CONCAT('%',#{supplier},'%')
+		</if>
+		<if test="manufacturer != null and manufacturer != ''">
+			and manufacturer like CONCAT('%',#{manufacturer},'%')
+		</if>
+	</select>
+
+	<insert id="insertResistince" parameterType="com.zikezhi.entity.Product">
+		insert into product
+		(ProductUUID, Product, Supplier,
+		Description,
+		Manufacturer, LotNumber,
+		Encapsulation, IsGoodsInStock,
+		Price,TotalSales,
+		Document, Image,
+		Keywords,
+		Complaint, Quality,
+		SupplierUUID,complaintPrice,
+		complaintActuals,
+		complaintOriginal,product_miaoshu,
+		QQ,productName,zhuzhi,jingquedu,danwei,baozhuang
+		)
+		values
+		(#{productuuid,jdbcType=VARCHAR},
+		#{product,jdbcType=VARCHAR},
+		#{supplier,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{manufacturer,jdbcType=VARCHAR},
+		#{lotnumber,jdbcType=VARCHAR},
+		#{encapsulation,jdbcType=VARCHAR},
+		#{isgoodsinstock,jdbcType=VARCHAR},
+		#{price,jdbcType=REAL},
+		#{totalSales,jdbcType=INTEGER},
+		#{document,jdbcType=VARCHAR},
+		#{image,jdbcType=VARCHAR},
+		#{keywords,jdbcType=VARCHAR},
+		#{complaint,jdbcType=VARCHAR},
+		#{quality,jdbcType=INTEGER},
+		#{supplieruuid,jdbcType=VARCHAR},
+		#{product_miaoshu,jdbcType=VARCHAR},
+		#{complaintprice,jdbcType=INTEGER},
+		#{complaintactuals,jdbcType=INTEGER},
+		#{complaintoriginal,jdbcType=INTEGER},
+		#{qq,jdbcType=CHAR},
+		#{productName,jdbcType=VARCHAR},
+		#{zhuzhi,jdbcType=VARCHAR},
+		#{jingquedu,jdbcType=VARCHAR},
+		#{danwei,jdbcType=VARCHAR},
+		#{baozhuang,jdbcType=VARCHAR})
+	</insert>
+
+	<select id="selectByPrimaryKey" parameterType="String"
+		resultType="com.zikezhi.entity.Product">
+		select * from product where productUUID = #{productuuid}
+	</select>
+
+	<update id="updateDianzu" parameterType="com.zikezhi.entity.Product">
+		update ignore product
+		<set>
+			<if test="product != null">
+				Product = #{product, jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				Supplier = #{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				Description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="manufacturer != null">
+				Manufacturer = #{manufacturer,jdbcType=VARCHAR},
+			</if>
+			<if test="lotnumber != null">
+				LotNumber = #{lotnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="encapsulation != null">
+				Encapsulation = #{encapsulation,jdbcType=VARCHAR},
+			</if>
+			<if test="isgoodsinstock != null">
+				IsGoodsInStock = #{isgoodsinstock,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null and price != ''">
+				Price = #{price,jdbcType=REAL},
+			</if>
+			<if test="document != null">
+				Document = #{document,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				Image = #{image,jdbcType=VARCHAR},
+			</if>
+			<if test="keywords != null">
+				Keywords = #{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="complaint != null">
+				Complaint = #{complaint,jdbcType=VARCHAR},
+			</if>
+			<if test="quality != null">
+				Quality = #{quality,jdbcType=INTEGER},
+			</if>
+			<if test="supplieruuid != null">
+				SupplierUUID = #{supplieruuid,jdbcType=VARCHAR},
+			</if>
+			<if test="complaintprice != null">
+				complaintPrice = #{complaintprice,jdbcType=INTEGER},
+			</if>
+			<if test="complaintactuals != null">
+				complaintActuals = #{complaintactuals,jdbcType=INTEGER},
+			</if>
+			<if test="complaintoriginal != null">
+				complaintOriginal =
+				#{complaintoriginal,jdbcType=INTEGER},
+			</if>
+			<if test="qq != null">
+				QQ = #{qq,jdbcType=CHAR},
+			</if>
+			<if test="p_data != null and p_data!=''">
+				p_data = #{p_data,jdbcType=VARCHAR},
+			</if>
+			<if test="uptime != null">
+				uptime = #{uptime},
+			</if>
+			<if test="product_primary != null">
+				product_primary = #{product_primary},
+			</if>
+			<if test="product_selling != null and product_selling!=0">
+				product_selling = #{product_selling},
+			</if>
+			<if test="product_miaoshu != null">
+				product_miaoshu = #{product_miaoshu},
+			</if>
+			<if test="product_booking != null and product_booking!=''">
+				product_booking = #{product_booking},
+			</if>
+			<if test="zhuzhi != null and zhuzhi!=''">
+				zhuzhi = #{zhuzhi},
+			</if>
+			<if test="jingquedu != null and jingquedu!=''">
+				jingquedu = #{jingquedu},
+			</if>
+			<if test="danwei != null and danwei!=''">
+				danwei = #{danwei},
+			</if>
+			<if test="baozhuang != null and baozhuang!=''">
+				baozhuang = #{baozhuang}
+			</if>
+		</set>
+		where ProductUUID = #{productuuid,jdbcType=VARCHAR}
+	</update>
+
+	<select id="queryDianzuList" parameterType="map"
+		resultType="com.zikezhi.entity.Product">
+		SELECT
+	ProductUUID, 
+	Product,
+	Description,
+	Manufacturer,
+	LotNumber,
+	Encapsulation,
+	IsGoodsInStock,
+	Price,
+	Supplier,
+	product_selling,
+	Quality,
+	SupplierUUID,
+	ifnull(complaintPrice, 0)  complaintPrice,
+	complaintOriginal,
+	p_data,
+	product_miaoshu,
+	uptime,
+	sort_miaoshu
+    productName from product where productName = '贴片电阻 '
+		<if test="product != null and product!=''">
+			and product like CONCAT('%',#{product},'%')
+		</if>
+		<if test="manufacturer != null and manufacturer != ''">
+			and manufacturer like CONCAT('%',#{manufacturer},'%')
+		</if>
+	</select>
+	<select id="queryResisticeList" parameterType="map" resultType="com.zikezhi.entity.Product">
+	       select * from product Where productName = '贴片电阻' limit ${start} ,${size}
+	</select>
+</mapper>

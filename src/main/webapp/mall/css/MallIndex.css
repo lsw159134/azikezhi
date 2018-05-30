@@ -1,0 +1,450 @@
+*{
+    /*border: 1px solid #D30706;*/
+}
+
+body{
+    width: 1200px;
+    margin: 0px auto;
+}
+
+header{
+    margin-top: 20px;
+
+}
+
+header img{
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+header #logo{
+    color: #FF6537;
+    font-family: "Microsoft YaHei UI";
+}
+
+header #logo #title{
+    margin-left: 40px;
+    font-size: 28px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+header #logo #smallTitle{
+    font-size: 17px;
+}
+
+#wapper a{
+    font-size: 13px;
+    font-family: "Microsoft YaHei UI";
+    text-decoration: none;
+}
+#wapper a:hover{
+    color: seagreen;
+    text-decoration: none;
+}
+
+header #wapper{
+    float: right;
+}
+
+header #wapper img{
+    width: 20px;
+    height: 20px;
+}
+
+header #searchProduct{
+    margin: 0px auto 10px 400px;
+    display: flex;
+    height: 40px;
+}
+
+header #searchProduct input{
+    padding-left: 20px;
+    margin: auto;
+    border: 3px solid #CC0000;
+    width: 300px;
+    height: 40px;
+}
+
+header #searchProduct button{
+    border: none;
+    padding: 14px 30px 17px 30px;
+    font-size: 15px;
+    margin-left: -10px;
+    background-color: #CC0000;
+    color: #fff;
+}
+
+header #main_nav{
+    padding: 0px 5px 0px 0px;
+    border-bottom: 2px solid #D30706;
+}
+
+header #main_nav span{
+    font-family: "Microsoft YaHei UI";
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 25px;
+    color: #000;
+    font-size: 16px;
+}
+
+header #main_nav span:hover{
+    font-family: "Microsoft YaHei UI";
+    display: inline-block;
+    color: #F75000;
+    font-size: 16px;
+}
+
+#container{
+    margin-top: 30px;
+    width: 1200px;
+}
+#container #left{
+    width: 200px;
+    border: 1px solid #FF6537;
+    float: left;
+}
+#container #left span:first-child{
+    font-size: 16px;
+    width: 200px;
+    background-color: #e8421f;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+    color: #fff;
+    display: block;
+}
+#container #left span:first-child:hover{
+    font-size: 16px;
+    width: 200px;
+    background-color: #e8421f;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+    color: #fff;
+    display: block;
+}
+#container #left span{
+    font-size: 14px;
+    width: 200px;
+    background-color: #FF6537;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+    color: #fff;
+    display: block;
+}
+#container #left span:hover{
+    font-size: 14px;
+    width: 200px;
+    background-color: #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+    color: #FF6537;
+    display: block;
+}
+
+#container #center{
+    float: left;
+}
+#container #center img{
+    width: 750px;
+    height: 420px;
+}
+#container #right{
+    /*margin-top: 50px;*/
+    /*margin-left: 10px;*/
+    width: 235px;
+    float: left;
+}
+#container #right #idea{
+    border: 1px solid #FF6537;
+    text-align: center;
+}
+#container #right #idea span:first-child{
+    font-size:14px;
+    font-family: "Microsoft YaHei";
+    text-align: center;
+    color: #fff;
+    background-color: #FF6537;
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+#container #right #idea span{
+    font-family: "Microsoft YaHei";
+    text-align: left;
+    letter-spacing: 2px;
+    font-size: 18px;
+    line-height: 24px;
+}
+#container #right #translate{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /*border: 1px solid #FF6537;*/
+}
+#container #right #translate span{
+    margin-left: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: "Microsoft YaHei";
+    font-size: 20px;
+    background-color: #FF6537;
+    color: #FFF;
+    border: 1px solid #FF6537;
+    border-radius: 100%;
+}
+#container #right #stocking{
+    margin-top: 10px;
+    color: #FFF;
+    font-family: "Microsoft YaHei";
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    border: 1px solid #FF6537;
+    background-color: #FF6537;
+}
+#container #product input{
+    width: 231px;
+    height: 30px;
+    border: 2px solid #FF6537;
+}
+#container #product button{
+    font-family: "Microsoft YaHei";
+    border:0px;
+    width: 235px;
+    height: 33px;
+    color: #fff;
+    font-size: 15px;
+    background-color: #FF6537;
+}
+#container #product button:hover{
+    background-color: #d95934;
+    color: #ccc;
+}
+#active{
+    background-color: #D30706;
+    color: #fff !important;
+}
+#content #ad{
+    clear: both;
+}
+/*第一个上下滚动*/
+.list1{
+    margin-top: 0px !important;
+}
+.list2{
+    margin-top: 0px !important;
+}
+.list3{
+    margin-top: 0px !important;
+}
+.scroll1 {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+.scroll1 ul{
+    padding-left: 0px;
+}
+.scroll1 li {
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+}
+.scroll2 {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+.scroll2 ul{
+    padding-left: 0px;
+}
+.scroll2 li {
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+}
+.scroll3 {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+.scroll3 ul{
+    padding-left: 0px;
+}
+.scroll3 li {
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+}
+.scroll4 {
+    position: relative;
+    overflow: hidden;
+    height: 130px;
+}
+.scroll4 ul{
+    padding-left: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.list1 div{
+    background-color: #FFFFFF;
+}
+.list2 div{
+    background-color: #FFFFFF;
+}
+.list3 div{
+    background-color: #FFFFFF;
+}
+
+#content #hotSell,#new,#orders{
+    margin-top: 30px;
+    margin-left: 5px;
+    float: left;
+    width: 390px;
+    border: 1px solid #FF6537;
+    border-radius: 5px;
+    text-align: center ;
+}
+#content .show{
+    background-color: #FF6537;
+    font-family: "Microsoft YaHei UI";
+    width: 390px;
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #fff;
+}
+#content div span{
+    display: inline-block;
+}
+#content .product{
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: "Microsoft YaHei UI";
+    width: 150px;
+    border-right: 1px solid #FF6537;
+}
+#content .number{
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: "Microsoft YaHei UI";
+    width: 140px;
+    border-right: 1px solid #FF6537;
+}
+#content .encapsulation{
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    font-family: "Microsoft YaHei UI";
+    width: 140px;
+    border-right: 1px solid #FF6537;
+}
+#content .price{
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: "Microsoft YaHei UI";
+    width: 80px;
+    /*border-right: 1px solid #FF6537;*/
+}
+.dark{
+    background-color: #DDD !important;
+}
+#footer{
+    clear: both;
+    float: left;
+}
+#footer #netuser{
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+}
+#footer #leave{
+    float: left;
+    margin-top: 30px;
+    display: block;
+    width: 350px;
+    border-radius: 5px;
+}
+#footer #leave div{
+    padding-top: 5px;
+    /*border-bottom: 1px solid #000;*/
+}
+
+#footer #leave .comment{
+    word-break: break-all;
+    padding-left: 20px;
+    display: block;
+    margin-bottom: 5px;
+    font-family: "microsoft yahei";
+    font-size: 14px;
+}
+#footer #leave .user,.time{
+    color: #0f88eb;
+    font-size: 13px;
+    display: inline-block;
+}
+#footer #join{
+    font-family: "Microsoft YaHei";
+    margin-left: 20px;
+    width: 800px;
+    float: left;
+    margin-top: 30px;
+    text-align: center;
+}
+#footer #join div:first-child{
+    font-size: 18px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#footer #join div{
+    color: #0047cc;
+    font-size: 18px;
+    text-align: left;
+    width: 550px;
+}
+#footer #join div:last-child{
+    width: 200px;
+    display: inline-block;
+    float: right;
+    margin-top: -154px;
+    text-align: center;
+}
+#footer #join div:last-child img{
+    width: 50px;
+}
+
+footer{
+    clear: both;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 1200px;
+    justify-content: center;
+    font-family: "Microsoft YaHei UI";
+    display: flex;
+}

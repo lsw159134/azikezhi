@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.BookingMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Booking" >
+    <id column="booking_id" property="booking_id" jdbcType="VARCHAR" />
+    <result column="booking_product" property="booking_product" jdbcType="VARCHAR" />
+    <result column="booking_encapsulation" property="booking_encapsulation" jdbcType="VARCHAR" />
+    <result column="booking_number" property="booking_number"/>
+    <result column="booking_price" property="booking_price" jdbcType="REAL" />
+    <result column="booking_channel" property="booking_channel" jdbcType="VARCHAR" />
+	<result column="booking_status" property="booking_status" jdbcType="VARCHAR" />
+    <result column="booking_phone" property="booking_phone" jdbcType="VARCHAR" />
+    <result column="booking_date" property="booking_date"/>
+	<result column="booking_note" property="booking_note"/>
+	<result column="booking_uid" property="booking_uid"/>
+	<result column="booking_feedback" property="booking_feedback"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    booking_id, booking_product, booking_encapsulation, booking_feedback,booking_number, booking_price, booking_channel,booking_status
+    ,booking_phone,booking_date,booking_note
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Booking" >
+    insert into booking
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="booking_id != null" >
+        booking_id,
+      </if>
+      <if test="booking_product != null" >
+        booking_product,
+      </if>
+      <if test="booking_encapsulation != null" >
+        booking_encapsulation,
+      </if>
+      <if test="booking_number != null" >
+        booking_number,
+      </if>
+      <if test="booking_price != null" >
+        booking_price,
+      </if>
+      <if test="booking_channel != null" >
+        booking_channel,
+      </if>
+      <if test="booking_status != null" >
+        booking_status,
+      </if>
+      <if test="booking_phone != null" >
+        booking_phone,
+      </if>
+      <if test="booking_date != null" >
+        booking_date,
+      </if>
+      <if test="booking_note != null" >
+        booking_note,
+      </if>
+      <if test="booking_uid != null" >
+        booking_uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="booking_id != null" >
+        #{booking_id,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_product != null" >
+        #{booking_product,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_encapsulation != null" >
+        #{booking_encapsulation,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_number != null" >
+        #{booking_number},
+      </if>
+      <if test="booking_price != null" >
+        #{booking_price,jdbcType=TIMESTAMP},
+      </if>
+      <if test="booking_channel != null" >
+        #{booking_channel,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_status != null" >
+        #{booking_status,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_phone != null" >
+        #{booking_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_date != null" >
+        #{booking_date},
+      </if>
+      <if test="booking_note != null" >
+        #{booking_note,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_uid != null" >
+        #{booking_uid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Booking" >
+    update booking
+    <set >
+      <if test="booking_product != null" >
+        booking_product = #{booking_product,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_encapsulation != null" >
+        booking_encapsulation = #{booking_encapsulation,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_number != null and booking_number!=0 " >
+        booking_number = #{booking_number},
+      </if>
+      <if test="booking_price != null" >
+        booking_price = #{booking_price,jdbcType=TIMESTAMP},
+      </if>
+      <if test="booking_channel != null" >
+        booking_channel = #{booking_channel,jdbcType=VARCHAR},
+      </if>
+      <if test="booking_status != null" >
+        booking_status = #{booking_status},
+      </if>
+      <if test="booking_phone != null" >
+        booking_phone = #{booking_phone},
+      </if>
+      <if test="booking_note != null" >
+        booking_note = #{booking_note},
+      </if>
+      <if test="booking_date != null" >
+        booking_date = #{booking_date},
+      </if>
+      <if test="booking_feedback != null" >
+        booking_feedback = #{booking_feedback},
+      </if>
+    </set>
+    where booking_id = #{booking_id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查看代售申请（用户） -->
+  <select id="queryByUid" resultMap="BaseResultMap" parameterType="Map">
+  		select 
+  		<include refid="Base_Column_List" />
+  		from booking b where b.booking_uid=#{uid,jdbcType=VARCHAR} order by booking_date desc limit #{start},#{size}
+  </select>
+  
+	<!-- 总记录数 -->
+	<select id="getTotal" parameterType="Map" resultType="Long">
+		select count(*) from booking b where b.booking_uid=#{uid,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 查看代售申请 （所有）-->
+	<select id="queryAll" resultMap="BaseResultMap" parameterType="Map">
+		select 
+		<include refid="Base_Column_List" />
+		from booking b order by booking_date desc limit #{start},#{size}
+	</select>
+  
+  	<!-- 总记录数(所有) -->
+	<select id="getTotalAll" parameterType="Map" resultType="Long">
+		select count(*) from booking b
+	</select>
+	
+	<select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from booking where booking_id=#{0}
+	</select>
+  
+</mapper>

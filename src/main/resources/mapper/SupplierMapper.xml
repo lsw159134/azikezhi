@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.SupplierMapper">
+	<resultMap id="BaseResultMap" type="com.zikezhi.entity.Supplier">
+		<id column="SupplierUUID" property="supplieruuid" jdbcType="VARCHAR" />
+		<result column="SupplierName" property="suppliername" jdbcType="VARCHAR" />
+		<result column="SupplierPosition" property="supplierposition"
+			jdbcType="VARCHAR" />
+		<result column="RepoPosition" property="repoposition" jdbcType="VARCHAR" />
+		<result column="ValidityPeriod" property="validityperiod"
+			jdbcType="VARCHAR" />
+		<result column="Telphone4" property="telphone4" jdbcType="VARCHAR" />
+		<result column="Telphone3" property="telphone3" jdbcType="VARCHAR" />
+		<result column="Telphone2" property="telphone2" jdbcType="VARCHAR" />
+		<result column="Telphone1" property="telphone1" jdbcType="VARCHAR" />
+		<result column="Telphone" property="telphone" jdbcType="VARCHAR" />
+		<result column="Cellphone" property="cellphone" jdbcType="VARCHAR" />
+		<result column="Fax" property="fax" jdbcType="VARCHAR" />
+		<result column="Email" property="email" jdbcType="VARCHAR" />
+		<result column="BrandOperation" property="brandoperation"
+			jdbcType="VARCHAR" />
+		<result column="SupplierPhotos" property="supplierphotos"
+			jdbcType="VARCHAR" />
+		<result column="Qualification" property="qualification"
+			jdbcType="VARCHAR" />
+		<result column="Evaluate" property="evaluate" jdbcType="VARCHAR" />
+		<result column="IsCheck" property="ischeck" jdbcType="BIT" />
+		<result column="QQ" property="qq" jdbcType="CHAR" />
+		<result column="QQ2" property="qq2" jdbcType="CHAR" />
+		<result column="supplier_uid" property="supplier_uid" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="VARCHAR" />
+		<result column="supplier_label1" property="supplier_label1"
+			jdbcType="VARCHAR" />
+		<result column="supplier_label2" property="supplier_label2"
+			jdbcType="VARCHAR" />
+		<result column="supplier_label3" property="supplier_label3"
+			jdbcType="VARCHAR" />
+		<result column="supplier_label4" property="supplier_label4"
+			jdbcType="VARCHAR" />
+		<result column="supplier_label5" property="supplier_label5"
+			jdbcType="VARCHAR" />
+		<result column="supplier_bieming" property="supplier_bieming"
+			jdbcType="VARCHAR" />
+		<association property="user" javaType="com.zikezhi.entity.UserInfo">
+			<id column="userUid" property="useruid" jdbcType="VARCHAR" />
+			<result column="userName" property="username" jdbcType="VARCHAR" />
+			<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+		</association>
+		<collection property="productList" javaType="list"
+			ofType="com.zikezhi.entity.Product">
+			<id column="ProductUUID" jdbcType="VARCHAR" property="productuuid" />
+			<result column="Product" jdbcType="VARCHAR" property="product" />
+			<result column="Supplier" jdbcType="VARCHAR" property="supplier" />
+			<result column="Description" jdbcType="VARCHAR" property="description" />
+			<result column="Manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+			<result column="LotNumber" jdbcType="VARCHAR" property="lotnumber" />
+			<result column="Encapsulation" jdbcType="VARCHAR" property="encapsulation" />
+			<result column="IsGoodsInStock" jdbcType="VARCHAR" property="isgoodsinstock" />
+			<result column="Price" jdbcType="REAL" property="price" />
+			<result column="Document" jdbcType="VARCHAR" property="document" />
+			<result column="Image" jdbcType="VARCHAR" property="image" />
+			<result column="Keywords" jdbcType="VARCHAR" property="keywords" />
+			<result column="Complaint" jdbcType="VARCHAR" property="complaint" />
+			<result column="Quality" jdbcType="INTEGER" property="quality" />
+			<result column="p_data" jdbcType="VARCHAR" property="p_data" />
+			<result column="uptime" property="uptime" />
+			<result column="product_primary" property="product_primary" />
+			<result column="product_second" property="product_second" />
+			<result column="SupplierUUID" jdbcType="VARCHAR" property="supplieruuid" />
+			<result column="product_miaoshu" jdbcType="VARCHAR" property="product_miaoshu" />
+			<result column="complaintPrice" property="complaintprice"
+				jdbcType="INTEGER" />
+			<result column="complaintActuals" property="complaintactuals"
+				jdbcType="INTEGER" />
+			<result column="complaintOriginal" property="complaintoriginal"
+				jdbcType="INTEGER" />
+			<result column="QQ" property="qq" jdbcType="CHAR" />
+			<result column="product_booking" property="product_booking" />
+			<!-- 分类 -->
+			<result column="sort_miaoshu" property="sort_miaoshu"
+				jdbcType="VARCHAR" />
+			<result column="sort_lianjie" property="sort_lianjie"
+				jdbcType="VARCHAR" />
+			<result column="sort_waishe" property="sort_waishe" jdbcType="VARCHAR" />
+			<result column="sort_io" property="sort_io" jdbcType="VARCHAR" />
+			<result column="sort_ram" property="sort_ram" jdbcType="VARCHAR" />
+			<result column="sort_shujuzhuanhuan" property="sort_shujuzhuanhuan"
+				jdbcType="VARCHAR" />
+			<result column="sort_dianya" property="sort_dianya" jdbcType="VARCHAR" />
+			<result column="sort_wendu" property="sort_wendu" jdbcType="VARCHAR" />
+
+			<association property="evaluate" javaType="com.zikezhi.entity.Evaluate">
+				<id column="evaluate_id" property="evaluate_id" />
+				<result column="evaluate_zan" property="evaluate_zan" />
+				<result column="evaluate_cai" property="evaluate_cai" />
+			</association>
+
+			<association property="primary" javaType="com.zikezhi.entity.Primary">
+				<id column="primary_id" property="primary_id" />
+				<result column="primary_name" property="primary_name"
+					jdbcType="VARCHAR" />
+			</association>
+			<association property="second" javaType="com.zikezhi.entity.Second">
+				<id column="second_id" property="second_id" />
+				<result column="second_name" property="second_name" jdbcType="VARCHAR" />
+			</association>
+			<collection property="pimgList" javaType="list"
+				ofType="com.zikezhi.entity.PImg">
+				<id column="p_imgid" property="p_imgid" jdbcType="VARCHAR" />
+				<result column="p_imgname" property="p_imgname" jdbcType="VARCHAR" />
+				<result column="p_imgpid" property="p_imgpid" jdbcType="VARCHAR" />
+				<result column="p_imgstauts" property="p_imgstauts" jdbcType="VARCHAR" />
+				<result column="p_imgtime" property="p_imgtime" />
+			</collection>
+		</collection>
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.zikezhi.entity.Supplier"
+		extends="BaseResultMap">
+		<result column="SupplierPrefile" property="supplierprefile"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		SupplierUUID, SupplierName, SupplierPosition, RepoPosition,
+		ValidityPeriod,
+		Telphone4, Telphone3, Telphone2, Telphone1, Telphone,
+		Cellphone, Fax,
+		Email, BrandOperation, SupplierPhotos, Qualification,
+		Evaluate,
+		IsCheck, QQ, QQ2,supplier_uid
+	</sql>
+
+	<select id="selectRand" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from supplier ORDER BY RAND() LIMIT 8
+	</select>
+
+	<select id="selectSupplierName" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select supplieruuid from supplier where supplierName =
+		#{suppliername}
+	</select>
+
+	<!-- 供应商总数 -->
+	<select id="getCount" resultType="int" parameterType="Map">
+		select count(*) from supplier
+		<where>
+			suppliername!='样品商城'
+			<if test="suppliername!=null and suppliername!=''">
+				and suppliername like CONCAT('%',#{suppliername},'%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 所有供应商 -->
+	<select id="selectByNews" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		SELECT
+		s.SupplierUUID,s.SupplierName,s.SupplierPosition,s.RepoPosition,s.time,s.Telphone1,ifnull(p.s,0)ValidityPeriod
+		,u.*,s.supplier_label1,s.supplier_label2,s.supplier_label3,s.supplier_label4,s.supplier_label5
+		from supplier s left join (select count(*)s,SupplierUUID from product
+		group by supplieruuid)p on s.SupplierUUID=p.SupplierUUID
+		left join user
+		u on supplier_uid=u.useruid
+		<where>
+			suppliername!='样品商城'
+			<if test="suppliername!=null and suppliername!=''">
+				and (suppliername like CONCAT('%',#{suppliername},'%') or
+				supplier_bieming like CONCAT('%',#{suppliername},'%'))
+			</if>
+			<if test="username !=null and username !=''">
+				and u.username like CONCAT('%',#{username},'%')
+			</if>
+		</where>
+		order by time desc
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+	<!--分页查询 -->
+	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		,supplier_bieming
+		from supplier
+		<if test="keyword != null">
+			where SupplierName like CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	<!--获取总数 -->
+	<select id="getTotal" parameterType="java.lang.String"
+		resultType="java.lang.Long">
+		select count(0) from supplier
+		<if test="keyword != null">
+			where SupplierName like CONCAT('%',#{keyword},'%')
+		</if>
+	</select>
+	<sql id="Blob_Column_List">
+		SupplierPrefile
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		*
+		from supplier where SupplierUUID =
+		#{supplieruuid,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		supplier where SupplierUUID = #{supplieruuid,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zikezhi.entity.Supplier">
+		insert into supplier
+		(SupplierUUID, SupplierName, SupplierPosition,
+		RepoPosition,
+		ValidityPeriod, Telphone4, Telphone3, Telphone2,
+		Telphone1, Telphone,
+		Cellphone, Fax, Email, BrandOperation,
+		SupplierPhotos, Qualification,
+		Evaluate, IsCheck,QQ, QQ2,
+		SupplierPrefile) values
+		(#{supplieruuid,jdbcType=VARCHAR},
+		#{suppliername, jdbcType=VARCHAR},
+		#{supplierposition,jdbcType=VARCHAR},
+		#{repoposition,jdbcType=VARCHAR}, #{validityperiod,jdbcType=VARCHAR},
+		#{telphone4,jdbcType=VARCHAR}, #{telphone3,jdbcType=VARCHAR},
+		#{telphone2,jdbcType=VARCHAR}, #{telphone1,jdbcType=VARCHAR},
+		#{telphone,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+		#{brandoperation,jdbcType=VARCHAR},
+		#{supplierphotos,jdbcType=VARCHAR}, #{qualification,jdbcType=VARCHAR},
+		#{evaluate,jdbcType=VARCHAR}, #{ischeck,jdbcType=BIT},
+		#{qq,jdbcType=CHAR}, #{qq2,jdbcType=CHAR},
+		#{supplierprefile,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zikezhi.entity.Supplier">
+		insert into supplier
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="supplieruuid != null">
+				SupplierUUID,
+			</if>
+			<if test="suppliername != null">
+				SupplierName,
+			</if>
+			<if test="supplierposition != null">
+				SupplierPosition,
+			</if>
+			<if test="repoposition != null">
+				RepoPosition,
+			</if>
+			<if test="validityperiod != null">
+				ValidityPeriod,
+			</if>
+			<if test="telphone4 != null">
+				Telphone4,
+			</if>
+			<if test="telphone3 != null">
+				Telphone3,
+			</if>
+			<if test="telphone2 != null">
+				Telphone2,
+			</if>
+			<if test="telphone1 != null">
+				Telphone1,
+			</if>
+			<if test="telphone != null">
+				Telphone,
+			</if>
+			<if test="cellphone != null">
+				Cellphone,
+			</if>
+			<if test="fax != null">
+				Fax,
+			</if>
+			<if test="email != null">
+				Email,
+			</if>
+			<if test="brandoperation != null">
+				BrandOperation,
+			</if>
+			<if test="supplierphotos != null">
+				SupplierPhotos,
+			</if>
+			<if test="qualification != null">
+				Qualification,
+			</if>
+			<if test="evaluate != null">
+				Evaluate,
+			</if>
+			<if test="ischeck != null">
+				IsCheck,
+			</if>
+			<if test="qq != null">
+				QQ,
+			</if>
+			<if test="qq2 != null">
+				QQ2,
+			</if>
+			<if test="supplierprefile != null">
+				SupplierPrefile,
+			</if>
+			<if test="supplier_uid != null">
+				supplier_uid,
+			</if>
+			<if test="supplier_bieming != null">
+				supplier_bieming,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="supplieruuid != null">
+				#{supplieruuid,jdbcType=VARCHAR},
+			</if>
+			<if test="suppliername != null">
+				#{suppliername, jdbcType=VARCHAR},
+			</if>
+			<if test="supplierposition != null">
+				#{supplierposition,jdbcType=VARCHAR},
+			</if>
+			<if test="repoposition != null">
+				#{repoposition,jdbcType=VARCHAR},
+			</if>
+			<if test="validityperiod != null">
+				#{validityperiod,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone4 != null">
+				#{telphone4,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone3 != null">
+				#{telphone3,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone2 != null">
+				#{telphone2,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone1 != null">
+				#{telphone1,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone != null">
+				#{telphone,jdbcType=VARCHAR},
+			</if>
+			<if test="cellphone != null">
+				#{cellphone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				#{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="brandoperation != null">
+				#{brandoperation,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierphotos != null">
+				#{supplierphotos,jdbcType=VARCHAR},
+			</if>
+			<if test="qualification != null">
+				#{qualification,jdbcType=VARCHAR},
+			</if>
+			<if test="evaluate != null">
+				#{evaluate,jdbcType=VARCHAR},
+			</if>
+			<if test="ischeck != null">
+				#{ischeck,jdbcType=BIT},
+			</if>
+			<if test="qq != null">
+				#{qq,jdbcType=CHAR},
+			</if>
+			<if test="qq2 != null">
+				#{qq2,jdbcType=CHAR},
+			</if>
+			<if test="supplierprefile != null">
+				#{supplierprefile,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="supplier_uid != null">
+				#{supplier_uid},
+			</if>
+			<if test="supplier_bieming != null">
+				#{supplier_bieming},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- <update id="updateBySupplierNameSelective" parameterType="com.zikezhi.entity.Supplier"> 
+		update supplier <set> <if test="supplierposition != null"> SupplierPosition 
+		= #{supplierposition,jdbcType=VARCHAR}, </if> <if test="suppliername != null"> 
+		SupplierName = #{suppliername, jdbcType=VARCHAR}, </if> <if test="repoposition 
+		!= null"> RepoPosition = #{repoposition,jdbcType=VARCHAR}, </if> <if test="validityperiod 
+		!= null"> ValidityPeriod = #{validityperiod,jdbcType=VARCHAR}, </if> <if 
+		test="telphone4 != null"> Telphone4 = #{telphone4,jdbcType=VARCHAR}, </if> 
+		<if test="telphone3 != null"> Telphone3 = #{telphone3,jdbcType=VARCHAR}, 
+		</if> <if test="telphone2 != null"> Telphone2 = #{telphone2,jdbcType=VARCHAR}, 
+		</if> <if test="telphone1 != null"> Telphone1 = #{telphone1,jdbcType=VARCHAR}, 
+		</if> <if test="telphone != null"> Telphone = #{telphone,jdbcType=VARCHAR}, 
+		</if> <if test="cellphone != null"> Cellphone = #{cellphone,jdbcType=VARCHAR}, 
+		</if> <if test="fax != null"> Fax = #{fax,jdbcType=VARCHAR}, </if> <if test="email 
+		!= null"> Email = #{email,jdbcType=VARCHAR}, </if> <if test="brandoperation 
+		!= null"> BrandOperation = #{brandoperation,jdbcType=VARCHAR}, </if> <if 
+		test="supplierphotos != null"> SupplierPhotos = #{supplierphotos,jdbcType=VARCHAR}, 
+		</if> <if test="qualification != null"> Qualification = #{qualification,jdbcType=VARCHAR}, 
+		</if> <if test="evaluate != null"> Evaluate = #{evaluate,jdbcType=VARCHAR}, 
+		</if> <if test="ischeck != null"> IsCheck = #{ischeck,jdbcType=BIT}, </if> 
+		<if test="qq != null"> QQ = #{qq,jdbcType=CHAR}, </if> <if test="qq2 != null"> 
+		QQ2 = #{qq2,jdbcType=CHAR}, </if> <if test="supplierprefile != null"> SupplierPrefile 
+		= #{supplierprefile,jdbcType=LONGVARCHAR}, </if> </set> where SupplierName 
+		= #{SupplierName,jdbcType=VARCHAR} </update> -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Supplier">
+		update supplier
+		<set>
+			<if test="supplierposition != null">
+				SupplierPosition = #{supplierposition},
+			</if>
+			<if test="suppliername != null">
+				SupplierName = #{suppliername, jdbcType=VARCHAR},
+			</if>
+			<if test="repoposition != null">
+				RepoPosition = #{repoposition,jdbcType=VARCHAR},
+			</if>
+			<if test="validityperiod != null">
+				ValidityPeriod = #{validityperiod,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone4 != null">
+				Telphone4 = #{telphone4,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone3 != null">
+				Telphone3 = #{telphone3,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone2 != null">
+				Telphone2 = #{telphone2,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone1 != null">
+				Telphone1 = #{telphone1,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone != null">
+				Telphone = #{telphone,jdbcType=VARCHAR},
+			</if>
+			<if test="cellphone != null">
+				Cellphone = #{cellphone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				Fax = #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				Email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="brandoperation != null">
+				BrandOperation = #{brandoperation,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierphotos != null">
+				SupplierPhotos = #{supplierphotos,jdbcType=VARCHAR},
+			</if>
+			<if test="qualification != null">
+				Qualification = #{qualification,jdbcType=VARCHAR},
+			</if>
+			<if test="evaluate != null">
+				Evaluate = #{evaluate,jdbcType=VARCHAR},
+			</if>
+			<if test="ischeck != null">
+				IsCheck = #{ischeck,jdbcType=BIT},
+			</if>
+			<if test="qq != null">
+				QQ = #{qq,jdbcType=CHAR},
+			</if>
+			<if test="qq2 != null">
+				QQ2 = #{qq2,jdbcType=CHAR},
+			</if>
+			<if test="supplierprefile != null">
+				SupplierPrefile = #{supplierprefile,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier_label1 != null">
+				supplier_label1 = #{supplier_label1,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier_label2 != null">
+				supplier_label2 = #{supplier_label2,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier_label3 != null">
+				supplier_label3 = #{supplier_label3,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier_label4 != null">
+				supplier_label4 = #{supplier_label4,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier_label5 != null">
+				supplier_label5 = #{supplier_label5,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier_bieming != null">
+				supplier_bieming = #{supplier_bieming},
+			</if>
+		</set>
+		where SupplierUUID = #{supplieruuid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zikezhi.entity.Supplier">
+		update
+		supplier set SupplierName = #{suppliername,jdbcType=VARCHAR},
+		SupplierPosition = #{supplierposition,jdbcType=VARCHAR}, RepoPosition
+		= #{repoposition,jdbcType=VARCHAR}, ValidityPeriod =
+		#{validityperiod,jdbcType=VARCHAR}, Telphone4 =
+		#{telphone4,jdbcType=VARCHAR}, Telphone3 =
+		#{telphone3,jdbcType=VARCHAR}, Telphone2 =
+		#{telphone2,jdbcType=VARCHAR}, Telphone1 =
+		#{telphone1,jdbcType=VARCHAR}, Telphone =#{telphone,jdbcType=VARCHAR},
+		Cellphone =#{cellphone,jdbcType=VARCHAR}, Fax =
+		#{fax,jdbcType=VARCHAR}, Email =#{email,jdbcType=VARCHAR},
+		BrandOperation =#{brandoperation,jdbcType=VARCHAR}, SupplierPhotos
+		=#{supplierphotos,jdbcType=VARCHAR}, Qualification
+		=#{qualification,jdbcType=VARCHAR}, Evaluate
+		=#{evaluate,jdbcType=VARCHAR}, IsCheck = #{ischeck,jdbcType=BIT}, QQ =
+		#{qq,jdbcType=CHAR}, QQ2 = #{qq2,jdbcType=CHAR}, SupplierPrefile =
+		#{supplierprefile,jdbcType=LONGVARCHAR} where SupplierUUID =
+		#{supplieruuid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.Supplier">
+		update supplier
+		set SupplierName = #{suppliername, jdbcType=VARCHAR},
+		SupplierPosition
+		= #{supplierposition,jdbcType=VARCHAR}, RepoPosition
+		=
+		#{repoposition,jdbcType=VARCHAR}, ValidityPeriod =
+		#{validityperiod,jdbcType=VARCHAR}, Telphone4 =
+		#{telphone4,jdbcType=VARCHAR}, Telphone3 =
+		#{telphone3,jdbcType=VARCHAR}, Telphone2 =
+		#{telphone2,jdbcType=VARCHAR}, Telphone1 =
+		#{telphone1,jdbcType=VARCHAR}, Telphone =
+		#{telphone,jdbcType=VARCHAR}, Cellphone =
+		#{cellphone,jdbcType=VARCHAR}, Fax = #{fax,jdbcType=VARCHAR}, Email =
+		#{email,jdbcType=VARCHAR}, BrandOperation =
+		#{brandoperation,jdbcType=VARCHAR}, SupplierPhotos =
+		#{supplierphotos,jdbcType=VARCHAR}, Qualification =
+		#{qualification,jdbcType=VARCHAR}, Evaluate =
+		#{evaluate,jdbcType=VARCHAR}, IsCheck = #{ischeck,jdbcType=BIT}, QQ =
+		#{qq,jdbcType=CHAR}, QQ2 = #{qq2,jdbcType=CHAR} where SupplierUUID =
+		#{supplieruuid,jdbcType=VARCHAR}
+	</update>
+
+	<select id="seleSupplierUid" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select * from supplier where supplier_uid=#{0}
+	</select>
+	<select id="selepanduan" resultMap="BaseResultMap"
+		parameterType="Map" useCache="false">
+		select * from supplier
+		<where>
+			<if test="telphone1!=null">
+				telphone1=#{telphone1} or telphone2=#{telphone1} or
+				telphone3=#{telphone1}
+			</if>
+			<if test="telphone2!=null">
+				and telphone2=#{telphone2} or telphone1=#{telphone2} or
+				telphone3=#{telphone2}
+			</if>
+			<if test="telphone3!=null">
+				and telphone3=#{telphone3} or telphone2=#{telphone3} or
+				telphone1=#{telphone3}
+			</if>
+			<if test="cellphone!=null">
+				and cellphone=#{cellphone}
+			</if>
+			<if test="suppliername != null">
+				and suppliername=#{suppliername}
+			</if>
+		</where>
+	</select>
+
+	<select id="productlist" resultMap="BaseResultMap"
+		parameterType="Map">
+		select * from supplier s
+		left join (
+		select * from(select
+		p.ProductUUID,p.Product,p.supplieruuid,p.supplier,p.Manufacturer,p.Quality,p.Encapsulation,p.LotNumber,p.IsGoodsInStock,p.Price,p.Description,p.s
+		as complaintPrice,e.* from(select *,count(*)s from (select * from
+		product
+		<where>
+			<if test="keyword != null and keyword !='' and isExact == null">
+				product like CONCAT(#{keyword},'%')
+			</if>
+			<if
+				test="keyword != null and keyword !='' and isExact != null and isExact!=''">
+				product = #{keyword}
+			</if>
+			<if test="product_second != null and product_second!=''">
+				and product_second in(select second_id from second1 where
+				second_name =
+				#{product_second})
+			</if>
+			<if test="manufacturer != null and manufacturer !=''">
+				and manufacturer = #{manufacturer}
+			</if>
+			<if test="encapsulation != null and encapsulation !=''">
+				and encapsulation = #{encapsulation}
+			</if>
+		</where>
+		order by Quality asc)p
+		group by p.supplieruuid,p.Quality order by
+		p.Quality asc)p left join (
+		select
+		evaluate_pid,ifnull(sum(evaluate_zan),0)evaluate_zan,ifnull(sum(evaluate_cai),0)evaluate_cai
+		from evaluate group by evaluate_pid
+		)e on p.ProductUUID =e.evaluate_pid
+		group by p.supplieruuid order by
+		p.Quality asc,e.evaluate_zan desc
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+		)p left join p_img i on p.productuuid = i.p_imgpid group by
+		SupplierUUID order by quality asc) p on s.SupplierUUID=p.SupplierUUID
+		where
+		p.Product is not null
+		order by p.quality asc,p.evaluate_zan desc
+
+	</select>
+
+	<select id="getTotallist" resultType="int" parameterType="Map">
+		select count(*) from supplier s left join (select * from product
+		<where>
+			Product is not null
+			<if test="keyword != null and keyword !=''">
+				and product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="product_second != null and product_second!=''">
+				and product_second in(select second_id from second1 where
+				second_name = #{product_second})
+			</if>
+			<if test="manufacturer != null and manufacturer !=''">
+				and manufacturer = #{manufacturer}
+			</if>
+			<if test="encapsulation != null and encapsulation !=''">
+				and encapsulation = #{encapsulation}
+			</if>
+		</where>
+		group by SupplierUUID)p on s.SupplierUUID=p.SupplierUUID
+	</select>
+
+	<!-- 新加入供应商 -->
+	<select id="queryBySupplierXin" resultMap="BaseResultMap">
+		select suppliername
+		from supplier where suppliername!='样品商城' order by time desc
+		,LENGTH(suppliername)
+	</select>
+
+	<select id="selectByproductByQuality" resultMap="BaseResultMap"
+		parameterType="Map">
+		select * from supplier s
+		left join (
+		select * from(
+		select
+		p.ProductUUID,p.Product,p.supplieruuid,
+		p.supplier,p.Manufacturer,p.Quality,
+		p.Encapsulation,p.LotNumber,p.IsGoodsInStock,
+		p.Price,p.Description,e.* from(select * from (select * from product
+		<where>
+			Product is not null
+			<if test="keyword != null and keyword !=''">
+				and product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="product_second != null and product_second!=''">
+				and product_second in(select second_id from second1 where
+				second_name =
+				#{product_second})
+			</if>
+			<if test="manufacturer != null and manufacturer !=''">
+				and manufacturer = #{manufacturer}
+			</if>
+			<if test="encapsulation != null and encapsulation !=''">
+				and encapsulation = #{encapsulation}
+			</if>
+		</where>
+		order by Quality asc)p
+		order by p.Quality asc)p left join (
+		select
+		evaluate_pid,ifnull(sum(evaluate_zan),0)evaluate_zan,ifnull(sum(evaluate_cai),0)evaluate_cai
+		from evaluate group by evaluate_pid
+		)e on p.ProductUUID =e.evaluate_pid
+		order by p.Quality
+		asc,e.evaluate_zan desc)p left join p_img i on
+		p.productuuid =
+		i.p_imgpid order by quality asc) p on
+		s.SupplierUUID=p.SupplierUUID
+		where
+		p.Product is not null
+		order by
+		p.quality asc,p.evaluate_zan desc
+	</select>
+
+	<select id="seleSupplierByname" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select * from supplier where suppliername=#{0}
+	</select>
+
+	<select id="queryBysname" resultType="int" parameterType="java.lang.String">
+		select
+		count(*) from supplier where suppliername =#{0} or Telphone1=#{1} or
+		Telphone2=#{2}
+	</select>
+	<select id="querySupplierBySupplierName" resultType="com.zikezhi.entity.Supplier"
+		parameterType="java.lang.String">
+		select * from supplier where suppliername=#{0}
+	</select>
+</mapper>

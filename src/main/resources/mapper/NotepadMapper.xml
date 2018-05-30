@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.NotepadMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Notepad" >
+    <id column="notepad_id" property="notepad_id" />
+    <result column="notepad_connet" property="notepad_connet" jdbcType="VARCHAR" />
+    <result column="notepad_uid" property="notepad_uid"/>
+    <result column="notepad_date" property="notepad_date"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    notepad_id, notepad_connet, notepad_date
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Notepad" >
+    insert into notepad
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="notepad_connet != null" >
+        notepad_connet,
+      </if>
+      <if test="notepad_uid != null" >
+        notepad_uid,
+      </if>
+      <if test="notepad_date != null" >
+        notepad_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="notepad_connet != null" >
+        #{notepad_connet,jdbcType=VARCHAR},
+      </if>
+      <if test="notepad_uid != null" >
+        #{notepad_uid,jdbcType=VARCHAR},
+      </if>
+      <if test="notepad_date != null" >
+        #{notepad_date},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Notepad" >
+    update notepad
+    <set >
+      <if test="notepad_connet != null" >
+        notepad_connet = #{notepad_connet},
+      </if>
+    </set>
+    where notepad_id = #{notepad_id}
+  </update>
+  
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="map">
+  	select s.*,a.admin_adminName name from notepad s left join adminzaixinjian a on s.notepad_uid=a.admin_id
+  	<where>
+  		<if test="connet!=null and connet!=''">
+  			notepad_connet like #{connet}
+  		</if>
+  	</where>	
+   order by notepad_date desc
+  </select>
+  
+  <delete id="deleteNotepad" parameterType="int" >
+  	delete from notepad where notepad_id=#{0}
+  </delete>
+  
+</mapper>

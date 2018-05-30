@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.FanKuiMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.FanKui" >
+    <id column="fankuiid" property="fankuiid" jdbcType="INTEGER" />
+    <result column="fankui_pid" property="fankui_pid" jdbcType="VARCHAR" />
+    <result column="fankui_time" property="fankui_time" />
+    <result column="fankuitext" property="fankuitext" jdbcType="VARCHAR" />
+    <result column="fankui_product" property="fankui_product" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    fankuiid,fankui_pid,fankui_time,fankuitext,fankui_product
+  </sql>
+  
+  <insert id="insertFankui" parameterType="com.zikezhi.entity.FanKui">
+     insert into fankui (fankui_pid,fankuitext,fankui_product) values(#{fankui_pid,jdbcType=VARCHAR},#{fankuitext,jdbcType=VARCHAR},#{fankui_product})
+  </insert>
+  <select id="selectFankui" resultMap="BaseResultMap" >
+     select * from fankui order by fankui_time desc
+  </select>
+  
+  <delete id="fankuidele" parameterType="java.lang.String" >
+     delete from fankui where fankuiid = #{fankuiid}
+  </delete>
+</mapper>

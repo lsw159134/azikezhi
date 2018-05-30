@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Cart" >
+    <id column="cart_id" property="cart_id" jdbcType="VARCHAR" />
+    <result column="cart_pid" property="cart_uid" jdbcType="VARCHAR" />
+    <result column="cart_uid" property="cart_uid"/>
+    <result column="cart_number" property="cart_number"/>
+    <result column="cart_date" property="cart_date"/>
+    <association property="p" javaType="com.zikezhi.entity.Product" column="productuid">
+		<id column="ProductUUID" jdbcType="VARCHAR" property="productuuid" />
+		<result column="Product" jdbcType="VARCHAR" property="product" />
+		<result column="Supplier" jdbcType="VARCHAR" property="supplier" />
+		<result column="encapsulation" jdbcType="VARCHAR" property="encapsulation" />
+	</association>
+	<association property="user" javaType="com.zikezhi.entity.UserInfo">
+		<id column="userUid" property="useruid" jdbcType="VARCHAR" />
+   		<result column="userName" property="username" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cart_id, cart_pid, cart_uid, cart_number,cart_date
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Cart" >
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cart_id != null" >
+        cart_id,
+      </if>
+      <if test="cart_pid != null" >
+        cart_pid,
+      </if>
+      <if test="cart_uid != null" >
+        cart_uid,
+      </if>
+      <if test="cart_number != null" >
+        cart_number,
+      </if>
+       <if test="cart_date != null" >
+        cart_date,
+      </if>
+        <if test="panduan != null" >
+        panduan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cart_id != null" >
+        #{cart_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cart_pid != null" >
+        #{cart_pid,jdbcType=VARCHAR},
+      </if>
+      <if test="cart_uid != null" >
+        #{cart_uid},
+      </if>
+      <if test="cart_number != null" >
+        #{cart_number},
+      </if>
+      <if test="cart_date != null" >
+        #{cart_date},
+      </if>
+       <if test="panduan != null" >
+        #{panduan},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Cart" >
+    update cart
+    <set >
+      <if test="cart_number != null" >
+        cart_number = #{cart_number},
+      </if>
+    </set>
+    where cart_id = #{cart_id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询购物车是否有产品相同 -->
+  <select id="queryByPid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from cart where cart_pid=#{0} and cart_uid=#{1}
+  </select>
+  
+  <!-- 删除购物产品 -->
+  <delete id="deleteByPid" parameterType="java.lang.String">
+  	delete from cart where cart_id=#{0}
+  </delete>
+  
+  <!-- 清空购物车 -->
+  <delete id="deleteByUid" parameterType="java.lang.String">
+  	delete from cart where cart_uid=#{cart_uid}
+  </delete>
+  
+  <select id="queryAll" resultMap="BaseResultMap" useCache="false">
+  	select c1.Product,c1.cart_number,c1.cart_date,u.userName from(select c.cart_uid,c.cart_number,c.cart_date,p.Product from cart c,product p where c.cart_pid=p.ProductUUID)c1,user u where c1.cart_uid=u.userUid order by c1.cart_date desc
+
+  </select>
+  <select id="countCart" parameterType="java.lang.String" resultType="java.lang.Long">
+  	select count(*) from cart where cart_uid = #{cart_uid}
+  </select>
+  
+</mapper>

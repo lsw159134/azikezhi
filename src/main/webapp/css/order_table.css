@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+#order_table td{
+	border:1px #FFA500 solid;
+}

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.InquiryMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Inquiry">
+    <id column="inquiry_id" property="inquiry_id" />
+    <result column="inquiry_product" property="inquiry_product" jdbcType="VARCHAR" />
+    <result column="inquiry_package" property="inquiry_package"/>
+    <result column="inquiry_number" property="inquiry_number"/>
+    <result column="inquiry_price" property="inquiry_price"/>
+    <result column="inquiry_date" property="inquiry_date"/>
+    <result column="inquiry_uid" property="inquiry_uid"/>
+    <result column="inquiry_status" property="inquiry_status"/>
+    <result column="inquiry_supplier" property="inquiry_supplier"/>
+    <result column="inquiry_supplieruuid" property="inquiry_supplieruuid"/>
+    <result column="inquiry_lotNumber" property="inquiry_lotnumber"/>
+    <result column="inquiry_brand" property="inquiry_brand"/>
+    <result column="inquiry_telphone" property="inquiry_telphone"/>
+    <result column="inquiry_utilnumber" property="inquiry_utilnumber"/>
+    <result column="inquiry_priceutil" property="inquiry_priceutil"/>
+    <result column="inquiry_quality" property="inquiry_quality"/>
+	<association property="supplier" javaType="com.zikezhi.entity.Supplier">
+		<id column="SupplierUUID" property="supplieruuid" jdbcType="VARCHAR" />
+		<result column="SupplierName" property="suppliername" jdbcType="VARCHAR" />
+		<result column="SupplierPosition" property="supplierposition"
+			jdbcType="VARCHAR" />
+		<result column="RepoPosition" property="repoposition" jdbcType="VARCHAR" />
+		<result column="ValidityPeriod" property="validityperiod"
+			jdbcType="VARCHAR" />
+		<result column="Telphone4" property="telphone4" jdbcType="VARCHAR" />
+		<result column="Telphone3" property="telphone3" jdbcType="VARCHAR" />
+		<result column="Telphone2" property="telphone2" jdbcType="VARCHAR" />
+		<result column="Telphone1" property="telphone1" jdbcType="VARCHAR" />
+		<result column="Telphone" property="telphone" jdbcType="VARCHAR" />
+		<result column="Cellphone" property="cellphone" jdbcType="VARCHAR" />
+		<result column="Fax" property="fax" jdbcType="VARCHAR" />
+		<result column="Email" property="email" jdbcType="VARCHAR" />
+		<result column="BrandOperation" property="brandoperation"
+			jdbcType="VARCHAR" />
+		<result column="SupplierPhotos" property="supplierphotos"
+			jdbcType="VARCHAR" />
+		<result column="Qualification" property="qualification"
+			jdbcType="VARCHAR" />
+		<result column="Evaluate" property="evaluate" jdbcType="VARCHAR" />
+		<result column="IsCheck" property="ischeck" jdbcType="BIT" />
+		<result column="QQ" property="qq" jdbcType="CHAR" />
+		<result column="QQ2" property="qq2" jdbcType="CHAR" />
+		<result column="supplier_uid" property="supplier_uid" jdbcType="VARCHAR" />
+	</association>
+	<association property="user" javaType="com.zikezhi.entity.UserInfo">
+		<id column="useruid" property="useruid" jdbcType="VARCHAR" />
+		<result column="username" property="username"/>
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    inquiry_id, inquiry_product, inquiry_package,inquiry_number,inquiry_price,inquiry_date
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Inquiry" >
+    insert into inquiry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="inquiry_product != null" >
+        inquiry_product,
+      </if>
+      <if test="inquiry_package != null" >
+        inquiry_package,
+      </if>
+      <if test="inquiry_number != null" >
+        inquiry_number,
+      </if>
+      <if test="inquiry_date != null" >
+        inquiry_date,
+      </if>
+      <if test="inquiry_uid != null" >
+        inquiry_uid,
+      </if>
+      <if test="inquiry_supplier != null" >
+        inquiry_supplier,
+      </if>
+      <if test="inquiry_supplieruuid != null" >
+        inquiry_supplieruuid,
+      </if>
+      <if test="inquiry_lotnumber != null" >
+        inquiry_lotNumber,
+      </if>
+      <if test="inquiry_brand != null" >
+        inquiry_brand,
+      </if>
+      <if test="inquiry_price != null" >
+        inquiry_price,
+      </if>
+      <if test="inquiry_status != null" >
+        inquiry_status,
+      </if>
+      <if test="inquiry_telphone != null" >
+        inquiry_telphone,
+      </if>
+      <if test="inquiry_utilnumber != null" >
+        inquiry_utilnumber,
+      </if>
+      <if test="inquiry_priceutil != null" >
+        inquiry_priceutil,
+      </if>
+      <if test="inquiry_quality != null" >
+        inquiry_quality,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="inquiry_product != null" >
+        #{inquiry_product,jdbcType=VARCHAR},
+      </if>
+      <if test="inquiry_package != null" >
+        #{inquiry_package},
+      </if>
+      <if test="inquiry_number != null" >
+        #{inquiry_number},
+      </if>
+      <if test="inquiry_date != null" >
+        #{inquiry_date},
+      </if>
+      <if test="inquiry_uid != null" >
+        #{inquiry_uid},
+      </if>
+      <if test="inquiry_supplier != null" >
+        #{inquiry_supplier},
+      </if>
+      <if test="inquiry_supplieruuid != null" >
+        #{inquiry_supplieruuid},
+      </if>
+      <if test="inquiry_lotnumber != null" >
+        #{inquiry_lotnumber},
+      </if>
+      <if test="inquiry_brand != null" >
+        #{inquiry_brand},
+      </if>
+      <if test="inquiry_price != null" >
+        #{inquiry_price},
+      </if>
+      <if test="inquiry_status != null" >
+        #{inquiry_status},
+      </if>
+      <if test="inquiry_telphone != null" >
+        #{inquiry_telphone},
+      </if>
+      <if test="inquiry_utilnumber != null" >
+        #{inquiry_utilnumber},
+      </if>
+      <if test="inquiry_priceutil != null" >
+        #{inquiry_priceutil},
+      </if>
+      <if test="inquiry_quality != null" >
+         #{inquiry_quality},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Inquiry" >
+    update inquiry
+    <set >
+      <if test="inquiry_product != null" >
+        inquiry_product=#{inquiry_product,jdbcType=VARCHAR},
+      </if>
+      <if test="inquiry_package != null" >
+        inquiry_package=#{inquiry_package},
+      </if>
+      <if test="inquiry_number != null" >
+        inquiry_number=#{inquiry_number},
+      </if>
+      <if test="inquiry_supplier != null" >
+        inquiry_supplier=#{inquiry_supplier},
+      </if>
+      inquiry_supplieruuid=#{inquiry_supplieruuid},
+      <if test="inquiry_lotnumber != null" >
+        inquiry_lotnumber=#{inquiry_lotnumber},
+      </if>
+      <if test="inquiry_brand != null" >
+        inquiry_brand=#{inquiry_brand},
+      </if>
+      <if test="inquiry_price != null" >
+        inquiry_price=#{inquiry_price},
+      </if>
+      <if test="inquiry_status != null" >
+        inquiry_status=#{inquiry_status},
+      </if>
+      <if test="inquiry_telphone != null" >
+        inquiry_telphone=#{inquiry_telphone},
+      </if>
+      <if test="inquiry_utilnumber != null" >
+        inquiry_utilnumber=#{inquiry_utilnumber},
+      </if>
+      <if test="inquiry_priceutil != null" >
+        inquiry_priceutil=#{inquiry_priceutil},
+      </if>
+      <if test="inquiry_quality != null" >
+        inquiry_quality=#{inquiry_quality},
+      </if>
+    </set>
+    where inquiry_id = #{inquiry_id}
+  </update>
+  
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="Map">
+  	select i.*,u.username from inquiry i,user u 
+  	<where>
+		u.useruid=i.inquiry_uid 
+		<if test="product !=null and product != '' ">
+			and inquiry_product like CONCAT('%',#{product},'%')
+		</if>
+		<if test="status !=null and status != '' and status!=0">
+			and inquiry_status=#{status}
+		</if>
+	</where>
+  	order by inquiry_date desc
+  </select>
+  
+  <select id="queryByUserid" parameterType="Map" resultMap="BaseResultMap">
+  	select * from inquiry left join supplier on supplieruuid=inquiry_supplieruuid 
+  		<where>
+  			inquiry_uid=#{uid} 
+  			<if test="product !=null and product != '' ">
+  				and inquiry_product like CONCAT('%',#{product},'%')
+  			</if>
+  			<if test="status !=null and status != '' and status!=0">
+  				and inquiry_status=#{status}
+  			</if>
+  			<if test="date1 != null and date1!='' and date2 != null and date2!=''">
+				and inquiry_date &gt;= #{date1} and inquiry_date &lt;= DATE_ADD(#{date2},INTERVAL 1 DAY)
+			</if>
+  		</where>
+  		order by inquiry_date desc
+  		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+  </select>
+  
+  <select id="getTotal" resultType="int" parameterType="Map">
+  	select count(*) from inquiry
+  		<where>
+			inquiry_uid=#{uid} 
+			<if test="product !=null and product != '' ">
+				and inquiry_product=#{product}
+			</if>
+			<if test="status !=null and status != '' and status!=0">
+				and inquiry_status=#{status}
+			</if>
+			<if test="date1 != null and date2 != null">
+				and inquiry_date &gt;= #{date1} and inquiry_date &lt;= DATE_ADD(#{date2},INTERVAL 1 DAY)
+			</if>
+		</where>
+  </select>
+  
+  <select id="queryByid" parameterType="int" resultMap="BaseResultMap">
+  	select i.*,u.username,u.telephone from inquiry i,user u where u.useruid=i.inquiry_uid and i.inquiry_id=#{0}  order by inquiry_date desc
+  </select>
+  
+</mapper>

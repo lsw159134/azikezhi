@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: 
+Crawl-delay: 5
+Disallow: /WEB-INF/classes/
+Disallow: /WEB-INF/lib/
+Disallow: /WEB-INF/web.xml
+Disallow: /WEB-INF/
+Disallow: /META-INF/
+Disallow: /logs/
+Disallow: /files/
+Disallow: /fonts/
+Disallow: 120.24.241.163

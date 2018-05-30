@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zikezhi.dao.ClassificationMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Classification" >
+    <id column="classification_id" property="classification_id" />
+    <result column="classification_name" property="classification_name" jdbcType="VARCHAR" />
+    <result column="classification_time" property="classification_time"/>
+ 	<result column="classification_sort" property="classification_sort"/>
+ 	<collection property="subcategorylist" javaType="list" ofType="com.zikezhi.entity.Subcategory">  
+		<id column="subcategory_id" property="subcategory_id" />
+	    <result column="subcategory_name" property="subcategory_name" jdbcType="VARCHAR" />
+	    <result column="subcategory_time" property="subcategory_time"/>
+	    <result column="subcategory_classification" property="subcategory_classification"/>
+	    <result column="subcategory_sort" property="subcategory_sort"/>
+    </collection>
+    <collection property="passivelist" javaType="list" ofType="com.zikezhi.entity.PassiveComponents">  
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="phone" property="phone" jdbcType="VARCHAR" />
+	    <result column="phone1" property="phone1" jdbcType="VARCHAR" />
+	    <result column="phone2" property="phone2" jdbcType="VARCHAR" />
+	    <result column="down" property="down" jdbcType="INTEGER" />
+	    <result column="up" property="up" jdbcType="INTEGER" />
+	    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+	    <result column="cellphone1" property="cellphone1" jdbcType="VARCHAR" />
+	    <result column="qq" property="qq" jdbcType="VARCHAR" />
+	    <result column="qq1" property="qq1" jdbcType="VARCHAR" />
+	    <result column="qq2" property="qq2" jdbcType="VARCHAR" />
+	    <result column="qq3" property="qq3" jdbcType="VARCHAR" />
+	    <result column="address" property="address" jdbcType="VARCHAR" />
+	    <result column="illustration" property="illustration" jdbcType="VARCHAR" />
+	    <result column="explain1" property="explain1" jdbcType="VARCHAR" />
+	    <result column="explain2" property="explain2" jdbcType="VARCHAR" />
+	    <result column="explain3" property="explain3" jdbcType="VARCHAR" />
+	    <result column="label" property="label" jdbcType="VARCHAR" />
+	    <result column="label1" property="label1" jdbcType="VARCHAR" />
+	    <result column="passive_cid" property="passive_cid" jdbcType="VARCHAR" />
+	    <result column="passive_sid" property="passive_sid" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    classification_id, classification_name, classification_time,classification_sort
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Classification" >
+    insert into classification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classification_name != null" >
+        classification_name,
+      </if>
+      <if test="classification_sort != null" >
+        classification_sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classification_name != null" >
+        #{classification_name,jdbcType=VARCHAR},
+      </if>
+      <if test="classification_sort != null" >
+        #{classification_sort},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByclassificationKeySelective" parameterType="com.zikezhi.entity.Classification" >
+    update classification
+    <set >
+      <if test="classification_name != null and classification_name!=''" >
+        classification_name = #{classification_name},
+      </if>
+      <if test="classification_sort != null and classification_sort != 0 " >
+        classification_sort = #{classification_sort},
+      </if>
+    </set>
+    where classification_id = #{classification_id}
+  </update>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select * from classification order by classification_sort
+  </select>
+  <delete id="delete" parameterType="int">
+  	delete from classification where classification_id=#{0}
+  </delete>
+  
+  <select id="selectBySort" parameterType="int" resultMap="BaseResultMap">
+  	select * from classification where classification_sort=#{0}
+  </select>
+  
+  <select id="queryclassificationName" parameterType="com.zikezhi.entity.Classification" resultType="int">
+  	select count(*) from classification where classification_name=#{classification_name}
+  </select>
+  
+  <select id="selepassice" resultMap="BaseResultMap">
+  	select * from classification left join subcategory on classification_id=subcategory_classification left join passivecomponents on passive_cid=classification_id order by classification_sort,subcategory_sort,down asc
+  </select>
+  
+</mapper>

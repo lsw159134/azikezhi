@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.MaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Material" >
+    <id column="material_id" property="material_id"/>
+    <result column="material_name" property="material_name" jdbcType="VARCHAR" />
+    <result column="material_frequency" property="material_frequency"/>
+    <result column="material_label" property="material_label"  />
+    <result column="material_time" property="material_time"  />
+    <result column="material_content" property="material_content"  />
+    <result column="material_userName" property="material_userName"  />
+    <result column="material_alterTime" property="material_alterTime"  />
+    <result column="material_channelId" property="material_channelId"  />
+    <association property="user" javaType="com.zikezhi.entity.UserInfo">
+    	<id column="userUid" property="useruid" jdbcType="VARCHAR" />
+   		<result column="userName" property="username" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    material_id,material_name,material_frequency,material_label,material_time,material_content,material_userName,
+    material_alterTime,material_channelId
+  </sql>
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="Map">
+  	select
+  	<include refid="Base_Column_List" />
+  	from material
+  	<where>
+  		<if test="material_name!=null and material_name!=''">
+  			material_name like #{material_name} or material_label like #{material_name}
+  		</if>
+  	</where>
+  	order by material_time desc 
+	<if test="start!=null and size!=null">
+		limit #{start},#{size}
+	</if>
+  </select>
+  
+   <select id="getTotal" resultType="int" parameterType="Map">
+  	select count(*)
+  	from material
+  	<where>
+  		<if test="material_name!=null and material_name!=''">
+  			material_name like #{material_name} or material_label like #{material_name}
+  		</if>
+  	</where>
+  </select>
+
+  <insert id="insertMaterial" parameterType="com.zikezhi.entity.Material" >
+    insert into material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="material_name != null" >
+        material_name,
+      </if>
+      <if test="material_label != null" >
+        material_label,
+      </if>
+      <if test="material_content != null" >
+        material_content,
+      </if>
+      <if test="material_userName != null" >
+        material_userName,
+      </if>
+      <if test="material_channelId != null" >
+        material_channelId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="material_name != null" >
+        #{material_name,jdbcType=VARCHAR},
+      </if>
+      <if test="material_label != null" >
+        #{material_label,jdbcType=VARCHAR},
+      </if>
+      <if test="material_content != null" >
+        #{material_content},
+      </if>
+      <if test="material_userName != null" >
+        #{material_userName},
+      </if>
+      <if test="material_channelId != null" >
+        #{material_channelId},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateMaterial" parameterType="com.zikezhi.entity.Material">
+  	update material set material_frequency = material_frequency + 1 where material_id = #{material_id}
+  </update>
+  
+  <update id="updateMaterialAll" parameterType="com.zikezhi.entity.Material">
+  	update material
+  	<set >
+      <if test="material_name != null" >
+        material_name = #{material_name},
+      </if>
+      <if test="material_label != null" >
+        material_label = #{material_label},
+      </if>
+      <if test="material_content != null" >
+        material_content = #{material_content},
+      </if>
+    </set>
+  	where material_id = #{material_id}
+  </update>
+ 
+ <delete id="deletematerial" parameterType="java.lang.String">
+ 	delete from material where  material_id=#{0}
+ </delete>
+ 
+ <select id="queryByID" resultMap="BaseResultMap" parameterType="int">
+  	select
+  	<include refid="Base_Column_List" />
+  	from material where
+  	material_id=#{0}
+  </select>
+ 
+ <select id="queryByRAND" resultMap="BaseResultMap">
+ 	select * from material ORDER BY RAND() limit 15
+ </select>
+ 
+ <select id="queryByDesc" resultMap="BaseResultMap">
+ 	select * from material ORDER BY material_frequency desc limit 15
+ </select>
+ 
+ <select id="queryByWen" resultMap="BaseResultMap" parameterType="Map">
+ 	select * from material where material_content is not null ORDER BY material_time desc 
+ 	<if test="start!=null and size!=null">
+		limit #{start},#{size}
+	</if>
+ </select>
+ 
+ <select id="getTotalWen" resultType="int" parameterType="Map">
+  	select count(*)
+  	from material
+  	where material_content is not null ORDER BY material_time desc 
+  </select>
+  
+  <select id="selectTiwen" resultMap="BaseResultMap" parameterType="int">
+ 	select m.*,u.username from material m,user u where material_userName=u.useruid and material_id=#{0}
+ </select>
+ 
+ <select id="selectTiwenlimit" resultMap="BaseResultMap" parameterType="int">
+ 	select m.*,u.username from material m,user u where material_userName=u.useruid ORDER BY material_time desc limit 10
+  </select>
+  
+  <select id="UserselectTiwen" resultMap="BaseResultMap" parameterType="Map">
+ 	select m.*,u.username from material m left join user u on m.material_userName=u.useruid where material_userName=#{material_userName} ORDER BY material_time desc
+ 	<if test="start!=null and size!=null">
+		limit #{start},#{size}
+	</if>
+  </select>
+ 
+</mapper>

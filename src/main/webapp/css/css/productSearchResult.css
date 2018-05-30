@@ -1,0 +1,301 @@
+@charset "utf-8";
+
+.fix-div {
+	position: fixed;
+	height: 70px;
+	top: -20px;
+}
+
+#navigationBar ul {
+	background-color: #f0ffff;
+	list-style: none;
+	margin-top: 20px;
+	padding: 20px 0px;
+	border: 1px solid #AAA;
+	border-radius: 5px;
+	height: 20px;
+}
+
+#navigationBar ul li {
+	float: left;
+	text-align: center;
+	font-family: "微软雅黑";
+	color: #555;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#article {
+	margin: 50px auto;
+	border: #E7E7E7 1px solid;
+	border-radius: 5px;
+	width: 1200px;
+	min-width: 1200px;
+}
+
+#bgColor {
+	background-color: #EEEEEE;
+}
+
+#bgColor1 {
+	background-color: #FAFAFA;
+}
+
+#article ul {
+	list-style: none;
+	height: 70px;
+}
+
+#article ul li {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	float: left;
+	text-align: center;
+	font-family: Tahoma, Helvetica, Arial, '宋体', sans-serif;
+	color: #555;
+	font-size: 13px;
+	line-height: 70px;
+}
+
+#article ul li a:link {
+	color: #555555;
+}
+
+.model {
+	/*overflow: auto !important;
+	text-overflow: clip !important;
+	white-space: normal !important;*/
+	width: 220px;
+}
+
+.model img {
+	vertical-align: middle;
+}
+
+.supplier {
+	width: 190px;
+}
+
+.manufacturer {
+	width: 100px;
+}
+
+.batchNumber {
+	width: 80px;
+}
+
+.encapsulation {
+	width: 100px
+}
+
+.storehouse {
+	width: 48px;
+}
+
+.price {
+	width: 80px;
+}
+
+.appraise {
+	width: 100px;
+}
+
+.exchange {
+	width: 100px;
+	text-overflow:clip;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+.complaint {
+	width: 100px;
+}
+
+.complaint img {
+	height: 18px;
+}
+
+.QQ {
+	width: 50px;
+}
+/*  -----------以下内容为提示框样式------------------------------------------- */
+.newcont {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	display: block;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	background-color: #ddd;
+	font-family: "微软雅黑";
+	margin-top: 10px;
+	color: blue;
+}
+
+.newcont span {
+	padding: 5px;
+}
+
+.icomment {
+	color: #FFF;
+	padding: 5px;
+	background-color: rgba(8, 111, 110, 0.67);
+}
+
+.morecomment {
+	margin-left: 20px;
+	margin-right: 15px;
+	padding: 5px;
+}
+
+.morecomment span {
+	margin-left: 20px;
+	color:rgb(123, 18, 18);
+}
+
+#popover {
+	display: inline-block;
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.webui-popover-title {
+	background-color: #669c94 !important;
+	color: white;
+}
+
+.webui-popover-content {
+	font-size: 14px !important;
+}
+/*  -----------以下内容为模态框样式------------------------------------------- */
+.madel {
+	margin: 0px auto;
+	padding: 20px 20px;
+	background-color: #EEE;
+	border-radius: 10px;
+}
+
+.madelTitle {
+	padding-bottom: 10px;
+	font-family: "微软雅黑";
+	color: #000;
+	font-size: 25px;
+}
+
+.madelButton {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-family: "微软雅黑";
+	font-size: 20px;
+}
+
+      #dialog {  
+          background-color: #fff;  
+          height: 400px;  
+          border:1px solid #000000;
+          margin: -200px 0 0 -200px;  
+          position: fixed !important; /* 浮动对话框 */  
+          position: absolute;  
+          width: 350px;  
+          z-index: 5;  
+          border-radius: 5px;  
+          display: none;
+          background: #EEECF7;  
+      }  
+      /* #dialog p {  
+              margin: 0 0 12px;  
+              height:40px;  
+              line-height: 24px;  
+              background: #EEECF7;  
+       }   */
+       #dialog p.close {  
+              text-align: right;  
+              padding-right: 10px;  
+       }  
+      #dialog p.close a {  
+              color: #fff;  
+              text-decoration: none;  
+      }
+      
+      #godialog {  
+          background-color: #fff;  
+          border: 5px solid #FFA500;
+          min-height:390px; 
+          display:inline-block;*display:inline;*zoom:1; 
+          left: 50%;  
+          margin: -200px 0 0 -200px;  
+          position: fixed !important; /* 浮动对话框 */  
+          position: absolute;  
+          top: 50%;  
+          width: 400px;  
+          z-index: 5;  
+          border-radius: 5px;  
+          display: none;  
+      }  
+      #godialog p {  
+              margin: 0 0 12px;  
+              height:40px;  
+              line-height: 24px;  
+              background: #FFA500;  
+       }  
+       #godialog p.goclose {  
+              text-align: right;  
+              padding-right: 10px;  
+       }  
+      #godialog p.goclose a {  
+              color: #fff;  
+              text-decoration: none;  
+      }
+      
+      input#button2 {
+		/* General Properties */
+		height:30px;
+		width:80px;
+		border:1px solid #000;
+		background:#717a77;
+		/* CSS3 Styling */
+		background:-moz-linear-gradient(bottom, #0a0809, #0a0f0b 50%, #6d7673 50%, #afbdc0);
+		background:-webkit-gradient(linear, left bottom, left top, from(#0a0809), to(#afbdc0), color-stop(0.5, #0a0f0b), color-stop(0.5, #6d7673));
+		-moz-border-radius:20px;
+		-webkit-border-radius:20px;
+		border-radius:20px;
+		-moz-box-shadow:0px 0px 7px rgba(255, 255,255, 0.5);
+		-webkit-box-shadow:0px 0px 7px rgba(255, 255,255, 0.5);
+		box-shadow:0px 0px 7px rgba(255, 255,255, 0.5);
+		/* Text Styling */
+		color:#ff7d00;
+		text-shadow:0px -1px 0px #000;
+		font-family:'HighlandGothicFLFRegular', Impact, 'Arial Black', sans-serif;
+		font-size:15px;
+		padding-bottom:5px;
+	}
+	
+	/* Pseudo-classes for interactivity */
+	
+	input#button2:hover {
+		font-size:21px;
+		-moz-box-shadow:0px 0px 7px rgba(255, 255,255, 1);
+		-webkit-box-shadow:0px 0px 7px rgba(255, 255,255, 1);
+		box-shadow:0px 0px 7px rgba(255, 255,255, 1);
+	}
+	
+	input#button2:focus {
+		-moz-box-shadow:0px 0px 7px rgba(255, 255,255, 0.75);
+		-webkit-box-shadow:0px 0px 7px rgba(255, 255,255, 0.75);
+		box-shadow:0px 0px 7px rgba(255, 255,255, 0.75);
+	}
+	
+	input#button2:active {
+		border-width:2px 1px 1px 2px;
+		font-size:20px;
+	}
+
+	#product a{
+		color:blue;
+	}
+	
+	#product a:hover{
+		color:red;
+	}

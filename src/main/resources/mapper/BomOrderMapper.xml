@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.BomOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.BomOrder" >
+    <id column="bom_id" property="bom_id" />
+    <result column="bom_content" property="bom_content" jdbcType="VARCHAR" />
+    <result column="bom_price" property="bom_price"/>
+    <result column="bom_remarks" property="bom_remarks"/>
+    <result column="bom_userphone" property="bom_userphone"/>
+    <result column="bom_date" property="bom_date"/>
+    <result column="bom_address" property="bom_address"/>
+    <result column="bom_phone" property="bom_phone"/>
+    <result column="bom_name" property="bom_name"/>
+    <result column="bom_identifier" property="bom_identifier"/>
+    <result column="bom_status" property="bom_status"/>
+    <result column="bom_invoice" property="bom_invoice"/>
+    <result column="bom_mode" property="bom_mode"/>
+    <result column="bom_kuaidi" property="bom_kuaidi"/>
+    <result column="bom_help" property="bom_help"/>
+    <result column="bom_fan" property="bom_fan"/>
+    <result column="bom_profit" property="bom_profit"/>
+	<association property="user" javaType="com.zikezhi.entity.UserInfo">
+		<id column="userUid" property="useruid" jdbcType="VARCHAR" />
+   		<result column="userName" property="username" jdbcType="VARCHAR" />
+   		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bom_id, bom_content, bom_price, bom_remarks,bom_userphone,bom_date,bom_address,bom_phone,bom_name,bom_identifier,bom_status
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.BomOrder" >
+    insert into bomorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bom_content != null" >
+        bom_content,
+      </if>
+      <if test="bom_price != null" >
+        bom_price,
+      </if>
+      <if test="bom_userphone != null" >
+        bom_userphone,
+      </if>
+      <if test="bom_date != null" >
+        bom_date,
+      </if>
+      <if test="bom_identifier != null" >
+        bom_identifier,
+      </if>
+      <if test="bom_status != null" >
+        bom_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bom_content != null" >
+        #{bom_content,jdbcType=VARCHAR},
+      </if>
+      <if test="bom_price != null" >
+        #{bom_price, jdbcType=REAL},
+      </if>
+      <if test="bom_userphone != null" >
+        #{bom_userphone},
+      </if>
+      <if test="bom_date != null" >
+        #{bom_date},
+      </if>
+      <if test="bom_identifier != null" >
+        #{bom_identifier},
+      </if>
+      <if test="bom_status != null" >
+        #{bom_status},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.BomOrder" >
+    update bomorder
+    <set >
+      <if test="bom_content != null" >
+        bom_content = #{bom_content},
+      </if>
+      <if test="bom_price != null" >
+        bom_price = #{bom_price},
+      </if>
+      <if test="bom_remarks != null" >
+        bom_remarks = #{bom_remarks},
+      </if>
+      <if test="bom_address != null" >
+        bom_address = #{bom_address},
+      </if>
+      <if test="bom_phone != null" >
+        bom_phone = #{bom_phone},
+      </if>
+      <if test="bom_name != null" >
+        bom_name = #{bom_name},
+      </if>
+      <if test="bom_status != null" >
+        bom_status = #{bom_status},
+      </if>
+      <if test="bom_invoice != null" >
+        bom_invoice = #{bom_invoice},
+      </if>
+      <if test="bom_mode != null" >
+        bom_mode = #{bom_mode},
+      </if>
+      <if test="bom_kuaidi != null" >
+        bom_kuaidi = #{bom_kuaidi},
+      </if>
+      <if test="bom_help != null" >
+        bom_help = #{bom_help},
+      </if>
+      <if test="bom_fan != null" >
+        bom_fan = #{bom_fan},
+      </if>
+      <if test="bom_profit != null" >
+        bom_profit = #{bom_profit},
+      </if>
+    </set>
+    where bom_id = #{bom_id}
+  </update>
+  <!-- bom订单查看（管理员） -->
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="Map">
+  	select b.*,u.userName from bomorder b left join user u on b.bom_userphone=u.telephone
+  		<where>
+ 			<if test="username != null and username !=''">
+				username like #{username}
+			</if>
+			<if test="edate!=null and edate != ''">
+				and bom_date like #{edate}
+			</if>
+			<if test="telphone!=null and telphone!=''">
+				and bom_phone like #{telphone}
+			</if>
+			<if test="address!=null and address!=''">
+				and bom_address like #{address}
+			</if>
+			<if test="status!=null and status!=''">
+				and bom_status like #{status}
+			</if>
+ 		</where>
+  		order by b.bom_date desc limit #{start},#{size}
+  </select>
+  
+  <select id="getTotalAll" resultType="Long" parameterType="Map">
+  	select count(*) from bomorder b left join user u on b.bom_userphone=u.telephone
+  		<where>
+ 			<if test="username != null and username !=''">
+				username like #{username}
+			</if>
+			<if test="edate!=null and edate != ''">
+				and bom_date like #{edate}
+			</if>
+			<if test="telphone!=null and telphone!=''">
+				and bom_phone like #{telphone}
+			</if>
+			<if test="address!=null and address!=''">
+				and bom_address like #{address}
+			</if>
+			<if test="status!=null and status!=''">
+				and bom_status like #{status}
+			</if>
+ 		</where>
+  </select>
+  
+  <!-- 根据id查看bom订单 -->
+  <select id="selectByid" parameterType="int" resultMap="BaseResultMap">
+  	select b.*,u.userName,u.telephone from bomorder b,user u where b.bom_userphone=u.telephone and bom_id=#{0}
+  </select>
+  <!-- 查看bom订单（用户） -->
+  <select id="querybomuserphone" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * from bomorder where bom_userphone=(select telephone from user where useruid=#{0}) order by bom_date desc
+  </select>
+  
+  <select id="queryByDateCount" parameterType="java.lang.String" resultType="int">
+  	select count(*) from bomorder where bom_date like #{0}
+  </select>
+  
+  <!-- bom订单返利 -->
+  <select id="queryByfanUserBom" parameterType="java.lang.String" resultType="Float">
+  	select sum(bom_fan)	from bomorder where bom_userphone=(select telephone from user where useruid=#{0})
+  </select>
+  
+  <select id="queryByTotalExpress" resultType="java.lang.String">
+  	select bom_status from bomorder where date_format(bom_date,'%Y-%m')=date_format(now(),'%Y-%m')
+  </select>
+  
+  <!-- 订单状态查询 -->
+   <select id="queryByStatus" resultType="java.lang.String">
+  	select bom_status from bomorder
+  </select>
+  
+</mapper>

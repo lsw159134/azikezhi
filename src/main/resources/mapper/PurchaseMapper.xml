@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.PurchaseMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Purchase" >
+    <id column="purchase_id" property="purchase_id" />
+    <result column="purchase_model" property="purchase_model" jdbcType="VARCHAR" />
+    <result column="purchase_name" property="purchase_name"/>
+    <result column="purchase_number" property="purchase_number"/>
+    <result column="purchase_supplier" property="purchase_supplier"/>
+    <result column="purchase_one" property="purchase_one"/>
+    <result column="purchase_encapsulation" property="purchase_encapsulation"/>
+    <result column="purchase_time" property="purchase_time"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purchase_id, purchase_model, purchase_name,purchase_number,purchase_supplier,purchase_one,purchase_encapsulation,purchase_time
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Purchase" >
+    insert into purchase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchase_model != null" >
+        purchase_model,
+      </if>
+      <if test="purchase_name != null" >
+        purchase_name,
+      </if>
+      <if test="purchase_number != null" >
+        purchase_number,
+      </if>
+      <if test="purchase_supplier != null" >
+        purchase_supplier,
+      </if>
+      <if test="purchase_one != null" >
+        purchase_one,
+      </if>
+      <if test="purchase_encapsulation != null" >
+        purchase_encapsulation,
+      </if>
+       <if test="purchase_time != null" >
+        purchase_time
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchase_model != null" >
+        #{purchase_model,jdbcType=VARCHAR},
+      </if>
+      <if test="purchase_name != null" >
+        #{purchase_name},
+      </if>
+      <if test="purchase_number != null" >
+        #{purchase_number},
+      </if>
+      <if test="purchase_supplier != null" >
+        #{purchase_supplier},
+      </if>
+      <if test="purchase_one != null" >
+        #{purchase_one},
+      </if>
+      <if test="purchase_encapsulation != null" >
+        #{purchase_encapsulation},
+      </if>
+      <if test="purchase_time != null" >
+        #{purchase_time}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Purchase" >
+    update purchase
+    <set >
+      <if test="purchase_model != null" >
+        purchase_model = #{purchase_model},
+      </if>
+      <if test="purchase_name != null" >
+        purchase_name = #{purchase_name},
+      </if>
+      <if test="purchase_number != null" >
+        purchase_number = #{purchase_number},
+      </if>
+      <if test="purchase_supplier != null" >
+        purchase_supplier = #{purchase_supplier},
+      </if>
+      <if test="purchase_one != null" >
+        purchase_one = #{purchase_one},
+      </if>
+      <if test="purchase_encapsulation != null" >
+        purchase_encapsulation = #{purchase_encapsulation},
+      </if>
+    </set>
+    where purchase_id = #{purchase_id}
+  </update>
+  
+  <select id="queryAll" parameterType="Map" resultMap="BaseResultMap">
+		select purchase_encapsulation,purchase_id,purchase_model,purchase_number,purchase_one,purchase_supplier,purchase_time,admin_adminName purchase_name,purchase_name from purchase left join adminzaixinjian
+  		on purchase_name=admin_id
+  	<where>
+  		<if test="purchase_time != null">
+  			and purchase_time like #{purchase_time}
+  		</if>
+  		<if test="purchase_model != null">
+  			and purchase_model like #{purchase_model}
+  		</if>
+  		<if test="purchase_supplier != null">
+  			and purchase_supplier like #{purchase_supplier}
+  		</if>
+  	</where>
+  	order by purchase_time desc
+  	<if test="start!=null and size!=null">
+		limit #{start},#{size}
+	</if>
+  </select>
+  
+  <select id="queryTotal" parameterType="Map" resultType="int">
+  	select count(*) from purchase
+	  	<where>
+	  		<if test="purchase_time != null">
+	  			purchase_time like #{purchase_time}
+	  		</if>
+	  		<if test="purchase_model != null">
+	  			purchase_model like #{purchase_model}
+	  		</if>
+	  		<if test="purchase_supplier != null">
+	  			purchase_supplier like #{purchase_supplier}
+	  		</if>
+	  	</where>
+  </select>
+  
+</mapper>

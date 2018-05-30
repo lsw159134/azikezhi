@@ -1,0 +1,23 @@
+
+#warning{
+    display: block;
+    margin-top: 100px;
+    text-align: center;
+}
+
+#superiority{
+    margin-top:100px;
+    text-align: center;
+}
+
+#superiority span{
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    font-size: 30px;
+}
+
+#coming{
+    display: block;
+    margin-top: 150px;
+}

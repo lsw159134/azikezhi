@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.UaddressMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Uaddress" >
+    <id column="a_id" property="a_id" jdbcType="VARCHAR" />
+    <result column="a_name" property="a_name" jdbcType="VARCHAR" />
+    <result column="a_phone" property="a_phone" jdbcType="VARCHAR" />
+    <result column="a_address" property="a_address" jdbcType="VARCHAR" />
+    <result column="a_uid" property="a_uid" jdbcType="VARCHAR" />
+    <result column="a_status" property="a_status" jdbcType="VARCHAR" />
+    <result column="a_company" property="a_company" jdbcType="VARCHAR" />
+    <result column="a_gudingtel" property="a_gudingtel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a_id, a_name, a_phone, a_address, a_uid,a_status,a_company,a_gudingtel
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Uaddress" >
+    insert into uaddress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="a_id != null" >
+        a_id,
+      </if>
+      <if test="a_name != null" >
+        a_name,
+      </if>
+      <if test="a_phone != null" >
+        a_phone,
+      </if>
+      <if test="a_address != null" >
+        a_address,
+      </if>
+      <if test="a_uid != null" >
+        a_uid,
+      </if>
+      <if test="a_status != null" >
+        a_status,
+      </if>
+      <if test="a_company != null" >
+        a_company,
+      </if>
+      <if test="a_gudingtel != null" >
+        a_gudingtel
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="a_id != null" >
+        #{a_id,jdbcType=VARCHAR},
+      </if>
+      <if test="a_name != null" >
+        #{a_name,jdbcType=VARCHAR},
+      </if>
+      <if test="a_phone != null" >
+        #{a_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="a_address != null" >
+        #{a_address,jdbcType=VARCHAR},
+      </if>
+      <if test="a_uid != null" >
+        #{a_uid,jdbcType=VARCHAR},
+      </if>
+      <if test="a_status != null" >
+        #{a_status,jdbcType=VARCHAR},
+      </if>
+      <if test="a_company != null" >
+        #{a_company,jdbcType=VARCHAR},
+      </if>
+      <if test="a_gudingtel != null" >
+        #{a_gudingtel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 设置默认地址 -->
+  <update id="updateByAid" parameterType="com.zikezhi.entity.Uaddress" >
+  	update uaddress set a_status=2 where a_id != #{a_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Uaddress" >
+    update uaddress
+    <set >
+      <if test="a_name != null" >
+        a_name = #{a_name,jdbcType=VARCHAR},
+      </if>
+      <if test="a_phone != null" >
+        a_phone = #{a_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="a_address != null" >
+        a_address = #{a_address,jdbcType=VARCHAR},
+      </if>
+      <if test="a_uid != null" >
+        a_uid = #{a_uid,jdbcType=VARCHAR},
+      </if>
+      <if test="a_status != null and a_status!=''" >
+        a_status = #{a_status,jdbcType=VARCHAR},
+      </if>
+      <if test="a_company != null" >
+        a_company = #{a_company,jdbcType=VARCHAR},
+      </if>
+      <if test="a_gudingtel != null" >
+        a_gudingtel = #{a_gudingtel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where a_id = #{a_id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 用户地址查询 -->
+  <select id="queryByUid" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> from uaddress where a_uid=#{uid,jdbcType=VARCHAR} order by a_status asc
+  </select>
+  
+  <!-- 查询默认地址 -->
+  <select id="queryByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> from uaddress where a_uid=#{uid,jdbcType=VARCHAR} and a_status='1'
+  </select>
+  
+  <!-- 查询单个地址 -->
+  <select id="queryByAid" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> from uaddress where a_id=#{a_id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteUaddress" parameterType="java.lang.String">
+	delete from uaddress where a_id=#{0}  
+  </delete>
+  
+</mapper>

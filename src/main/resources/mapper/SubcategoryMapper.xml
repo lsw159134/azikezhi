@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.SubcategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Subcategory" >
+    <id column="subcategory_id" property="subcategory_id" />
+    <result column="subcategory_name" property="subcategory_name" jdbcType="VARCHAR" />
+    <result column="subcategory_time" property="subcategory_time"/>
+    <result column="subcategory_classification" property="subcategory_classification"/>
+    <result column="subcategory_sort" property="subcategory_sort"/>
+	<collection property="passivelist" javaType="list" ofType="com.zikezhi.entity.PassiveComponents">  
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="phone" property="phone" jdbcType="VARCHAR" />
+	    <result column="phone1" property="phone1" jdbcType="VARCHAR" />
+	    <result column="phone2" property="phone2" jdbcType="VARCHAR" />
+	    <result column="down" property="down" jdbcType="INTEGER" />
+	    <result column="up" property="up" jdbcType="INTEGER" />
+	    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+	    <result column="cellphone1" property="cellphone1" jdbcType="VARCHAR" />
+	    <result column="qq" property="qq" jdbcType="VARCHAR" />
+	    <result column="qq1" property="qq1" jdbcType="VARCHAR" />
+	    <result column="qq2" property="qq2" jdbcType="VARCHAR" />
+	    <result column="qq3" property="qq3" jdbcType="VARCHAR" />
+	    <result column="address" property="address" jdbcType="VARCHAR" />
+	    <result column="illustration" property="illustration" jdbcType="VARCHAR" />
+	    <result column="explain1" property="explain1" jdbcType="VARCHAR" />
+	    <result column="explain2" property="explain2" jdbcType="VARCHAR" />
+	    <result column="explain3" property="explain3" jdbcType="VARCHAR" />
+	    <result column="label" property="label" jdbcType="VARCHAR" />
+	    <result column="label1" property="label1" jdbcType="VARCHAR" />
+	    <result column="passive_cid" property="passive_cid" jdbcType="VARCHAR" />
+	    <result column="passive_sid" property="passive_sid" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    subcategory_id, subcategory_name, subcategory_time,subcategory_classification,subcategory_sort
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Subcategory" >
+    insert into subcategory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subcategory_name != null" >
+        subcategory_name,
+      </if>
+      <if test="subcategory_sort != null" >
+        subcategory_sort,
+      </if>
+      <if test="subcategory_classification != null" >
+        subcategory_classification,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subcategory_name != null" >
+        #{subcategory_name,jdbcType=VARCHAR},
+      </if>
+      <if test="subcategory_sort != null" >
+        #{subcategory_sort},
+      </if>
+      <if test="subcategory_classification != null" >
+        #{subcategory_classification},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Subcategory" >
+    update subcategory
+    <set >
+      <if test="subcategory_name != null" >
+        subcategory_name = #{subcategory_name},
+      </if>
+      <if test="subcategory_sort != null" >
+        subcategory_sort = #{subcategory_sort},
+      </if>
+      <if test="subcategory_classification != null and subcategory_classification != 0" >
+        subcategory_classification = #{subcategory_classification},
+      </if>
+    </set>
+    where subcategory_id = #{subcategory_id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	delete from subcategory where subcategory_id=#{0}
+  </delete>
+  
+  <select id="queryAll" parameterType="int" resultMap="BaseResultMap">
+  	select * from subcategory where subcategory_classification=#{0} order by subcategory_sort
+  </select>
+  
+  <select id="selectBySort" parameterType="com.zikezhi.entity.Subcategory" resultMap="BaseResultMap">
+  	select * from subcategory where subcategory_sort=#{subcategory_sort} and subcategory_classification=#{subcategory_classification}
+  </select>
+  
+</mapper>

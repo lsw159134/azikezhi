@@ -1,0 +1,108 @@
+#addBill{
+    margin-top: 30px;
+    font-size: 25px;
+    padding-left: 100px;
+    padding-bottom: 50px;
+}
+#addBill select{
+    float: left;
+    width: 100px;
+    height: 30px;
+    padding-left: 5px;
+    font-size: 20px;
+    overflow:hidden;
+    margin: 0px auto;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+    border:1px solid #ccc;
+    -moz-border-radius: 5px; /* Gecko browsers */
+    -webkit-border-radius: 5px; /* Webkit browsers */
+    border-radius:5px;
+}
+#addBill input{
+    height: 30px;
+    font-size: 20px;
+
+}
+#addBill button{
+    padding: 3px 10px;
+    font-size: 20px;
+    background-color: #a49ef0;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+    color: #fff;
+    font-weit: 300;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+#addbill button:hover{
+    background-color: #7d76da;
+    color: #bee2cd;
+}
+#detail{
+    margin-bottom: 10px;
+    background: #b0b5d8;
+    padding: 10px 0px;
+    color: #FFFFFF;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+    text-align: center;
+}
+#detail span{
+    padding:0px 100px;
+    border-right: 1px solid;
+}
+
+.de{
+    background: #e4bbd8;
+    padding: 10px 0px;
+    color: #555;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+}
+.de span{
+    border-right: 1px solid;
+}
+
+.statistics{
+    text-align: right;
+}
+.c{
+    font-size: 20px;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+}
+#count{
+    font-size: 20px;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+}
+#countexpend{
+    font-size: 20px;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+}
+#countincome{
+    font-size: 20px;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+}
+.deled{
+    width:235px;
+    display: inline-block;
+    text-align: center;
+}
+.pri{
+    width: 235px;
+    display: inline-block;
+    text-align: center;
+}
+.time{
+    width:235px;
+    display: inline-block;
+    text-align: center;
+}
+.detaile{
+    width: 235px;
+    display: inline-block;
+    text-align: center;
+}
+.remarks{
+    width: 235px;
+    display: inline-block;
+    text-align: center;
+}

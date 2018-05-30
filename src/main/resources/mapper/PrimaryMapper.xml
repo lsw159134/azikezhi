@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.PrimaryMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Primary" >
+    <id column="primary_id" property="primary_id" />
+    <result column="primary_name" property="primary_name" jdbcType="VARCHAR" />
+    <result column="primary_addtime" property="primary_addtime"/>
+ 	<result column="primarytotal" property="primarytotal"/>
+ 	<result column="primary_sorting" property="primary_sorting"/>
+ 	<collection property="secondList" javaType="list" ofType="com.zikezhi.entity.Second">  
+		<id column="second_id" property="second_id" />
+	    <result column="second_name" property="second_name" jdbcType="VARCHAR" />
+    </collection> 
+   
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    primary_id, primary_name, primary_addtime,primary_sorting
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Primary" >
+    insert into Primary1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="primary_name != null" >
+        primary_name,
+      </if>
+      <if test="primary_addtime != null" >
+        primary_addtime,
+      </if>
+      <if test="primary_sorting != null" >
+        primary_sorting,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="primary_name != null" >
+        #{primary_name,jdbcType=VARCHAR},
+      </if>
+      <if test="primary_addtime != null" >
+        #{primary_addtime},
+      </if>
+      <if test="primary_sorting != null" >
+        #{primary_sorting},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Primary" >
+    update Primary1
+    <set >
+      <if test="primary_name != null and primary_name!=''" >
+        primary_name = #{primary_name},
+      </if>
+      <if test="primary_sorting != null and primary_sorting != 0 " >
+        primary_sorting = #{primary_sorting},
+      </if>
+    </set>
+    where primary_id = #{primary_id}
+  </update>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select primary_id, primary_name, primary_addtime,primary_sorting,count(second_id) primarytotal from primary1 p left join second1 s on p.primary_id=s.second_primaryid group by p.primary_id order by p.primary_sorting asc
+  </select>
+  
+  <select id="selectByid" parameterType="int" resultMap="BaseResultMap">
+  
+  </select>
+  
+  <select id="querybomuserphone" parameterType="java.lang.String" resultMap="BaseResultMap">
+  
+  </select>
+  
+  <select id="queryPrimaryName" parameterType="com.zikezhi.entity.Primary" resultType="int">
+  	select count(*) from primary1 where primary_name=#{primary_name}
+  </select>
+  
+  <delete id="deletePrimary" parameterType="int" >
+  	delete from primary1 where primary_id=#{0}
+  </delete>
+  
+  <select id="select_primary_name" parameterType="int" resultMap="BaseResultMap">
+  	select primary_name from primary1 where primary_id=#{primary_id}
+  </select>
+  <select id="indexseleprimary" resultMap="BaseResultMap">
+  	select primary_name from primary1 order by primary_sorting limit 7
+  </select>
+  <select id="moreSort" resultMap="BaseResultMap">
+  	select * from primary1 p left join second1 s on p.primary_id = s.second_primaryid  order by p.primary_sorting 
+  </select>
+</mapper>

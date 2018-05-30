@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.EvaluateMapper">
+	<resultMap id="BaseResultMap" type="com.zikezhi.entity.Evaluate">
+		<id column="evaluate_id" property="evaluate_id"/>
+		<result column="evaluate_pid" property="evaluate_pid" />
+		<result column="evaluate_uid" property="evaluate_uid" />
+		<result column="evaluate_time" property="evaluate_time"/>
+		<result column="evaluate_zan" property="evaluate_zan"/>
+		<result column="evaluate_cai" property="evaluate_cai"/>
+	</resultMap>
+	<insert id="insertSelective" parameterType="com.zikezhi.entity.Evaluate">
+		insert into evaluate
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="evaluate_pid != null">
+				evaluate_pid,
+			</if>
+			<if test="evaluate_uid != null">
+				evaluate_uid,
+			</if>
+			<if test="evaluate_time != null">
+				evaluate_time,
+			</if>
+			<if test="evaluate_zan != null">
+				evaluate_zan,
+			</if>
+			<if test="evaluate_cai != null">
+				evaluate_cai,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="evaluate_pid != null">
+				#{evaluate_pid,jdbcType=CHAR},
+			</if>
+			<if test="evaluate_uid != null">
+				#{evaluate_uid,jdbcType=VARCHAR},
+			</if>
+			<if test="evaluate_time != null">
+				#{evaluate_time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evaluate_zan != null">
+				#{evaluate_zan},
+			</if>
+			<if test="evaluate_cai != null">
+				#{evaluate_cai},
+			</if>
+		</trim>
+	</insert>
+	
+	<select id="selectByZanuid" resultType="int" parameterType="java.lang.String">
+		select ifnull(sum(evaluate_zan),0) from evaluate where to_days(evaluate_time) = to_days(now()) and evaluate_uid=#{0} and evaluate_pid=#{1}
+	</select>
+	
+	<select id="selectByCaiuid" resultType="int" parameterType="java.lang.String">
+		select ifnull(sum(evaluate_cai),0) from evaluate where to_days(evaluate_time) = to_days(now()) and evaluate_uid=#{0} and evaluate_pid=#{1}
+	</select>
+	
+	<select id="seleZan" resultType="int" parameterType="java.lang.String">
+		select sum(evaluate_zan) from evaluate where evaluate_pid=#{0}
+	</select>
+	
+	<select id="seleCai" resultType="int" parameterType="java.lang.String">
+		select sum(evaluate_cai) from evaluate where evaluate_pid=#{0}
+	</select>
+	
+	<select id="seleUserSumZanBydate" resultType="int" parameterType="java.lang.String">
+		select ifnull(sum(evaluate_zan),0) from evaluate where to_days(evaluate_time) = to_days(now()) and evaluate_uid=#{0}
+	</select>
+	
+	<select id="seleUserSumCaiBydate" resultType="int" parameterType="java.lang.String">
+		select ifnull(sum(evaluate_cai),0) from evaluate where to_days(evaluate_time) = to_days(now()) and evaluate_uid=#{0}
+	</select>
+	
+</mapper>

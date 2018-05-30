@@ -1,0 +1,17 @@
+#s{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.showSupplier,.showProduct,.showEncapsulation,.showNumber{
+    width: 250px;
+    text-align: center;
+    display: inline-block;
+}
+textarea{
+    margin-top: 50px;
+    margin-left: 100px;
+}
+#submit{
+    padding:10px 15px;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.IPGuoLvMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.IPGuoLv" >
+    <id column="ip_id" property="ip_id" />
+    <result column="ip_ip" property="ip_ip" jdbcType="VARCHAR" />
+    <result column="ip_time" property="ip_time"/>
+  </resultMap>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Primary" >
+    insert into ipguolv
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ip_ip != null" >
+        ip_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ip_ip != null" >
+        #{ip_ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,141 @@
+*{
+    /*border: 1px solid #D30706;*/
+}
+
+body{
+    width: 1200px;
+    margin: 0px auto;
+}
+
+header{
+    margin-top: 20px;
+
+}
+
+header img{
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+header #logo{
+    color: #2e8b57;
+    font-family: "Microsoft YaHei UI";
+}
+
+header #logo #title{
+    margin-left: 40px;
+    font-size: 28px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+header #logo #smallTitle{
+    font-size: 17px;
+}
+
+#wapper a{
+    font-size: 13px;
+    font-family: "Microsoft YaHei UI";
+    text-decoration: none;
+}
+#wapper a:hover{
+    color: seagreen;
+    text-decoration: none;
+}
+
+header #wapper{
+    float: right;
+}
+
+header #wapper img{
+    width: 20px;
+    height: 20px;
+}
+
+header #searchProduct{
+    margin: 0px auto 10px 400px;
+    display: flex;
+    height: 40px;
+}
+
+header #searchProduct input{
+    padding-left: 20px;
+    margin: auto;
+    border: 3px solid #CC0000;
+    width: 300px;
+    height: 40px;
+}
+
+header #searchProduct button{
+    border: none;
+    padding: 8px 30px 12px 30px;
+    font-size: 15px;
+    margin-left: -10px;
+    background-color: #CC0000;
+    color: #fff;
+}
+
+header #main_nav{
+    margin-top: 50px;
+    padding: 0px 5px 0px 0px;
+    border-bottom: 2px solid #D30706;
+}
+
+header #main_nav span{
+    font-family: "Microsoft YaHei UI";
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 25px;
+    color: #000;
+    font-size: 16px;
+}
+
+header #main_nav span:hover{
+    font-family: "Microsoft YaHei UI";
+    display: inline-block;
+    color: #F75000;
+    font-size: 16px;
+}
+#artifact{
+    margin-top: 50px;
+}
+#artifact hr{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#category a{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+#content .supplier{
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+#content .supplier table td{
+    font-size: 12px;
+    padding: 5px;
+}
+
+#active{
+    background: #D30706;
+    color: #fff !important;
+}
+#active a{
+    color: #fff !important;
+}
+#active a:hover{
+    color: #000 !important;
+}
+#page{
+    display: inline-block;
+    margin-top:10px;
+    margin-left: 40px;
+}
+.button-caution, .button-caution-flat {
+    background-color: #683a3d;
+    border-color: #ff4351;
+    color: #fff;
+}

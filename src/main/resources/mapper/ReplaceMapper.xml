@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.ReplaceMapper">
+	<resultMap id="BaseResultMap" type="com.zikezhi.entity.Replace">
+		<id column="replace_id" property="replace_id"/>
+		<result column="replace_name" property="replace_name"/>
+		<result column="replace_time" property="replace_time"/>
+		<result column="replace_product" property="replace_product"/>
+		<result column="replace_adminname" property="replace_adminname"/>
+		<result column="replace_status" property="replace_status"/>
+	</resultMap>
+	<insert id="insertService" parameterType="com.zikezhi.entity.Replace">
+		insert into Replaces
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="replace_name != null" >
+	        replace_name,
+	      </if>
+	      <if test="replace_product != null" >
+	        replace_product,
+	      </if>
+	      <if test="replace_adminname != null" >
+	        replace_adminname,
+	      </if>
+	      <if test="replace_status != null">
+	      	replace_status,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="replace_name!= null" >
+	        #{replace_name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="replace_product != null" >
+	        #{replace_product,jdbcType=VARCHAR},
+	      </if>
+	       <if test="replace_adminname != null" >
+	        #{replace_adminname,jdbcType=VARCHAR},
+	      </if>
+	      <if test="replace_status != null">
+	      	#{replace_status},
+	      </if>
+	    </trim>
+	</insert>
+	
+	<update id="updateService" parameterType="com.zikezhi.entity.Replace">
+		update replaces
+		<set >
+	      <if test="replace_name != null" >
+	        replace_name = #{replace_name},
+	      </if>
+	    </set>
+	    where replace_id = #{replace_id}
+	</update>
+	
+	<select id="selereplace" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from replaces where replace_product=#{0} and replace_status=1
+	</select>
+	
+	<select id="selereplaceBy2" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from replaces where replace_product=#{0} and replace_status=2
+	</select>
+	
+	<select id="selereplaceAdmin" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select 
+			replace_id,replace_time,replace_name,replace_adminname,
+			replace_product,if(replace_status=1,"可完全替代","非完全替代") as replace_status 
+		from replaces
+		where replace_product=#{0}
+	</select>
+	
+	<delete id="deletet" parameterType="java.lang.String">
+		delete from replaces where replace_id=#{0}
+	</delete>
+</mapper>

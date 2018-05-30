@@ -1,0 +1,39 @@
+table td{
+    /*border: 1px solid;*/
+}
+table tr th{
+    font-size: 12px;
+}
+table tr td input{
+    width: 100px;
+}
+table tr{
+    height: 50px;
+}
+#add{
+    margin-left: 10px;
+}
+#submit{
+    padding: 10px 20px;
+    background-color: #4ba66f;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    margin-left: 550px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+#submit:hover {
+    background-color: #336b49;
+    color: #ff4736;
+}
+#submit:active {
+     background-color: #1c3926;
+     color: #ff0a00;
+}
+
+footer{
+    margin-top: 40px;
+    margin-left: 400px;
+    font-family: "Microsoft YaHei";
+}

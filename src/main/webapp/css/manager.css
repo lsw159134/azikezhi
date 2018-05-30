@@ -1,0 +1,31 @@
+﻿#addStockType{
+	margin-bottom:5px;
+}
+#addStockType label{
+	margin-left:10px;
+}.paddingAll5 {
+    padding: 5px;
+}
+.displaynone {
+    display: none;
+}
+.table-note{
+width:100%;
+}
+.table-note .bottomborder{
+border-bottom: 1px solid #DDDDDD;
+border-right: 0 none;
+}
+.paddingAll5 {
+    padding: 5px;
+}
+.displaynone {
+    display: none;
+}
+.table-note{
+width:100%;
+}
+.table-note .bottomborder{
+border-bottom: 1px solid #DDDDDD;
+border-right: 0 none;
+}

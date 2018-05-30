@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.PImgMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.PImg" >
+    <id column="p_imgid" property="p_imgid" jdbcType="VARCHAR" />
+    <result column="p_imgname" property="p_imgname" jdbcType="VARCHAR" />
+    <result column="p_imgpid" property="p_imgpid" jdbcType="VARCHAR" />
+    <result column="p_imgtime" property="p_imgtime"  />
+    <result column="p_imguptime" property="p_imguptime"  />
+    <result column="p_imgstauts" property="p_imgstauts" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    p_imgid,p_imgname,p_imgpid,p_imgstauts
+  </sql>
+  <select id="selectPimg" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select
+  	<include refid="Base_Column_List" />
+  	from p_img
+  	where p_imgpid = #{p_imgpid} order by p_imgstauts
+  </select>
+  
+   <select id="selectPimgCount" resultType="Long" parameterType="java.lang.String">
+  	select count(*)
+  	from p_img
+  	where p_imgpid = #{p_imgpid}
+  </select>
+
+  <insert id="insertPimg" parameterType = "com.zikezhi.entity.PImg">
+  	insert into p_img (p_imgid,p_imgname,p_imgpid,p_imgstauts) values
+  						(#{p_imgid,jdbcType=VARCHAR},#{p_imgname,jdbcType=VARCHAR},#{p_imgpid,jdbcType=VARCHAR},#{p_imgstauts,jdbcType=VARCHAR})
+  						
+  </insert>
+  
+  <update id="updatePimgById" parameterType="com.zikezhi.entity.PImg">
+  	update p_img set
+  		<if test="p_imgname != null">
+  	 		p_imgname = #{p_imgname,jdbcType=VARCHAR}
+  	 	</if>
+  	 	where p_imgid = #{p_imgid}
+  </update>
+  <!-- <select id="selectPimg" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    FROM  p_img
+    <if test="start!=null and size!=null">
+      limit #{start},#{size}
+    </if>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from addsimpleproduct
+    where productuid = #{productuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from addsimpleproduct
+    where productuid = #{productuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zikezhi.entity.AddSimpleProduct" >
+    insert into addsimpleproduct (productuid, product, number, 
+      time, ip, username
+      )
+    values (#{productuid,jdbcType=VARCHAR}, #{product,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.AddSimpleProduct" >
+    update addsimpleproduct
+    set product = #{product,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR}
+    where productuid = #{productuid,jdbcType=VARCHAR}
+  </update> -->
+</mapper>

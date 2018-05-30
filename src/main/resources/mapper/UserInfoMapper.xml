@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.UserInfo" >
+    <id column="userUid" property="useruid" jdbcType="VARCHAR" />
+    <result column="userIcon" property="usericon" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="regTime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="lastIp" property="lastip" jdbcType="VARCHAR" />
+    <result column="regIp" property="regip" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="CHAR" />
+    <result column="qqMail" property="qqmail" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="activity" property="activity" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="supplieruid" property="supplieruid" jdbcType="VARCHAR" />
+    <result column="excellent" property="excellent" jdbcType="INTEGER"/>
+	<result column="good" property="good" jdbcType="INTEGER"/>
+	<result column="average" property="average" jdbcType="INTEGER"/>
+	<result column="authority" property="authority" jdbcType="VARCHAR"/>
+    <result column="alipay" property="alipay" jdbcType="VARCHAR"/>
+    <result column="countsearch" property="countsearch" jdbcType="INTEGER" />
+    <result column="realname" property="realname" jdbcType="VARCHAR"/>
+    <result column="realtelphone" property="realtelphone" jdbcType="VARCHAR" />
+    <result column="realaddress" property="realaddress" jdbcType="VARCHAR" />
+    <result column="expressaddress" property="expressaddress" jdbcType="VARCHAR"/>
+     <result column="u_personalid" property="u_personalid" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userUid, userIcon, userName, password, regTime, lastTime, lastIp, regIp, qq, qqMail, 
+    sex, telephone, salt, count, activity, mail,supplieruid,excellent,good,average,authority, 
+    alipay, countsearch, realname, realtelphone, realaddress,expressaddress,u_personalid
+  </sql>
+
+  <update id="updateExpressAddress" parameterType="java.util.Map">
+    update user set expressaddress=#{expressaddress, jdbcType=VARCHAR} where useruid=#{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateRealAddress" parameterType="java.util.Map">
+    update user set realaddress=#{realaddress, jdbcType=VARCHAR} where useruid=#{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateRealTelphone" parameterType="java.util.Map">
+    update user set realtelphone=#{realtelphone, jdbcType=VARCHAR} where useruid=#{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateRealName" parameterType="java.util.Map">
+    update user set realname=#{realname, jdbcType=VARCHAR} where useruid=#{uid,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateCountSearch" parameterType="java.lang.String">
+    update user set countsearch=countsearch+1 where useruid=#{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByalipay" parameterType="java.util.Map">
+    update user SET alipay = #{alipay, jdbcType=VARCHAR}
+    where useruid = #{uid, jdbcType=VARCHAR}
+  </update>
+  <select id="findUserName" resultType="java.lang.Integer" parameterType="java.lang.String">
+  	select count(0) from user where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="findUserByTelphone" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from user where telephone = #{Telphone, jdbcType=VARCHAR}
+  </select>
+  <select id="findTelphone" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(0) from user where telephone = #{tel, jdbcType=VARCHAR}
+  </select>
+
+  <select id="userLogin" resultMap="BaseResultMap" parameterType="com.zikezhi.entity.UserInfo">
+  	select <include refid="Base_Column_List" />
+  	from user where telephone = #{telephone,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userUid = #{useruid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where userUid = #{useruid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zikezhi.entity.UserInfo" >
+    insert into user (userUid, userIcon, userName, 
+      password, regTime, lastTime, 
+      lastIp, regIp, qq, qqMail, 
+      sex, telephone, salt, 
+      count, activity, mail, supplieruid,excellent,good,average,authority,alipay, realname, realtelphone, realaddress, expressaddress
+      )
+    values (#{useruid,jdbcType=VARCHAR}, #{usericon,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{regtime,jdbcType=TIMESTAMP}, #{lasttime,jdbcType=TIMESTAMP}, 
+      #{lastip,jdbcType=VARCHAR}, #{regip,jdbcType=VARCHAR}, #{qq,jdbcType=CHAR}, #{qqmail,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER}, #{activity,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{supplieruid, jdbcType=VARCHAR},
+      #{excellent,jdbcType=INTEGER}, #{good,jdbcType=INTEGER}, #{average,jdbcType=INTEGER}, #{authority,jdbcType=VARCHAR}, #{alipay, jdbcType=VARCHAR},
+      #{realname, jdbcType=VARCHAR}, #{realtelphone, jdbcType=VARCHAR}, #{realaddress, jdbcType=VARCHAR}, #{expressaddress, jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.UserInfo" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="useruid != null" >
+        userUid,
+      </if>
+      <if test="usericon != null" >
+        userIcon,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="regtime != null" >
+        regTime,
+      </if>
+      <if test="lasttime != null" >
+        lastTime,
+      </if>
+      <if test="lastip != null" >
+        lastIp,
+      </if>
+      <if test="regip != null" >
+        regIp,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="qqmail != null" >
+        qqMail,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="activity != null" >
+        activity,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="supplieruid != null">
+      	supplieruid,
+      </if>
+      <if test="excellent != null">
+      	excellent,
+      </if>
+      <if test="good != null">
+      	good,
+      </if>
+      <if test="average != null">
+      	average,
+      </if>
+      <if test="authority != null">
+      	authority,
+      </if>
+      <if test="alipay != null">
+        alipay,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="realtelphone != null">
+        realtelphone,
+      </if>
+      <if test="realaddress != null">
+        realaddress,
+      </if>
+      <if test="expressaddress != null">
+        expressaddress
+      </if>
+      <if test="u_personalid != null">
+        u_personalid
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="useruid != null" >
+        #{useruid,jdbcType=VARCHAR},
+      </if>
+      <if test="usericon != null" >
+        #{usericon,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastip != null" >
+        #{lastip,jdbcType=VARCHAR},
+      </if>
+      <if test="regip != null" >
+        #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=CHAR},
+      </if>
+      <if test="qqmail != null" >
+        #{qqmail,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="activity != null" >
+        #{activity,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="supplieruid != null">
+      	#{supplieruid, jdbcType=VARCHAR},
+      </if>
+      <if test="excellent != null ">
+      	#{excellent,jdbcType=INTEGER},
+      </if>
+      <if test="good != null">
+      	#{good,jdbcType=INTEGER},
+      </if>
+      <if test="average != null">
+	      #{average,jdbcType=INTEGER},
+      </if>
+      <if test="authority != null">
+      	#{authority,jdbcType=VARCHAR},
+      </if>
+      <if test="alipay != null">
+        #{alipay, jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname, jdbcType=VARCHAR},
+      </if>
+      <if test="realtelphone != null">
+       #{realtelphone, jdbcType=VARCHAR},
+      </if>
+      <if test="realaddress != null">
+        #{realaddress, jdbcType=VARCHAR},
+      </if>
+      <if test="expressaddress != null">
+        #{expressaddress, jdbcType=VARCHAR}
+      </if>
+      <if test="u_personalid != null">
+        #{u_personalid, jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.UserInfo" >
+    update user
+    <set >
+      <if test="usericon != null" >
+        userIcon = #{usericon,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        regTime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttime != null" >
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastip != null" >
+        lastIp = #{lastip,jdbcType=VARCHAR},
+      </if>
+      <if test="regip != null" >
+        regIp = #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=CHAR},
+      </if>
+      <if test="qqmail != null" >
+        qqMail = #{qqmail,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="activity != null" >
+        activity = #{activity,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="supplieruid != null">
+      	supplieruid = #{supplieruid, jdbcType=VARCHAR},
+      </if>
+      <if test="excellent != null">
+      	excellent = #{excellent,jdbcType=INTEGER},
+      </if>
+      <if test="good != null">
+      	good = #{good,jdbcType=INTEGER},
+      </if>
+      <if test="average != null">
+	    average = #{average,jdbcType=INTEGER},
+      </if>
+      <if test="authority != null">
+      	authority = #{authority,jdbcType=VARCHAR},
+      </if>
+      <if test="alipay != null">
+        alipay = #{alipay, jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        realname = #{realname, jdbcType=VARCHAR},
+      </if>
+      <if test="realtelphone != null">
+        realtelphone = #{realtelphone, jdbcType=VARCHAR},
+      </if>
+      <if test="realaddress != null">
+        realaddress = #{realaddress, jdbcType=VARCHAR},
+      </if>
+      <if test="expressaddress != null">
+        expressaddress = #{expressaddress, jdbcType=VARCHAR}
+      </if>
+      <if test="u_personalid != null">
+        u_personalid = #{u_personalid, jdbcType=VARCHAR}
+      </if>
+    </set>
+    where userUid = #{useruid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.UserInfo" >
+    update user
+    set userIcon = #{usericon,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      regTime = #{regtime,jdbcType=TIMESTAMP},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      lastIp = #{lastip,jdbcType=VARCHAR},
+      regIp = #{regip,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=CHAR},
+      qqMail = #{qqmail,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      activity = #{activity,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      supplieruid = #{supplieruid, jdbcType=VARCHAR},
+      excellent = #{excellent,jdbcType=INTEGER},
+      good = #{good,jdbcType=INTEGER},
+      average = #{average,jdbcType=INTEGER},
+      authority = #{authority,jdbcType=VARCHAR},
+      alipay = #{alipay, jdbcType=VARCHAR},
+      realname = #{realname, jdbcType=VARCHAR},
+      realtelphone = #{realtelphone, jdbcType=VARCHAR},
+      realaddress = #{realaddress, jdbcType=VARCHAR},
+      expressaddress = #{expressaddress, jdbcType=VARCHAR}
+    where userUid = #{useruid,jdbcType=VARCHAR}
+  </update>
+  <select id="queryByPersonalID" parameterType="java.lang.String" resultType="java.lang.String">
+  	select userUid from user where u_personalid = #{u_personalid, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="Map">
+  	select * from user
+  		<where>
+	  		<if test="username != null" >
+				username like CONCAT(#{username},'%') or telephone like CONCAT(#{username},'%') 
+			</if>
+  		</where>
+  		order by regtime desc
+  		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+  </select>
+  
+  <select id="getTotal" resultType="int" parameterType="Map">
+  	select count(*) from user 
+  	<if test="username != null" >
+		where username like CONCAT(#{username},'%') or telephone like CONCAT(#{username},'%') 
+	</if>
+  </select>
+  
+</mapper>

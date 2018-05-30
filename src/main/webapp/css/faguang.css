@@ -1,0 +1,91 @@
+/*setup*/
+
+/*neeeeoooon*/
+
+.zheng{
+	-moz-animation:myfirst 1s ease-in-out infinite alternate; /* Firefox */
+	-webkit-animation:myfirst 1s ease-in-out infinite alternate; /* Safari and Chrome */
+	-o-animation:myfirst 1s ease-in-out infinite alternate;
+}
+.zai{
+	-moz-animation:myzheng 1s ease-in-out infinite alternate; /* Firefox */
+	-webkit-animation:myzheng 1s ease-in-out infinite alternate; /* Safari and Chrome */
+	-o-animation:myzheng 1s ease-in-out infinite alternate;
+}
+@keyframes myfirst
+{
+	0%   {color:#FF6347;}
+	25%  {color:#FF4500;}
+	50%  {color:#FF0000;}
+	75%  {color:#0000FF;}
+	100% {color:#0000CD;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+	0%   {color:#FF6347;}
+	25%  {color:#FF4500;}
+	50%  {color:#FF0000;}
+	75%  {color:#0000FF;}
+	100% {color:#0000CD;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+	0%   {color:#FF6347;}
+	25%  {color:#FF4500;}
+	50%  {color:#FF0000;}
+	75%  {color:#0000FF;}
+	100% {color:#0000CD;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+	0%   {color:#FF6347;}
+	25%  {color:#FF4500;}
+	50%  {color:#FF0000;}
+	75%  {color:#0000FF;}
+	100% {color:#0000CD;}
+}
+
+
+
+/*glow*/
+@keyframes myzheng
+{
+	0%   {background-color:#FF6347;}
+	25%  {background-color:#FF4500;}
+	50%  {background-color:#FF0000;}
+	75%  {background-color:#0000FF;}
+	100% {background-color:#0000CD;}
+}
+
+@-moz-keyframes myzheng /* Firefox */
+{
+	0%   {background-color:#FF6347;}
+	25%  {background-color:#FF4500;}
+	50%  {background-color:#FF0000;}
+	75%  {background-color:#0000FF;}
+	100% {background-color:#0000CD;}
+}
+
+@-webkit-keyframes myzheng /* Safari and Chrome */
+{
+	0%   {background-color:#FF6347;}
+	25%  {background-color:#FF4500;}
+	50%  {background-color:#FF0000;}
+	75%  {background-color:#0000FF;}
+	100% {background-color:#0000CD;}
+}
+
+@-o-keyframes myzheng /* Opera */
+{
+	0%   {background-color:#FF6347;}
+	25%  {background-color:#FF4500;}
+	50%  {background-color:#FF0000;}
+	75%  {background-color:#0000FF;}
+	100% {background-color:#0000CD;}
+}
+
+
+

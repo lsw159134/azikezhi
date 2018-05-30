@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zikezhi.dao.SortMapper">
+	<resultMap id="BaseResultMap" type="com.zikezhi.entity.Sort">
+		<id column="sort_id" jdbcType="INTEGER" property="sort_id" />
+		<!-- 分类 -->
+		<result column="sort_miaoshu" property="sort_miaoshu" jdbcType="VARCHAR" />
+		<result column="sort_lianjie" property="sort_lianjie" jdbcType="VARCHAR" />
+		<result column="sort_waishe" property="sort_waishe" jdbcType="VARCHAR" />
+		<result column="sort_io" property="sort_io" jdbcType="VARCHAR" />
+		<result column="sort_ram" property="sort_ram" jdbcType="VARCHAR" />
+		<result column="sort_shujuzhuanhuan" property="sort_shujuzhuanhuan" jdbcType="VARCHAR" />
+		<result column="sort_dianya" property="sort_dianya" jdbcType="VARCHAR" />
+		<result column="sort_wendu" property="sort_wendu" jdbcType="VARCHAR" />
+		<result column="sort_product" property="sort_product" jdbcType="VARCHAR" />
+		<result column="sort_encapsulation" property="sort_encapsulation" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List"> 
+		sort_id,sort_miaoshu,sort_lianjie,sort_waishe,sort_io,sort_ram,
+		sort_shujuzhuanhuan,sort_dianya,sort_wendu,sort_encapsulation,sort_product
+	</sql>
+	
+	<insert id="insert_Sort" parameterType="com.zikezhi.entity.Sort">
+		insert into sort 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sort_miaoshu != null ">
+				sort_miaoshu,
+			</if>
+			<if test="sort_lianjie != null">
+				sort_lianjie,
+			</if>
+			<if test="sort_waishe != null">
+				sort_waishe,
+			</if>
+			<if test="sort_io != null">
+				sort_io,
+			</if>
+			<if test="sort_ram != null">
+				sort_ram,
+			</if>
+			<if test="sort_shujuzhuanhuan != null">
+				sort_shujuzhuanhuan,
+			</if>
+			<if test="sort_dianya != null">
+				sort_dianya,
+			</if>
+			<if test="sort_wendu != null">
+				sort_wendu,
+			</if>
+			<if test="sort_product != null">
+				sort_product,
+			</if>
+			<if test="sort_encapsulation != null">
+				sort_encapsulation
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sort_miaoshu != null">
+				#{sort_miaoshu},
+			</if>
+			<if test="sort_lianjie != null">
+				#{sort_lianjie},
+			</if>
+			<if test="sort_waishe != null">
+				#{sort_waishe},
+			</if>
+			<if test="sort_io != null">
+				#{sort_io},
+			</if>
+			<if test="sort_ram != null">
+				#{sort_ram},
+			</if>
+			<if test="sort_shujuzhuanhuan != null">
+				#{sort_shujuzhuanhuan},
+			</if>
+			<if test="sort_dianya != null">
+				#{sort_dianya},
+			</if>
+			<if test="sort_wendu != null">
+				#{sort_wendu},
+			</if>
+			<if test="sort_product != null">
+				#{sort_product},
+			</if>
+			<if test="sort_encapsulation != null">
+				#{sort_encapsulation}
+			</if>
+		</trim>
+	</insert>
+	
+	<!-- 分类修改进数据库 -->
+	<update id="update_Sort" parameterType="com.zikezhi.entity.Sort">
+		update sort
+		<set>
+			<if test="sort_miaoshu != null">
+				sort_miaoshu = #{sort_miaoshu},
+			</if>
+			<if test="sort_lianjie != null">
+				sort_lianjie = #{sort_lianjie},
+			</if>
+			<if test="sort_waishe != null">
+				sort_waishe = #{sort_waishe},
+			</if>
+			<if test="sort_io != null">
+				sort_io = #{sort_io},
+			</if>
+			<if test="sort_ram != null">
+				sort_ram = #{sort_ram},
+			</if>
+			<if test="sort_shujuzhuanhuan != null">
+				sort_shujuzhuanhuan = #{sort_shujuzhuanhuan},
+			</if>
+			<if test="sort_dianya != null">
+				sort_dianya = #{sort_dianya},
+			</if>
+			<if test="sort_wendu != null">
+				sort_wendu = #{sort_wendu},
+			</if>
+			<if test="sort_product != null">
+				sort_product = #{sort_product},
+			</if>
+			<if test="sort_encapsulation != null">
+				sort_encapsulation = #{sort_encapsulation}
+			</if>
+		</set>
+		where sort_id = #{sort_id}
+	</update>
+	
+	
+	
+	<!-- 分类查询主页 -->
+	<select id="select_Sort" resultMap="BaseResultMap" parameterType="Map">
+		select * from sort
+				<where>
+					<if test="sort_miaoshu != null and sort_miaoshu !=''">
+						sort_miaoshu like CONCAT('%',#{sort_miaoshu},'%')
+					</if>
+					<if test="sort_product != null and sort_product !=''">
+						and sort_product like CONCAT('%',#{sort_product},'%')
+					</if>
+				</where>
+				<if test="start!=null and size!=null">
+					limit #{start},#{size}
+				</if>
+	</select>
+	
+	<!-- 分类修改查询 -->
+	<select id="select_SortUpdate" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from sort where sort_id = #{sort_id}
+	</select>
+	
+	<!--获取分类总数 -->
+	<select id="getTotal_Sort" parameterType="Map" resultType="java.lang.Long">
+		select count(*) from sort
+		<where>
+			<if test="sort_miaoshu != null and sort_miaoshu !=''">
+				sort_miaoshu like CONCAT('%',#{sort_miaoshu},'%')
+			</if>
+			<if test="sort_product != null and sort_product !=''">
+				and sort_product like CONCAT('%',#{sort_product},'%')
+			</if>
+		</where>
+	</select>
+	
+</mapper>

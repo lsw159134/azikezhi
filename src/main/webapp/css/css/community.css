@@ -1,0 +1,117 @@
+@charset "utf-8";
+#content{
+	margin-top: 30px;
+}
+
+#content #contentTitle{
+	border-bottom: 1px solid black;
+	padding-bottom: 30px;
+	margin-bottom: 50px;
+}
+
+#content #contentTitleText{
+	padding-left:20px;
+	font-family: "微软雅黑";
+	color: #4682B4;
+	font-size:20px;
+	padding-bottom: 10px;
+}
+#content #contentTitleComment{
+	color: #12314f;
+	line-height:20px;
+	font-size: 20px;
+	padding-left: 40px;
+	font-size:14px;
+}
+
+#content #contentTitleImg{
+	margin-top: 20px;
+}
+
+#content #contentTitleImg img{
+	width: 280px;
+	height: 200px;
+}
+
+#content #contentTitleDate{
+	margin-top: 10px;
+	padding-right: 50px;
+	float: right;
+	font-family: "微软雅黑";
+	font-size: 10px;
+}
+
+.indent .comments{
+	padding-left: 30px;
+}
+
+.comments{
+	margin-bottom: 20px;
+}
+.comments-userName{
+	color: #0F88EB;
+	margin: 5px 0px;
+	font-family: "微软雅黑";
+}
+.comments-content{
+	font-family: '宋体';
+	line-height: 20px;
+	font-size: 15px;
+	margin-left: 20px;
+}
+.comments-time{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+}
+.comments-reply{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+	cursor: pointer;
+}
+.comments-reply:hover{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #191970;
+}
+.comments-like{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+	cursor: pointer;
+}
+.comments-like:hover{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #191970;
+}
+.comments-downvote{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+	cursor: pointer;
+}
+.comments-downvote:hover{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #191970;
+}
+.user-complaint{
+	font-family: "微软雅黑";
+	font-size: 10px;
+	color: #6495ED;
+}
+.replysubmit{
+	float: right;
+	margin-top: 10px;
+	padding: 5px 15px;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	background-color: #7b72e9;
+	color: #ccc;
+}
+
+#editor{
+	margin-top:70px;
+}

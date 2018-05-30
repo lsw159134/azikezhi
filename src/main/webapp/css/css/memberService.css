@@ -1,0 +1,154 @@
+table{
+    margin-top: 100px;
+    border-collapse:collapse;
+    border: 1px solid #000;
+}
+table thead tr{
+    background-color: #FF6537;
+    width: 1200px;
+    color: #333;
+    /*display: inline-block;*/
+}
+table tr th{
+    background-color: #FF6537;
+    width: 1200px;
+    color: #333;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+    text-align: center;
+    font-size: 13px;
+}
+table thead td{
+    border: 1px solid #000;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 160px;
+    text-align: center;
+    font-size:11px;
+}
+table tbody td{
+    /*display: inline-block;*/
+    text-align: center;
+}
+table tbody td input{
+    width: 145px;
+    font-size: 11px;
+    padding: 5px;
+}
+
+#add{
+    margin: 3px;
+    padding: 3px 5px;
+    border-color: #E95D49;
+    background-color: #E95D49;
+    font-size: 10px;
+    color: #FFFFFF;
+}
+#add:hover {
+    border-color: #E93532;
+    background-color: #E93532;
+}
+#submit{
+    padding: 3px 10px;
+    border: none;
+    background-color: #b44a2c;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    float: right;
+    display: block;
+    font-family: "Microsoft YaHei", "SimHei", "YouYuan", "Arial";
+}
+#submit:disabled, #submit:hover{
+    background-color: #FF6537;
+    color: #ffffff;
+    border:none;
+}
+
+#show{
+    clear: both;
+    width: 1200px;
+    background-color: #FF6537;
+}
+#show span{
+    display: inline-block;
+    text-align: center;
+    padding: 10px 0px;
+    color: #FFFFFF;
+}
+
+#s{
+    clear: both;
+    width: 1200px;
+    /*background-color: #b5baad;*/
+}
+#s span{
+    display: inline-block;
+    text-align: center;
+    padding: 5px 0px;
+}
+
+.showProduct{
+    text-align: center;
+    width: 200px;
+    font-size: 14px;
+}
+.showNumber{
+    text-align: center;
+    width: 100px;
+    font-size: 14px;
+}
+.showEncapsulation{
+    text-align: center;
+    width: 130px;
+    font-size: 14px;
+}
+.supplierposition{
+    width: 190px;
+    font-size: 14px;
+}
+.showSupplier{
+    text-align: center;
+    width: 250px;
+    font-size: 14px;
+}
+.showYear{
+    text-align: center;
+    width: 100px;
+    font-size: 14px;
+}
+.showActualsNumber{
+    text-align: center;
+    width: 140px;
+    font-size: 14px;
+}
+.showTime{
+    text-align: center;
+    width: 190px;
+    font-size: 14px;
+}
+.showResult{
+    text-align: center;
+    width: 140px;
+    font-size: 14px;
+}
+#s button{
+    padding: 7px 10px;
+    background-color: #3a3a3a;
+    color: #CCCCCC;
+    border: none;
+}
+#s button:disabled{
+    padding: 7px 10px;
+    background-color: #919191;
+    color: #EEEEEE;
+    border: none;
+}
+#s button:hover{
+    padding: 7px 10px;
+    background-color: #919191;
+    color: #EEEEEE;
+    border: none;
+}

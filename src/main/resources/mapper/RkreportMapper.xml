@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.RkreportMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.Rkreport" >
+    <id column="id" property="id" />
+    <result column="rkreport_status" property="rkreport_status"/>
+    <result column="rkreport_num" property="rkreport_num"/>
+    <result column="rkreport_supplier" property="rkreport_supplier"/>
+    <result column="rkreport_fangshi" property="rkreport_fangshi"/>
+	<result column="rkreport_time" property="rkreport_time" />
+	<result column="rkreport_address" property="rkreport_address" />
+	<result column="rkreport_uid" property="rkreport_uid" />
+	<result column="rkreport_stockid" property="rkreport_stockid" />
+	<result column="rkreport_price" property="rkreport_price" />
+	<result column="rkreport_xsid" property="rkreport_xsid" />
+	<association property="stock" javaType="com.zikezhi.entity.Stock">
+		<id column="stock_id" property="stock_id" jdbcType="VARCHAR" />
+	    <result column="stock_product" property="stock_product" jdbcType="VARCHAR" />
+	    <result column="stock_brand" property="stock_brand"/>
+	    <result column="stock_package" property="stock_package"/>
+	    <result column="stock_lotnumber" property="stock_lotnumber"/>
+	    <result column="stock_number" property="stock_number"/>
+	    <result column="stock_price" property="stock_price"/>
+	    <result column="stock_position" property="stock_position"/>
+	    <result column="stock_addtime" property="stock_addtime"/>
+	    <result column="stock_uptime" property="stock_uptime"/>
+	    <result column="stock_danwei1" property="stock_danwei1"/>
+	    <result column="stock_huoqi" property="stock_huoqi"/>
+	    <result column="stock_beizhu" property="stock_beizhu"/>
+	    <result column="stock_danwei2" property="stock_danwei2"/>
+	    <result column="stock_baozhuangnum" property="stock_baozhuangnum"/>
+	    <result column="stock_quality" property="stock_quality"/>
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cart_id, cart_pid, cart_uid, cart_number,cart_date
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.Rkreport" >
+    insert into rkreport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rkreport_status != null" >
+        rkreport_status,
+      </if>
+      <if test="rkreport_num != null" >
+        rkreport_num,
+      </if>
+      <if test="rkreport_supplier != null" >
+        rkreport_supplier,
+      </if>
+      <if test="rkreport_fangshi != null" >
+        rkreport_fangshi,
+      </if>
+      <if test="rkreport_address != null" >
+        rkreport_address,
+      </if>
+      <if test="rkreport_uid != null" >
+        rkreport_uid,
+      </if>
+      <if test="rkreport_stockid != null" >
+        rkreport_stockid,
+      </if>
+      <if test="rkreport_price != null" >
+        rkreport_price,
+      </if>
+      <if test="rkreport_xsid != null" >
+        rkreport_xsid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rkreport_status != null" >
+        #{rkreport_status},
+      </if>
+      <if test="rkreport_num != null" >
+        #{rkreport_num},
+      </if>
+      <if test="rkreport_supplier != null" >
+        #{rkreport_supplier},
+      </if>
+      <if test="rkreport_fangshi != null" >
+        #{rkreport_fangshi},
+      </if>
+      <if test="rkreport_address != null" >
+        #{rkreport_address},
+      </if>
+      <if test="rkreport_uid != null" >
+        #{rkreport_uid},
+      </if>
+      <if test="rkreport_stockid != null" >
+        #{rkreport_stockid},
+      </if>
+      <if test="rkreport_price != null" >
+        #{rkreport_price},
+      </if>
+      <if test="rkreport_xsid != null" >
+        #{rkreport_xsid},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Rkreport" >
+    update rkreport
+    <set >
+      <if test="rkreport_status != null" >
+        rkreport_status=#{rkreport_status},
+      </if>
+      <if test="rkreport_num != null" >
+        rkreport_num=#{rkreport_num},
+      </if>
+      <if test="rkreport_supplier != null" >
+        rkreport_supplier=#{rkreport_supplier},
+      </if>
+      <if test="rkreport_fangshi != null" >
+        rkreport_fangshi=#{rkreport_fangshi},
+      </if>
+      <if test="rkreport_address != null" >
+        rkreport_address=#{rkreport_address},
+      </if>
+      <if test="rkreport_uid != null" >
+        rkreport_uid=#{rkreport_uid},
+      </if>
+      <if test="rkreport_stockid != null" >
+        rkreport_stockid=#{rkreport_stockid},
+      </if>
+      <if test="rkreport_price != null" >
+        rkreport_price=#{rkreport_price},
+      </if>
+      <if test="rkreport_xsid != null" >
+        rkreport_xsid=#{rkreport_xsid},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	delete from rkreport where id=#{0}
+  </delete>
+  
+  <select id="queryAll" resultMap="BaseResultMap" useCache="false" parameterType="Map">
+  	select * from rkreport left join stock on rkreport_stockid=stock_id where rkreport_uid=#{uid} and rkreport_status!=3
+  	<if test="product!=null">
+		and stock_product like CONCAT(#{product},'%')
+	</if>
+  	order by rkreport_time desc
+  	<if test="start!=null and size!=null">
+		limit #{start},#{size}
+	</if>
+  </select>
+  <select id="countCart" parameterType="Map" resultType="int">
+  	select count(*) from rkreport left join stock on rkreport_stockid=stock_id where rkreport_uid=#{uid} and rkreport_status!=3
+  	<if test="product!=null">
+		and stock_product like CONCAT(#{product},'%')
+	</if>
+  </select>
+  
+</mapper>

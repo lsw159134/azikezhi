@@ -1,0 +1,1671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zikezhi.dao.ProductMapper">
+	<cache eviction="FIFO" flushInterval="600000" size="5120"
+		readOnly="true" />
+	<resultMap id="BaseResultMap" type="com.zikezhi.entity.Product">
+		<id column="ProductUUID" jdbcType="VARCHAR" property="productuuid" />
+		<result column="Product" jdbcType="VARCHAR" property="product" />
+		<result column="productName" jdbcType="VARCHAR" property="productName" />
+		<result column="Supplier" jdbcType="VARCHAR" property="supplier" />
+		<result column="Description" jdbcType="VARCHAR" property="description" />
+		<result column="Manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+		<result column="LotNumber" jdbcType="VARCHAR" property="lotnumber" />
+		<result column="Encapsulation" jdbcType="VARCHAR" property="encapsulation" />
+		<result column="IsGoodsInStock" jdbcType="VARCHAR" property="isgoodsinstock" />
+		<result column="Price" jdbcType="REAL" property="price" />
+		<result column="Document" jdbcType="VARCHAR" property="document" />
+		<result column="Image" jdbcType="VARCHAR" property="image" />
+		<result column="Keywords" jdbcType="VARCHAR" property="keywords" />
+		<result column="Complaint" jdbcType="VARCHAR" property="complaint" />
+		<result column="Quality" jdbcType="INTEGER" property="quality" />
+		<result column="p_data" jdbcType="VARCHAR" property="p_data" />
+		<result column="uptime" property="uptime" />
+		<result column="product_primary" property="product_primary" />
+		<result column="product_selling" property="product_selling" />
+		<result column="SupplierUUID" jdbcType="VARCHAR" property="supplieruuid" />
+		<result column="product_miaoshu" jdbcType="VARCHAR" property="product_miaoshu" />
+		<result column="complaintPrice" property="complaintprice"
+			jdbcType="INTEGER" />
+		<result column="complaintActuals" property="complaintactuals"
+			jdbcType="INTEGER" />
+		<result column="complaintOriginal" property="complaintoriginal"
+			jdbcType="INTEGER" />
+		<result column="QQ" property="qq" jdbcType="CHAR" />
+		<result column="product_booking" property="product_booking" />
+		<result column="time" property="time" />
+		<!-- 分类 -->
+		<result column="sort_miaoshu" property="sort_miaoshu" jdbcType="VARCHAR" />
+		<result column="sort_lianjie" property="sort_lianjie" jdbcType="VARCHAR" />
+		<result column="sort_waishe" property="sort_waishe" jdbcType="VARCHAR" />
+		<result column="sort_io" property="sort_io" jdbcType="VARCHAR" />
+		<result column="sort_ram" property="sort_ram" jdbcType="VARCHAR" />
+		<result column="sort_shujuzhuanhuan" property="sort_shujuzhuanhuan"
+			jdbcType="VARCHAR" />
+		<result column="sort_dianya" property="sort_dianya" jdbcType="VARCHAR" />
+		<result column="sort_wendu" property="sort_wendu" jdbcType="VARCHAR" />
+		<result column="product_evaluatezai" property="product_evaluatezai" />
+		<result column="product_evaluatecai" property="product_evaluatecai" />
+		<association property="supplierlist" javaType="com.zikezhi.entity.Supplier">
+			<id column="SupplierUUID" property="supplieruuid" jdbcType="VARCHAR" />
+			<result column="SupplierName" property="suppliername"
+				jdbcType="VARCHAR" />
+			<result column="SupplierPosition" property="supplierposition"
+				jdbcType="VARCHAR" />
+			<result column="RepoPosition" property="repoposition"
+				jdbcType="VARCHAR" />
+			<result column="ValidityPeriod" property="validityperiod"
+				jdbcType="VARCHAR" />
+			<result column="Telphone4" property="telphone4" jdbcType="VARCHAR" />
+			<result column="Telphone3" property="telphone3" jdbcType="VARCHAR" />
+			<result column="Telphone2" property="telphone2" jdbcType="VARCHAR" />
+			<result column="Telphone1" property="telphone1" jdbcType="VARCHAR" />
+			<result column="Telphone" property="telphone" jdbcType="VARCHAR" />
+			<result column="Cellphone" property="cellphone" jdbcType="VARCHAR" />
+			<result column="Fax" property="fax" jdbcType="VARCHAR" />
+			<result column="Email" property="email" jdbcType="VARCHAR" />
+			<result column="BrandOperation" property="brandoperation"
+				jdbcType="VARCHAR" />
+			<result column="SupplierPhotos" property="supplierphotos"
+				jdbcType="VARCHAR" />
+			<result column="Qualification" property="qualification"
+				jdbcType="VARCHAR" />
+			<result column="Evaluate" property="evaluate" jdbcType="VARCHAR" />
+			<result column="IsCheck" property="ischeck" jdbcType="BIT" />
+			<result column="QQ" property="qq" jdbcType="CHAR" />
+			<result column="QQ2" property="qq2" jdbcType="CHAR" />
+			<result column="supplier_uid" property="supplier_uid"
+				jdbcType="VARCHAR" />
+			<result column="supplier_label1" property="supplier_label1"
+				jdbcType="VARCHAR" />
+			<result column="supplier_label2" property="supplier_label2"
+				jdbcType="VARCHAR" />
+			<result column="supplier_label3" property="supplier_label3"
+				jdbcType="VARCHAR" />
+			<result column="supplier_label4" property="supplier_label4"
+				jdbcType="VARCHAR" />
+			<result column="supplier_label5" property="supplier_label5"
+				jdbcType="VARCHAR" />
+			<result column="supplier_bieming" property="supplier_bieming"
+				jdbcType="VARCHAR" />
+		</association>
+
+		<association property="evaluate" javaType="com.zikezhi.entity.Evaluate">
+			<id column="evaluate_id" property="evaluate_id" />
+			<result column="evaluate_zan" property="evaluate_zan" />
+			<result column="evaluate_cai" property="evaluate_cai" />
+		</association>
+
+		<association property="primary" javaType="com.zikezhi.entity.Primary">
+			<id column="primary_id" property="primary_id" />
+			<result column="primary_name" property="primary_name"
+				jdbcType="VARCHAR" />
+		</association>
+		<association property="second" javaType="com.zikezhi.entity.Second">
+			<id column="second_id" property="second_id" />
+			<result column="second_name" property="second_name" jdbcType="VARCHAR" />
+		</association>
+		<association property="cart" javaType="com.zikezhi.entity.Cart">
+			<id column="cart_id" property="cart_id" jdbcType="VARCHAR" />
+			<result column="cart_pid" property="cart_uid" jdbcType="VARCHAR" />
+			<result column="cart_uid" property="cart_uid" />
+			<result column="cart_number" property="cart_number" />
+		</association>
+		<collection property="discountList" javaType="list"
+			ofType="com.zikezhi.entity.Discount">
+			<id column="discount_id" property="discount_id" jdbcType="VARCHAR" />
+			<result column="discount_pid" property="discount_pid"
+				jdbcType="VARCHAR" />
+			<result column="discount_numbermin" property="discount_numbermin" />
+			<result column="discount_numbermax" property="discount_numbermax" />
+			<result column="discount_price" property="discount_price"
+				jdbcType="REAL" />
+			<result column="discount_status" property="discount_status"
+				jdbcType="VARCHAR" />
+			<result column="discount_unit" property="discount_unit"
+				jdbcType="VARCHAR" />
+			<result column="discount_date" property="discount_date" />
+		</collection>
+		<collection property="pimgList" javaType="list"
+			ofType="com.zikezhi.entity.PImg">
+			<id column="p_imgid" property="p_imgid" jdbcType="VARCHAR" />
+			<result column="p_imgname" property="p_imgname" jdbcType="VARCHAR" />
+			<result column="p_imgpid" property="p_imgpid" jdbcType="VARCHAR" />
+			<result column="p_imgstauts" property="p_imgstauts" jdbcType="VARCHAR" />
+			<result column="p_imgtime" property="p_imgtime" />
+		</collection>
+	</resultMap>
+
+	<!-- 模块 -->
+	<sql id="Base_Module_List">
+		productuuid,product,lotnumber,product_miaoshu,second_name,product_primary,product_selling,
+		primary_name,second_name,discount_numbermin,discount_numbermax,discount_price,,discount_status,
+		discount_unit,discount_pid,discount_id,p_imgid,p_imgname,p_imgpid,p_imgstauts
+	</sql>
+
+	<sql id="Base_Column_List"> ProductUUID, Product, Supplier, Description, Manufacturer,
+		LotNumber, Encapsulation, IsGoodsInStock, Price, Document, Image,
+		Keywords, Complaint, Quality, SupplierUUID,complaintPrice,
+		complaintActuals, complaintOriginal, QQ,p_data,product_miaoshu
+	</sql>
+
+	<sql id="Base_discount_List">
+		ProductUUID, Product, Supplier, Description, Manufacturer,
+		LotNumber,
+		Encapsulation, IsGoodsInStock, Price,uptime,Keywords,
+		Quality,
+		SupplierUUID,
+		p_data,discount_numbermin,discount_numbermax,discount_price,discount_status,discount_unit,
+		discount_id,discount_pid,product_miaoshu
+	</sql>
+
+	<sql id="Base_pimg_List">
+		ProductUUID, Product, Supplier, Description, Manufacturer,
+		LotNumber,
+		Encapsulation, IsGoodsInStock, Price,uptime,Keywords,
+		Quality,
+		SupplierUUID,
+		p_data,discount_numbermin,discount_numbermax,discount_price,discount_status,discount_unit,
+		discount_id,discount_pid,product_miaoshu
+		p_imgid,p_imgname,p_imgpid,p_imgstauts,p_imgtime
+	</sql>
+
+	<select id="queryBySupplier" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from product where Supplier like #{0}
+	</select>
+
+	<delete id="sj_deleCP" parameterType="java.lang.String">
+		delete from product where
+		productuuid=#{productuuid,jdbcType=VARCHAR}
+	</delete>
+
+	<update id="supplier_updateCp" parameterType="com.zikezhi.entity.Product">
+		update product ,discount
+		<set>
+			<if test="product != null">
+				Product = #{product},
+			</if>
+			<if test="manufacturer != null">
+				manufacturer = #{manufacturer},
+			</if>
+			<if test="encapsulation != null">
+				encapsulation = #{encapsulation},
+			</if>
+			<if test="lotnumber != null">
+				lotnumber = #{lotnumber},
+			</if>
+			<if test="isgoodsinstock != null">
+				isgoodsinstock = #{isgoodsinstock},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+			<if test="quality != null">
+				quality = #{quality},
+			</if>
+			<if test="uptime != null">
+				uptime = #{uptime},
+			</if>
+		</set>
+		where productuuid = #{productuuid}
+	</update>
+
+	<select id="supplier_searchCP" parameterType="com.zikezhi.entity.Product"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_discount_List" />
+		from product p LEFT JOIN discount d on p.productuuid = d.Discount_pid
+		where ProductUUID = #{productuuid} order by discount_status asc
+	</select>
+
+	<!--分页查询 -->
+	<select id="selectByTimeDesc" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from product
+		<if test="keyword != null">
+			where product like CONCAT('%',#{keyword},'%')
+		</if>
+		order by time desc,
+		case when price = 0 then price end,
+		case when price
+		!= 0 then price end asc
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+	<!--查询最新的型号 -->
+	<select id="selectByNew" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		from product
+		order by time desc
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+	<!--分页查询 -->
+	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map"
+		useCache="false">
+		select * from(
+		SELECT
+		s.*,p.productName,p.ProductUUID,p.Product,p.supplier,p.Manufacturer,p.Quality,p.Encapsulation,
+		p.LotNumber,p.IsGoodsInStock,p.Price,p.Description,count(1) AS
+		complaintPrice,p.product_evaluatezai,p.product_evaluatecai
+		FROM
+		product
+		p,
+		supplier s
+		WHERE
+		p.supplieruuid = s.SupplierUUID
+		<if test="keyword != null and keyword !='' and isExact == null">
+			and product like CONCAT(#{keyword},'%')
+		</if>
+		<if
+			test="keyword != null and keyword !='' and isExact != null and isExact!=''">
+			and product = #{keyword}
+		</if>
+		<if test="product_second != null and product_second!=''">
+			and product_second in(select second_id from second1 where
+			second_name =
+			#{product_second})
+		</if>
+		<if test="manufacturer != null and manufacturer !=''">
+			and manufacturer = #{manufacturer}
+		</if>
+		<if test="encapsulation != null and encapsulation !=''">
+			and encapsulation = #{encapsulation}
+		</if>
+		GROUP BY
+		s.supplieruuid,Quality
+		ORDER BY
+		Quality ASC,
+		p.product_evaluatezai DESC
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+		)p
+		left join p_img i
+		ON p.productuuid = i.p_imgpid
+		ORDER BY
+		p.Quality ASC,
+		p.product_evaluatezai DESC
+	</select>
+	<select id="seleBygengduo" resultMap="BaseResultMap"
+		parameterType="Map">
+		select * from(select ProductUUID, Product, Supplier,
+		Description, Manufacturer,Price,
+		LotNumber, Encapsulation,
+		IsGoodsInStock,product_booking,
+		Quality,
+		SupplierUUID,product_miaoshu,ifnull(sum(evaluate_zan),0)evaluate_zan,ifnull(sum(evaluate_cai),0)evaluate_cai,
+		complaintActuals, complaintOriginal, p_data,uptime from product p left
+		join evaluate on p.ProductUUID =evaluate_pid where
+		ProductUUID!=#{productuuid} and product like CONCAT(#{keyword},'%')
+		and p.SupplierUUID is null order by uptime desc limit 0,5
+		)p left join
+		p_img i on p.productuuid = i.p_imgpid
+	</select>
+
+	<select id="seleBysuuid" resultMap="BaseResultMap"
+		parameterType="Map">
+		select * from(select ProductUUID, Product, Supplier,
+		Description, Manufacturer,Price,
+		LotNumber, Encapsulation,
+		IsGoodsInStock,product_booking,
+		Quality,
+		SupplierUUID,product_miaoshu,ifnull(sum(evaluate_zan),0)evaluate_zan,ifnull(sum(evaluate_cai),0)evaluate_cai,
+		complaintActuals, complaintOriginal, p_data,uptime from product p left
+		join evaluate on p.ProductUUID =evaluate_pid where
+		ProductUUID!=#{productuuid} and product like CONCAT(#{keyword},'%')
+		and SupplierUUID=#{supplieruuid} order by uptime desc limit 0,10
+		)p
+		left join p_img i on p.productuuid = i.p_imgpid left join supplier s
+		on s.SupplierUUID=p.supplieruuid
+	</select>
+
+	<select id="addProductHistory" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		from product
+		ORDER by time,
+		<if test="start != null and size != null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+	<select id="selectBySupplierUUid" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from product where supplieruuid = #{supplieruuid}
+		limit
+		#{start},#{size}
+	</select>
+
+	<!--获取总数 -->
+	<select id="getTotal" parameterType="java.util.Map" resultType="java.lang.Long">
+		select count(*) from(SELECT
+		count(1)
+		FROM
+		product p,
+		supplier s
+		WHERE
+		p.supplieruuid = s.SupplierUUID
+		<if test="keyword != null and keyword !='' and isExact == null">
+			and product like CONCAT(#{keyword},'%')
+		</if>
+		<if
+			test="keyword != null and keyword !='' and isExact != null and isExact!=''">
+			and product = #{keyword}
+		</if>
+		<if test="product_second != null and product_second!=''">
+			and product_second in(select second_id from second1 where
+			second_name =
+			#{product_second})
+		</if>
+		<if test="manufacturer != null and manufacturer !=''">
+			and manufacturer = #{manufacturer}
+		</if>
+		<if test="encapsulation != null and encapsulation !=''">
+			and encapsulation = #{encapsulation}
+		</if>
+		GROUP BY
+		s.supplieruuid,Quality
+		ORDER BY
+		Quality ASC,
+		p.product_evaluatezai DESC)p
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM(
+		select * from product LEFT JOIN discount on
+		ProductUUID=Discount_pid
+		where ProductUUID =
+		#{productuuid,jdbcType=VARCHAR}
+		)p LEFT JOIN p_img i ON p.productuuid =
+		i.p_imgpid order by
+		p.discount_price desc
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		product
+		where ProductUUID = #{productuuid,jdbcType=VARCHAR}
+	</delete>
+
+	<!--添加产品 -->
+	<insert id="insert" parameterType="com.zikezhi.entity.Product">
+		insert into product
+		(ProductUUID, Product, Supplier,
+		Description, Manufacturer, LotNumber,
+		Encapsulation, IsGoodsInStock, Price,TotalSales,
+		Document, Image,
+		Keywords,
+		Complaint, Quality, SupplierUUID,complaintPrice,
+		complaintActuals,
+		complaintOriginal,product_miaoshu,
+		QQ
+		)
+		values
+		(#{productuuid,jdbcType=VARCHAR},
+		#{product,jdbcType=VARCHAR},
+		#{supplier,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{manufacturer,jdbcType=VARCHAR},
+		#{lotnumber,jdbcType=VARCHAR},
+		#{encapsulation,jdbcType=VARCHAR},
+		#{isgoodsinstock,jdbcType=VARCHAR},
+		#{price,jdbcType=REAL},
+		#{totalSales,jdbcType=INTEGER},
+		#{document,jdbcType=VARCHAR},
+		#{image,jdbcType=VARCHAR},
+		#{keywords,jdbcType=VARCHAR},
+		#{complaint,jdbcType=VARCHAR},
+		#{quality,jdbcType=INTEGER},
+		#{supplieruuid,jdbcType=VARCHAR},
+		#{product_miaoshu,jdbcType=VARCHAR},
+		#{complaintprice,jdbcType=INTEGER},
+		#{complaintactuals,jdbcType=INTEGER},
+		#{complaintoriginal,jdbcType=INTEGER},
+		#{qq,jdbcType=CHAR}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.zikezhi.entity.Product"
+		flushCache="true">
+		insert into product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="productuuid != null">
+				ProductUUID,
+			</if>
+			<if test="product != null">
+				Product,
+			</if>
+			<if test="supplier != null">
+				Supplier,
+			</if>
+			<if test="description != null">
+				Description,
+			</if>
+			<if test="manufacturer != null">
+				Manufacturer,
+			</if>
+			<if test="lotnumber != null">
+				LotNumber,
+			</if>
+			<if test="encapsulation != null">
+				Encapsulation,
+			</if>
+			<if test="isgoodsinstock != null">
+				IsGoodsInStock,
+			</if>
+			<if test="price != null">
+				Price,
+			</if>
+			<if test="totalSales != null">TotalSales,</if>
+			<if test="document != null">
+				Document,
+			</if>
+			<if test="image != null">
+				Image,
+			</if>
+			<if test="keywords != null">
+				Keywords,
+			</if>
+			<if test="complaint != null">
+				Complaint,
+			</if>
+			<if test="quality != null">
+				Quality,
+			</if>
+			<if test="supplieruuid != null">
+				SupplierUUID,
+			</if>
+			<if test="complaintprice != null">
+				complaintPrice,
+			</if>
+			<if test="complaintactuals != null">
+				complaintActuals,
+			</if>
+			<if test="complaintoriginal != null">
+				complaintOriginal,
+			</if>
+			<if test="qq != null">
+				QQ,
+			</if>
+			<if test="product_primary != null">
+				product_primary,
+			</if>
+			<if test="product_selling != null">
+				product_selling,
+			</if>
+			<if test="p_data != null">
+				p_data,
+			</if>
+			<if test="product_miaoshu != null">
+				product_miaoshu,
+			</if>
+			<if test="product_booking != null and product_booking!=''">
+				product_booking
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="productuuid != null">
+				#{productuuid,jdbcType=VARCHAR},
+			</if>
+			<if test="product != null">
+				#{product,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				#{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="manufacturer != null">
+				#{manufacturer,jdbcType=VARCHAR},
+			</if>
+			<if test="lotnumber != null">
+				#{lotnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="encapsulation != null">
+				#{encapsulation,jdbcType=VARCHAR},
+			</if>
+			<if test="isgoodsinstock != null">
+				#{isgoodsinstock,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=REAL},
+			</if>
+			<if test="totalSales != null">
+				#{totalSales,jdbcType=INTEGER},
+			</if>
+			<if test="document != null">
+				#{document,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				#{image,jdbcType=VARCHAR},
+			</if>
+			<if test="keywords != null">
+				#{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="complaint != null">
+				#{complaint,jdbcType=VARCHAR},
+			</if>
+			<if test="quality != null">
+				#{quality,jdbcType=INTEGER},
+			</if>
+			<if test="supplieruuid != null">
+				#{supplieruuid,jdbcType=VARCHAR},
+			</if>
+			<if test="complaintprice != null">
+				#{complaintprice,jdbcType=INTEGER},
+			</if>
+			<if test="complaintactuals != null">
+				#{complaintactuals,jdbcType=INTEGER},
+			</if>
+			<if test="complaintoriginal != null">
+				#{complaintoriginal,jdbcType=INTEGER},
+			</if>
+			<if test="product_primary != null">
+				#{product_primary},
+			</if>
+			<if test="product_selling != null">
+				#{product_selling},
+			</if>
+			<if test="p_data != null">
+				#{p_data},
+			</if>
+			<if test="product_miaoshu != null">
+				#{product_miaoshu},
+			</if>
+			<if test="product_booking != null and product_booking!=''">
+				#{product_booking}
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.Product">
+		update ignore product
+		<set>
+			<if test="product != null">
+				Product = #{product, jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				Supplier = #{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				Description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="manufacturer != null">
+				Manufacturer = #{manufacturer,jdbcType=VARCHAR},
+			</if>
+			<if test="lotnumber != null">
+				LotNumber = #{lotnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="encapsulation != null">
+				Encapsulation = #{encapsulation,jdbcType=VARCHAR},
+			</if>
+			<if test="isgoodsinstock != null">
+				IsGoodsInStock = #{isgoodsinstock,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null and price != ''">
+				Price = #{price,jdbcType=REAL},
+			</if>
+			<if test="document != null">
+				Document = #{document,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				Image = #{image,jdbcType=VARCHAR},
+			</if>
+			<if test="keywords != null">
+				Keywords = #{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="complaint != null">
+				Complaint = #{complaint,jdbcType=VARCHAR},
+			</if>
+			<if test="quality != null">
+				Quality = #{quality,jdbcType=INTEGER},
+			</if>
+			<if test="supplieruuid != null">
+				SupplierUUID = #{supplieruuid,jdbcType=VARCHAR},
+			</if>
+			<if test="complaintprice != null">
+				complaintPrice = #{complaintprice,jdbcType=INTEGER},
+			</if>
+			<if test="complaintactuals != null">
+				complaintActuals = #{complaintactuals,jdbcType=INTEGER},
+			</if>
+			<if test="complaintoriginal != null">
+				complaintOriginal =
+				#{complaintoriginal,jdbcType=INTEGER},
+			</if>
+			<if test="qq != null">
+				QQ = #{qq,jdbcType=CHAR},
+			</if>
+			<if test="p_data != null and p_data!=''">
+				p_data = #{p_data,jdbcType=VARCHAR},
+			</if>
+			<if test="uptime != null">
+				uptime = #{uptime},
+			</if>
+			<if test="product_primary != null">
+				product_primary = #{product_primary},
+			</if>
+			<if test="product_selling != null and product_selling!=0">
+				product_selling = #{product_selling},
+			</if>
+			<if test="product_miaoshu != null">
+				product_miaoshu = #{product_miaoshu},
+			</if>
+			<if test="product_booking != null and product_booking!=''">
+				product_booking = #{product_booking}
+			</if>
+			<if test="product_evaluatezai != null and product_evaluatezai!=0">
+				product_evaluatezai = #{product_evaluatezai},
+			</if>
+			<if test="product_evaluatecai != null and product_evaluatecai!=0">
+				product_evaluatecai = #{product_evaluatecai},
+			</if>
+		</set>
+		where ProductUUID = #{productuuid,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 分类修改进数据库 -->
+	<update id="sort_update" parameterType="com.zikezhi.entity.Product">
+		update product
+		<set>
+			<if test="sort_miaoshu != null">
+				sort_miaoshu = #{sort_miaoshu},
+			</if>
+			<if test="sort_lianjie != null">
+				sort_lianjie = #{sort_lianjie},
+			</if>
+			<if test="sort_waishe != null">
+				sort_waishe = #{sort_waishe},
+			</if>
+			<if test="sort_io != null">
+				sort_io = #{sort_io},
+			</if>
+			<if test="sort_ram != null">
+				sort_ram = #{sort_ram},
+			</if>
+			<if test="sort_shujuzhuanhuan != null">
+				sort_shujuzhuanhuan = #{sort_shujuzhuanhuan},
+			</if>
+			<if test="sort_dianya != null">
+				sort_dianya = #{sort_dianya},
+			</if>
+			<if test="sort_wendu != null">
+				sort_wendu = #{sort_wendu}
+			</if>
+		</set>
+		where ProductUUID = #{productuuid,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.Product">
+		update product
+		set
+		Product = #{product,jdbcType=VARCHAR},
+		Description =
+		#{description,jdbcType=VARCHAR},
+		Manufacturer =
+		#{manufacturer,jdbcType=VARCHAR},
+		LotNumber =
+		#{lotnumber,jdbcType=VARCHAR},
+		Encapsulation =
+		#{encapsulation,jdbcType=VARCHAR},
+		IsGoodsInStock =
+		#{isgoodsinstock,jdbcType=VARCHAR}
+		where
+		ProductUUID =
+		#{productuuid,jdbcType=VARCHAR}
+	</update>
+
+	<select id="findByPid" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * from (select * from product p LEFT JOIN p_img i on
+		p.productuuid = i.p_imgpid)q LEFT JOIN supplier s on q.supplieruuid=
+		s.supplieruuid where q.ProductUUID=#{productuuid,jdbcType=VARCHAR}
+	</select>
+
+	<select id="sj_searchProduct" parameterType="Map" resultMap="BaseResultMap">
+		SELECT * from (
+		select * from product
+		<where>
+			<if test="supplieruuid!=null">
+				supplieruuid=#{supplieruuid}
+			</if>
+			<if test="product!=null and product!=''">
+				and product like CONCAT(#{product},'%')
+			</if>
+		</where>
+		order by uptime desc, time desc,quality desc
+		<if test="size!=null and size!=''">
+			limit #{start},#{size}
+		</if>
+		)p LEFT JOIN discount d on p.ProductUUID= d.Discount_pid
+		order by
+		uptime desc, time desc,discount_status asc
+	</select>
+
+	<!-- 总记录数 -->
+	<select id="getTotalBySj" parameterType="Map" resultType="Long">
+		select count(*) from product
+		<where>
+			<if test="supplieruuid!=null">
+				supplieruuid=#{supplieruuid}
+			</if>
+			<if test="product!=null and product!=''">
+				and product like CONCAT(#{product},'%')
+			</if>
+		</where>
+	</select>
+
+	<insert id="addNewProduct" parameterType="com.zikezhi.entity.Product">
+		insert into product
+		(productuuid,product,supplier,manufacturer,lotnumber,encapsulation,isgoodsinstock,price,quality,supplieruuid,description)
+		values(#{productuuid},
+		#{product},
+		#{supplier},
+		#{manufacturer},
+		#{lotnumber},
+		#{encapsulation},
+		#{isgoodsinstock},
+		#{price},
+		#{quality},
+		#{supplieruuid},
+		#{description}
+		)
+	</insert>
+
+	<delete id="daleteProduct" parameterType="java.lang.String">
+		delete from product
+		where productuuid=#{productuuid,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="queryByCart" resultMap="BaseResultMap"
+		parameterType="java.lang.String" useCache="false">
+		select * from(select * from
+		product p,cart c where p.ProductUUID=c.cart_pid and c.panduan is null and 
+		c.cart_uid=#{uid})s LEFT JOIN supplier ss on
+		ss.supplieruuid=s.supplieruuid
+	</select>
+
+<select id="querybdByCart" resultMap="BaseResultMap"
+		parameterType="java.lang.String" useCache="false">
+		select * from(select * from
+		product p,cart c where p.ProductUUID=c.cart_pid and c.panduan = 'beidong' and
+		c.cart_uid=#{uid})s LEFT JOIN supplier ss on
+		ss.supplieruuid=s.supplieruuid
+	</select>
+	<select id="queryAll" resultMap="BaseResultMap" parameterType="Map"
+		useCache="false">
+		select ProductUUID, Product, Supplier, Description, Manufacturer,
+		LotNumber, Encapsulation, IsGoodsInStock,Price,product_selling,
+		Quality,
+		SupplierUUID,ifnull(complaintPrice,0)complaintPrice,second_name,primary_name,
+		ifnull(total,0)as complaintActuals, complaintOriginal,
+		p_data,product_miaoshu,uptime,discount_id,discount_pid,
+		discount_numbermax,discount_numbermin,discount_price,discount_status,discount_unit,sort_miaoshu
+		from(select ProductUUID, Product, Supplier, Description,
+		Manufacturer,Price,
+		LotNumber, Encapsulation, IsGoodsInStock,
+		Quality,
+		SupplierUUID,complaintPrice,
+		complaintOriginal,
+		p_data,product_miaoshu,uptime,product_primary,product_selling
+		,sort_miaoshu from product
+		<where>
+			Quality=1
+			<if test="keyword != null and keyword!=''">
+				and product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="supplier != null and supplier!=''">
+				and Supplier like CONCAT('%',#{supplier},'%')
+			</if>
+			<if test="manufacturer != null and manufacturer != ''">
+				and manufacturer like CONCAT('%',#{manufacturer},'%')
+			</if>
+		</where>
+		order by product_selling desc,uptime desc
+		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+		)p LEFT JOIN discount d on d.Discount_pid=p.ProductUUID LEFT JOIN
+		primary1 on p.product_primary=primary_id LEFT JOIN second1 on
+		p.product_selling=second_id
+		left join (select * from(select
+		ps.productuid,sum(ps.total)total
+		from(select
+		productuid,product,count(*) total from express where
+		productuid is not
+		null group by productuid
+		union all
+		select o_pid productuid,o_product
+		product,count(*)total from
+		orderitme where o_eid in(select express from
+		express) group by o_pid
+		)ps GROUP BY ps.productuid)b)e on
+		p.productuuid=e.productuid order by
+		p.product_selling desc,p.uptime
+		desc, d.Discount_price desc
+	</select>
+
+<select id="seleZaixianGouByNum" parameterType="map" resultMap="BaseResultMap">
+select p.Manufacturer, p.IsGoodsInStock,p.Price,
+p.LotNumber,  p.Encapsulation ,p.Product,  
+ifnull(total, 0) AS complaintActuals 
+from product p join (
+			SELECT
+				ps.productuid,
+				sum(ps.total) total
+			FROM
+				(
+					SELECT
+						productuid,
+						product,
+						count(*) total
+					FROM
+						express
+					WHERE
+						productuid IS NOT NULL
+					GROUP BY
+						productuid
+					UNION ALL
+						SELECT
+							o_pid productuid,
+							o_product product,
+							count(*) total
+						FROM
+							orderitme
+						WHERE
+							o_eid IN (SELECT express FROM express)
+						GROUP BY
+							o_pid 
+				) ps
+			GROUP BY
+				ps.productuid   ) aa on  
+				p.ProductUUID = aa.productuid and p.Supplier = '样品商城'  
+				ORDER BY complaintActuals desc  limit #{start},#{size}
+</select>
+	<!--获取总数 -->
+	<select id="getTotalAll" parameterType="Map" resultType="java.lang.Long">
+		select count(*) from product
+		<where>
+			Quality=1
+			<if test="keyword != null and keyword!=''">
+				and product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="supplier != null and supplier!=''">
+				and Supplier like CONCAT('%',#{supplier},'%')
+			</if>
+			<if test="manufacturer != null and manufacturer != ''">
+				and manufacturer like CONCAT('%',#{manufacturer},'%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 分类查询主页 -->
+	<select id="sele_Sort" resultMap="BaseResultMap" parameterType="Map">
+		select
+		product,sort_miaoshu,sort_lianjie,sort_waishe,sort_io,encapsulation,
+		sort_ram,sort_shujuzhuanhuan,sort_dianya,sort_wendu
+		from product
+		<where>
+			<if test="sort_miaoshu != null and sort_miaoshu !=''">
+				sort_miaoshu like CONCAT('%',#{sort_miaoshu},'%')
+			</if>
+			<if test="product != null and product!=''">
+				and product like CONCAT('%',#{product},'%')
+			</if>
+			<if test="start!=null and size!=null">
+				limit #{start},#{size}
+			</if>
+		</where>
+	</select>
+
+	<!-- 分类添加查询 -->
+	<select id="sele_SortAdd" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		product,sort_miaoshu,sort_lianjie,sort_waishe,sort_io,encapsulation,
+		sort_ram,sort_shujuzhuanhuan,sort_dianya,sort_wendu
+		from product
+		where
+		productuuid = #{productuuid}
+	</select>
+
+   <select id="queryResistice" >
+   
+    
+   </select>
+
+	<!--获取分类总数 -->
+	<select id="getTotalSort" parameterType="Map" resultType="java.lang.Long">
+		select count(*) from product
+		<where>
+			<if test="sort_miaoshu != null and sort_miaoshu !=''">
+				sort_miaoshu like CONCAT('%',#{sort_miaoshu},'%')
+			</if>
+			<if test="product != null and product!=''">
+				and product like CONCAT('%',#{product},'%')
+			</if>
+		</where>
+
+	</select>
+
+	<select id="select_module" resultMap="BaseResultMap"
+		parameterType="com.zikezhi.entity.Product">
+		select * from (
+		select * from (
+		SELECT * FROM(
+		select * from(
+		select *
+		from product
+		<where>
+			<if test="product != null and product !=''">
+				product like CONCAT('%',#{product},'%')
+			</if>
+			<if test="product_primary != null and product_primary != ''">
+				and product_primary in (SELECT primary_id from primary1
+				where
+				primary_name like CONCAT('%',#{product_primary},'%'))
+			</if>
+			<if test="product_selling != null and product_selling != ''">
+				and product_selling in (SELECT second_id from second1
+				where second_name
+				like CONCAT('%',#{product_selling},'%'))
+			</if>
+		</where>
+		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+		)p LEFT JOIN discount d on p.ProductUUID = d.Discount_pid
+		)q LEFT JOIN
+		p_img i ON q.productuuid = i.p_imgpid
+		)m left join primary1 n on
+		m.product_primary = n.primary_id
+		)r left join second1 t on
+		r.product_selling = t.second_id order by
+		r.uptime desc,r.time desc,
+		r.discount_status asc
+
+	</select>
+
+	<!--获取模块总数 -->
+	<select id="getTotal_Module" parameterType="Map" resultType="java.lang.Long">
+		select count(*) from product
+		<where>
+			<if test="product != null and product !=''">
+				product like CONCAT('%',#{product},'%')
+			</if>
+			<if test="product_primary != null and product_primary != ''">
+				and product_primary in (SELECT primary_id from primary1
+				where
+				primary_name like CONCAT('%',#{product_primary},'%'))
+			</if>
+			<if test="product_selling != null and product_selling != ''">
+				and product_selling in (SELECT second_id from second1
+				where second_name
+				like CONCAT('%',#{product_selling},'%'))
+			</if>
+		</where>
+	</select>
+
+
+	<select id="select_updateModule" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from product where productuuid =
+		#{productuuid}
+	</select>
+
+	<select id="fenleilist" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select ProductUUID, Product, Supplier, Description, Manufacturer,
+		LotNumber, Encapsulation, IsGoodsInStock,Price,
+		Quality,
+		SupplierUUID,complaintPrice,product_miaoshu,primary_name,second_name,
+		complaintActuals, complaintOriginal,
+		p_data,uptime,discount_id,discount_pid,discount_numbermax,discount_numbermin,discount_price,discount_status,discount_unit,
+		p_imgid,p_imgname,p_imgpid,p_imgstauts,p_imgtime
+		from(SELECT * FROM (
+		select ProductUUID, Product, Supplier, Description,
+		Manufacturer,Price,
+		LotNumber, Encapsulation, IsGoodsInStock,
+		Quality,
+		SupplierUUID,complaintPrice,product_miaoshu,primary_name,second_name,
+		complaintActuals, complaintOriginal, p_data,uptime from product left
+		join primary1 pr on product_primary=primary_id left join second1 s on
+		product_selling=s.second_id
+		<where>
+			<if test="keyword != null and keyword!=''">
+				product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="product_selling != null and product_selling!=''">
+				and product_selling in(select second_id from second1
+				where second_name
+				= #{product_selling}
+			</if>
+		</where>
+		order by quality,
+		case when price = 0 then price end,
+		case when price !=
+		0 then price end asc
+		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+		)p LEFT JOIN discount d on d.Discount_pid=p.ProductUUID
+		)q left join
+		p_img i ON q.productuuid = i.p_imgpid order by q.quality,
+		case when
+		q.price = 0 then q.price end,
+		case when q.price != 0 then
+		q.price end
+		asc,
+		q.Discount_price desc
+	</select>
+
+	<select id="fenleigetTotal" parameterType="java.lang.String"
+		resultType="java.lang.Long">
+		select count(*) from product
+		where product_selling in(select
+		second_id from second1 where second_name =
+		#{0}
+	</select>
+
+	<!--查询资料为空或者一级分类为空 -->
+	<select id="dataNull" resultMap="BaseResultMap" parameterType="Map">
+		select ProductUUID, Product, Supplier, Description, Manufacturer,
+		LotNumber, Encapsulation, IsGoodsInStock,Price,
+		Quality,
+		SupplierUUID,complaintPrice,second_name,primary_name,
+		complaintActuals, complaintOriginal,
+		p_data,product_miaoshu,uptime,discount_id,discount_pid,
+		discount_numbermax,discount_numbermin,discount_price,discount_status,discount_unit,sort_miaoshu
+		from(select ProductUUID, Product, Supplier,
+		Description,Manufacturer,Price,
+		LotNumber, Encapsulation,
+		IsGoodsInStock,Quality, SupplierUUID,complaintPrice,
+		complaintActuals,
+		complaintOriginal,
+		p_data,product_miaoshu,uptime,product_primary,product_selling ,
+		sort_miaoshu from product left join p_img on ProductUUID=p_imgpid
+		where p_imgname is null and quality=1
+		<if test="manufacturer !=null and manufacturer != ''">
+			and manufacturer = #{manufacturer}
+		</if>
+		order by uptime desc
+		<if test="start !=null and size !=null">
+			limit #{start}, #{size}
+		</if>
+		)p LEFT JOIN discount d on d.Discount_pid=p.ProductUUID LEFT JOIN
+		primary1 on p.product_primary=primary_id LEFT JOIN second1 on
+		p.product_selling=second_id order by
+		p.uptime desc, d.Discount_price
+		desc
+	</select>
+
+	<!--获取资料为空数量 -->
+	<select id="dataNullTotal" parameterType="Map" resultType="java.lang.Long">
+		select count(*) from product left join p_img on ProductUUID=p_imgpid
+		where p_imgname is null
+	</select>
+
+	<!--查询质量为1和2的产品 -->
+	<select id="seleQuality" resultMap="BaseResultMap"
+		parameterType="Map">
+		select ProductUUID, Product, Supplier, Description, Manufacturer,
+		LotNumber, Encapsulation, IsGoodsInStock,Price,
+		Quality,
+		SupplierUUID,complaintPrice,second_name,primary_name,
+		complaintActuals, complaintOriginal,
+		p_data,product_miaoshu,uptime,discount_id,discount_pid,
+		discount_numbermax,discount_numbermin,discount_price,discount_status,discount_unit,sort_miaoshu
+		from(select ProductUUID, Product, Supplier, Description,
+		Manufacturer,Price,
+		LotNumber, Encapsulation, IsGoodsInStock,
+		Quality,
+		SupplierUUID,complaintPrice,
+		complaintActuals, complaintOriginal,
+		p_data,product_miaoshu,uptime,product_primary,product_selling
+		,sort_miaoshu from product
+		where (quality = 1 or quality = 2) and
+		encapsulation is not null
+		<if test="product !=null and product != ''">
+			and product = #{product}
+		</if>
+		<if test="manufacturer !=null and manufacturer != ''">
+			and manufacturer = #{manufacturer}
+		</if>
+		order by
+		<if test="isgoodsinstock !=null and isgoodsinstock !=null">
+			-isgoodsinstock desc,
+		</if>
+		uptime desc
+		<if test="start !=null and size !=null">
+			limit #{start}, #{size}
+		</if>
+		)p LEFT JOIN discount d on d.Discount_pid=p.ProductUUID LEFT JOIN
+		primary1 on p.product_primary=primary_id LEFT JOIN second1 on
+		p.product_selling=second_id order by
+		<if test="isgoodsinstock !=null and isgoodsinstock !=null">
+			-isgoodsinstock asc,
+		</if>
+		p.uptime desc, d.Discount_price desc
+	</select>
+
+	<!--查询质量为1和2的产品数量 -->
+	<select id="seleQualityTotal" parameterType="Map" resultType="java.lang.Long">
+		select count(*) from product where (quality = 1 or quality = 2) and
+		encapsulation is not null
+		<if test="product !=null and product != ''">
+			and product = #{product}
+		</if>
+		<if test="manufacturer !=null and manufacturer != ''">
+			and manufacturer = #{manufacturer}
+		</if>
+	</select>
+
+	<select id="queryByProduct_booking" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT * FROM(
+		select * from product LEFT JOIN discount
+		on ProductUUID=Discount_pid
+		where product_booking = #{0}
+		)p LEFT JOIN
+		p_img i ON p.productuuid = i.p_imgpid order by
+		p.discount_price desc
+	</select>
+
+	<update id="updateByNumberreduce" parameterType="com.zikezhi.entity.Product">
+		update product
+		set
+		isgoodsinstock=isgoodsinstock-#{isgoodsinstock},totalSales=isgoodsinstock+#{isgoodsinstock}
+		where productuuid
+		=#{productuuid}
+	</update>
+
+	<select id="seleCartRan" resultMap="BaseResultMap">
+		select * from (
+		select * from
+		(
+		SELECT * FROM(
+		select * from(
+		select * from product
+		where quality = 1 or
+		quality = 2 ORDER BY RAND() limit 6
+		)p LEFT JOIN discount d on
+		p.ProductUUID = d.Discount_pid
+		)q LEFT JOIN p_img i ON q.productuuid =
+		i.p_imgpid
+		)m left join primary1 n on m.product_primary = n.primary_id
+		)r left join second1 t on r.product_selling = t.second_id order by
+		r.uptime desc,r.time desc, r.discount_status asc
+	</select>
+
+
+	<!--筛选查询 -->
+	<select id="shaixuanList" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select *
+		from(
+		select ProductUUID, Product, Supplier, Description,
+		Manufacturer,Price,
+		LotNumber, Encapsulation,
+		IsGoodsInStock,product_booking,
+		Quality,
+		SupplierUUID,count(*)complaintPrice,product_miaoshu,ifnull(sum(evaluate_zan),0)evaluate_zan,ifnull(sum(evaluate_cai),0)evaluate_cai,
+		complaintActuals, complaintOriginal, p_data,uptime from product p left
+		join evaluate on p.ProductUUID =evaluate_pid
+		<where>
+			<if test="keyword != null and keyword !=''">
+				product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="product_primary != null and product_primary !=''">
+				and product_primary in(SELECT primary_id FROM primary1
+				WHERE
+				primary_name = #{product_primary})
+			</if>
+			<if test="product_selling != null and product_selling!=''">
+				and product_selling in(select second_id from second1
+				where second_name
+				= #{product_selling})
+			</if>
+			<if test="encapsulation != null and encapsulation !=''">
+				and encapsulation = #{encapsulation}
+			</if>
+		</where>
+		group by supplieruuid
+		order by quality,uptime desc,
+		case when price = 0
+		then price end,
+		case when price != 0 then price end asc
+		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+		)q left join p_img i on q.productuuid = i.p_imgpid
+		order by q.quality
+		asc,q.uptime desc
+	</select>
+
+	<!--获取筛选总数 -->
+	<select id="getshaixuanTotal" parameterType="java.util.Map"
+		resultType="java.lang.Long">
+		select count(*) from product
+		<where>
+			<if test="keyword != null and keyword !=''">
+				product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="product_primary != null and product_primary !=''">
+				and product_primary in(SELECT primary_id FROM primary1
+				WHERE
+				primary_name = #{product_primary})
+			</if>
+			<if test="product_selling != null and product_selling!=''">
+				and product_selling in(select second_id from second1
+				where second_name
+				= #{product_selling})
+			</if>
+			<if test="encapsulation != null and encapsulation !=''">
+				and encapsulation = #{encapsulation}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据封装筛选条件 -->
+	<select id="seleEncapsulation" resultMap="BaseResultMap"
+		parameterType="Map">
+		SELECT encapsulation,count(*) product_primary from product
+		<where>
+			<if test="keyword != null and keyword !=''">
+				product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="product_primary != null and product_primary !=''">
+				and product_primary in(SELECT primary_id FROM primary1
+				WHERE primary_name = #{product_primary})
+			</if>
+			<if test="second_name != null and second_name !=''">
+				and product_selling in(SELECT second_id FROM second1
+				WHERE second_name = #{second_name})
+			</if>
+			<if test="encapsulation != null and encapsulation !=''">
+				and encapsulation = #{encapsulation}
+			</if>
+		</where>
+		GROUP BY Encapsulation ORDER BY product_primary desc limit 48
+	</select>
+
+	<!-- 根据品牌筛选条件 -->
+	<select id="seleManufacturer" resultMap="BaseResultMap"
+		parameterType="Map">
+		SELECT manufacturer,count(*) product_primary from product
+		<where>
+			(quality = 1 or quality = 2)
+			<if test="keyword != null and keyword !=''">
+				and product like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="product_primary != null and product_primary !=''">
+				and product_primary in(SELECT primary_id FROM primary1
+				WHERE primary_name = #{product_primary})
+			</if>
+			<if test="encapsulation != null and encapsulation !=''">
+				and encapsulation = #{encapsulation}
+			</if>
+			<if test="manufacturer != null and manufacturer !=''">
+				and manufacturer = #{manufacturer}
+			</if>
+		</where>
+		GROUP BY manufacturer ORDER BY product_primary desc limit 48
+	</select>
+
+	<!-- 找到品牌下的产品数 -->
+	<select id="selemanum" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		SELECT count(*) from product WHERE manufacturer =
+		#{manufacturer} AND (quality = 1 or quality = 2)
+	</select>
+
+	<select id="seleShelves" resultMap="BaseResultMap">
+		select p.* from(select * from
+		product left join p_img on productuuid=p_imgpid where quality=1 and
+		p_imgname is not null LIMIT 0,4)p order by time desc limit 0,4
+	</select>
+	<select id="seleHot" resultMap="BaseResultMap">
+		CALL seleHot();
+	</select>
+	<select id="seleDeal" resultMap="BaseResultMap">
+		select * from product where
+		product_selling=2
+	</select>
+
+	<!-- 再次购买时 查找订单下的产品 -->
+	<select id="goAgain" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from(select * from express e LEFT JOIN orderitme o on
+		o.o_eid=e.express WHERE e.express = #{express})s
+		LEFT JOIN product p on
+		s.productuid=p.productuuid or s.o_pid=p.productuuid
+	</select>
+
+	<!-- 常见型号 -->
+	<select id="selechangjian" resultMap="BaseResultMap">
+		select * from product where
+		Quality&gt;=3 and Quality&lt;6 limit 0,200
+	</select>
+	<!-- st单片机 -->
+	<select id="seleS" resultMap="BaseResultMap">
+		select * from product where
+		Quality=6 order by time desc limit 0,500
+	</select>
+
+	<!-- ATM单片机 -->
+	<select id="seleATM" resultMap="BaseResultMap">
+		select * from(select second_name
+		from second1 where second_primaryid=(select
+		primary_id from primary1
+		where primary_name='ATMEL单片机系列'))s left join
+		(
+		select * from product
+		left join p_img on productuuid=p_imgpid group by
+		productuuid)p on
+		s.second_name=p.productuuid left join brand on
+		manufacturer=brand_id
+	</select>
+
+	<select id="seleUserSupplierProduct1" resultMap="BaseResultMap"
+		parameterType="java.lang.String" useCache="false">
+		select * from product where
+		Quality=3 and supplieruuid=(select supplieruuid
+		from supplier where
+		supplier_uid=#{0}) order by product
+	</select>
+
+	<select id="seleUserSupplierProduct2" resultMap="BaseResultMap"
+		parameterType="java.lang.String" useCache="false">
+		select * from product where
+		Quality=4 and supplieruuid=(select supplieruuid
+		from supplier where
+		supplier_uid=#{0}) order by product
+	</select>
+
+	<select id="seleUserSupplierProduct3" resultMap="BaseResultMap"
+		parameterType="java.lang.String" useCache="false">
+		select * from product where
+		Quality=5 and supplieruuid=(select supplieruuid
+		from supplier where
+		supplier_uid=#{0}) order by product
+	</select>
+
+	<select id="selePuTong" resultMap="BaseResultMap" parameterType="Map"
+		useCache="false">
+		select * from product where Quality=6 and SupplierUUID=#{sid}
+		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+	</select>
+
+	<select id="getputongTatol" resultType="int" parameterType="Map"
+		useCache="false">
+		select count(*) from product where Quality=6 and
+		SupplierUUID=#{sid}
+	</select>
+
+	<select id="queryByproductByMByEbyI" resultType="int"
+		parameterType="com.zikezhi.entity.Product">
+		select count(*) from product
+		<where>
+			quality &lt; 6 and quality &gt; 1
+			<if test="supplieruuid != null and supplieruuid !=''">
+				and supplieruuid=#{supplieruuid}
+			</if>
+			<if test="product != null and product !=''">
+				and product=#{product}
+			</if>
+			<if test="isgoodsinstock != null and isgoodsinstock !=''">
+				and isgoodsinstock=#{isgoodsinstock}
+			</if>
+			<if test="encapsulation != null and encapsulation !=''">
+				and encapsulation = #{encapsulation}
+			</if>
+			<if test="manufacturer != null and manufacturer !=''">
+				and manufacturer = #{manufacturer}
+			</if>
+			<if test="lotnumber != null and lotnumber !=''">
+				and lotnumber = #{lotnumber}
+			</if>
+		</where>
+	</select>
+
+	<select id="SupplierProduct" resultMap="BaseResultMap"
+		parameterType="Map" useCache="false" flushCache="true">
+		select * from product
+		<where>
+			quality!=1
+			<if test="product != null and product != ''">
+				and product like CONCAT(#{product},'%')
+			</if>
+			<if test="supplier != null and supplier != ''">
+				and supplieruuid in(select supplieruuid from supplier
+				where suppliername like CONCAT('%',#{supplier},'%'))
+			</if>
+		</where>
+		order by time desc
+		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+	</select>
+
+	<select id="getSupplierProductCount" resultType="int"
+		parameterType="Map" useCache="false">
+		select count(*) from product
+		<where>
+			quality!=1
+			<if test="product != null and product != ''">
+				and product like CONCAT(#{product},'%')
+			</if>
+			<if test="supplier != null and supplier != ''">
+				and supplieruuid in(select supplieruuid from supplier
+				where suppliername like CONCAT('%',#{supplier},'%'))
+			</if>
+		</where>
+	</select>
+
+	<select id="queryByGroup" resultMap="BaseResultMap"
+		parameterType="java.lang.String" useCache="false">
+		select
+		count(*)IsGoodsInStock,Quality,description from product where
+		SupplierUUID=#{0} and quality!=1 group by Quality
+	</select>
+
+	<select id="seleZaiXianProduct" resultMap="BaseResultMap"
+		parameterType="Map">
+		<!-- select p.*,i.* from(select p.* from( select * from product where quality=1)p 
+			left join p_img i on p_imgpid=p.productuuid where p_imgname is not null group 
+			by p_imgpid <if test="start!=null and size!=null"> limit #{start}, #{size} 
+			</if> )p left join p_img i on i.p_imgpid=p.productuuid left join supplier 
+			s on s.supplieruuid=p.supplieruuid -->
+		SELECT
+		p.*
+		FROM
+		product p
+		LEFT JOIN supplier s ON s.supplieruuid =
+		p.supplieruuid
+		WHERE
+		quality =
+		1
+		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+	</select>
+
+	<select id="getZaiTotal" resultType="int">
+		select count(*) from(
+		SELECT
+		p.*
+		FROM
+		product p
+		LEFT JOIN supplier s ON
+		s.supplieruuid = p.supplieruuid
+		WHERE
+		quality = 1
+		)c
+	</select>
+
+	<select id="selectProductxia" resultMap="BaseResultMap"
+		parameterType="Map">
+		SELECT
+		p.ProductUUID,p.Product,p.supplieruuid,p.supplier,p.Manufacturer,p.Quality,p.Encapsulation,
+		p.LotNumber,p.IsGoodsInStock,p.Price,p.Description,p.product_evaluatezai,p.product_evaluatecai,
+		s.*
+		FROM
+		(SELECT
+		*
+		FROM
+		product
+		WHERE
+		supplieruuid=#{sid} and
+		Quality=#{quality} and productuuid!=#{pid}
+		and product like
+		CONCAT(#{keyword},'%')
+		LIMIT 0,
+		5
+		)p left join supplier s on
+		s.SupplierUUID=p.supplieruuid order by
+		p.product_evaluatezai desc
+	</select>
+
+	<update id="updateEvaluatezai" parameterType="java.lang.String">
+		update product set
+		product_evaluatezai=(product_evaluatezai+1) where
+		productuuid=#{0}
+	</update>
+
+	<update id="updateEvaluatecai" parameterType="java.lang.String">
+		update product set
+		product_evaluatecai=(product_evaluatecai+1) where
+		productuuid=#{0}
+	</update>
+
+	<select id="selepAndlAndmAndeAnd" resultType="com.zikezhi.entity.Product"
+		parameterType="com.zikezhi.entity.Product" useCache="false">
+		SELECT
+		*
+		FROM
+		product
+		WHERE
+		Product = #{product}
+		AND Manufacturer = #{manufacturer}
+		AND
+		Encapsulation = #{encapsulation}
+		AND LotNumber = #{lotnumber}
+		AND
+		SupplierUUID = #{supplieruuid} and Quality = #{quality} LIMIT 1
+	</select>
+
+	<select id="seleByOnline" resultMap="BaseResultMap"
+		parameterType="Map" useCache="false">
+		SELECT
+		*
+		FROM
+		product
+		WHERE
+		quality = 1
+		AND supplieruuid = #{suid}
+		<if test="product != null and product != ''">
+			AND product like CONCAT(#{product},'%')
+		</if>
+		order by uptime desc, time desc
+		<if test="start!=null and size!=null">
+			limit #{start}, #{size}
+		</if>
+	</select>
+
+	<select id="getOnlineTotal" resultType="int" parameterType="Map"
+		useCache="false">
+		SELECT
+		count(*)
+		FROM
+		product
+		WHERE
+		quality = 1
+		AND supplieruuid = #{suid}
+		<if test="product != null and product != ''">
+			AND product like CONCAT(#{product},'%')
+		</if>
+	</select>
+
+	<update id="upsuppliername">
+		update product p,supplier s set
+		p.supplier=s.suppliername where
+		p.supplieruuid=s.supplieruuid
+	</update>
+	<!-- 添加数据，重复忽略 -->
+	<insert id="insertNoPepetition" parameterType="com.zikezhi.entity.Product">
+		insert ignore into
+		product
+		(ProductUUID, Product, Supplier,
+		Description, Manufacturer,
+		LotNumber,
+		Encapsulation, IsGoodsInStock, Price,
+		Document, Image,
+		Keywords,
+		Complaint, Quality, SupplierUUID,complaintPrice,
+		complaintActuals,
+		complaintOriginal,product_miaoshu,
+		QQ
+		)
+		values
+		(#{productuuid,jdbcType=VARCHAR},
+		#{product,jdbcType=VARCHAR},
+		#{supplier,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{manufacturer,jdbcType=VARCHAR},
+		#{lotnumber,jdbcType=VARCHAR},
+		#{encapsulation,jdbcType=VARCHAR},
+		#{isgoodsinstock,jdbcType=VARCHAR},
+		#{price,jdbcType=REAL},
+		#{document,jdbcType=VARCHAR},
+		#{image,jdbcType=VARCHAR},
+		#{keywords,jdbcType=VARCHAR},
+		#{complaint,jdbcType=VARCHAR},
+		#{quality,jdbcType=INTEGER},
+		#{supplieruuid,jdbcType=VARCHAR},
+		#{product_miaoshu,jdbcType=VARCHAR},
+		#{complaintprice,jdbcType=INTEGER},
+		#{complaintactuals,jdbcType=INTEGER},
+		#{complaintoriginal,jdbcType=INTEGER},
+		#{qq,jdbcType=CHAR}
+		)
+	</insert>
+	<update id="updateByProductAfterExpress" parameterType="com.zikezhi.entity.Product">
+		update product ,discount
+		<set>
+			<if test="isgoodsinstock != null">
+				isgoodsinstock = #{isgoodsinstock},
+			</if>
+			<if test="totalSales != null">
+				totalSales = #{totalSales}
+				s
+			</if>
+		</set>
+		where productuuid = #{productuuid}
+	</update>
+	<!-- 根据所有字段查询出product -->
+	<select id="queryProductByProduct" parameterType="com.zikezhi.entity.Product"
+		resultType="java.lang.Integer">
+		select count(*) from product
+		where
+		product=#{product} and supplier=#{supplier} and productuuid=#{productuuid} and
+		manufacturer=#{manufacturer} and lotnumber=#{lotnumber} and
+		encapsulation=#{encapsulation} and quality=#{quality}
+	</select>
+</mapper>																																																																																																																																																										

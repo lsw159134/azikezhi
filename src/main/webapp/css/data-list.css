@@ -1,0 +1,84 @@
+.main-wrap { margin-right:280px;}
+.col-sub { width:270px; margin-left: -270px;}
+
+/*闈㈠寘灞戝鑸� ----------------------------*/
+.crumb-search{position:relative;width:100%;margin:8px 0 -8px;}
+.crumb{height:40px;line-height:46px;overflow:hidden;}
+.crumb-logo{float:left;}
+.crumb-nav{float:left;padding-left:10px;}
+.crumb-nav a{color:#005ba0;font-family:"寰蒋闆呴粦",arial;}
+.crumb-nav a:hover{color:#c00;}
+/* 鎼滅储     ---------------------------------------------*/
+.min-search{position:absolute;zoom:1;width:235px;right:0;top:6px;}
+.min-searchBox{float:left;display:inline;margin-right:3px;width:160px;height:18px;padding:3px 7px;border:1px solid #d8d8d8;background:#fff;border-radius:3px;}
+.min-searchBtn{
+	float:left;height:26px;line-height:24px;width:50px;cursor:pointer;
+	background:#ffffe9;border:1px solid #d8d8d8;color:#c00;border-radius:3px;
+}
+.min-searchBtn:hover{background:#c00;color:#fff;}
+
+.site-notice .bd{border-color:#d8d8d8;background:#f3f8ff;}
+
+/*璧勬枡鍒楄〃 -----------------------------------*/
+/*鎺掑簭*/
+.order-panel{position:relative;width:100%;overflow:hidden;margin:5px 0 15px;border-bottom:1px solid #d8d8d8;}
+.page-title{font-size:26px;font-weight:bold;color:#c00;}
+.order{position:absolute;right:30px;bottom:0;_bottom:-1px;}
+.order-item{
+	display:inline-block;width:110px;height:30px;*zoom:1;
+	border:1px solid #d8d8d8;border-bottom:0;border-radius:3px 3px 0 0;
+	line-height:30px;text-align:center;
+}
+.order-item:hover,
+.order-item.order-cur{background:#ddd;color:#c00;}
+
+.data-list{padding:9px 24px 14px;border-top:2px solid #c00;}
+.data-list-hd{border-bottom:1px dashed #eee;}
+.data-list-hd,
+.data-list-bd .item-hd{width:100%;height:30px;line-height:30px;overflow:hidden;color:#999;}
+.data-list-bd li{width:100%;overflow:hidden;*zoom:1;padding:5px 0 7px;border-bottom:1px dashed #d8d8d8;}
+.data-list-bd .item-bd{margin-left:35px;}
+.data-list-bd .item-bd a{margin:0 5px 0 0;}
+/*b*/
+.data-list-bd b{font-weight:normal;}
+
+.data-type,
+.data-name,
+.upload-user,
+.download-times,
+.upload-time,
+.option{
+	float:left;
+	display:inline;
+	overflow:hidden;
+}
+.data-list-bd .ico{width:25px;margin:7px 8px 3px 2px;}
+.data-type{width:25px;margin-right:10px;}
+.data-name{width:370px;}
+.upload-user{width:90px;margin-right:10px;}
+.download-times{width:70px;}
+.upload-time{width:70px;}
+.data-list-bd .data-name{font-size:14px;}
+/*鍒嗛〉*/
+.pagn-bottom{margin:20px 0 0;text-align:center;}
+
+/*鎺掕*/
+.download-rank .bd{padding-top:60px;}
+.download-rank .tab-title{width:60px;height:26px;top:18px;left:40px;line-height:26px;border-radius:3px;}
+.download-rank .tab-2{left:105px;}
+.download-rank .tab-3{left:170px;}
+.user-rank em{display:inline-block;width:16px;padding-right:3px;font-family:arial;text-align:right;}
+.user-rank a{display:inline-block;width:6em;}
+.user-rank span{margin-left:5px;}
+
+
+/* 灏侀潰鍒楄〃椤甸潰 ---------------------------------------------------*/
+.tl-nav-wrap{padding:6px 14px 9px 5px;border:1px solid #d8d8d8;border-top:2px solid #c00;background:#ffffe9;}
+.tl-nav-wrap .page-title{padding-left:12px;}
+.tl-nav-item{float:left;display:inline;padding:0 15px;height:24px;line-height:24px;color:#666;border-radius:3px;}
+.tl-nav-item:hover{background:#c00;color:#fff;text-decoration:none;}
+
+/*鑺傜偣*/
+.node-panel-wrap{margin:0 275px 0 -5px;}
+.node-panel{float:left;display:inline;position:relative;width:355px;margin:10px 5px 0;}
+.node-more{position:absolute;right:10px;top:6px;}

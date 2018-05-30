@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.AdminZaiXinJianMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.AdminZaiXinJian" >
+    <id column="admin_id" property="admin_id" jdbcType="VARCHAR" />
+    <result column="admin_adminAccountNumber" property="admin_adminAccountNumber" jdbcType="VARCHAR" />
+    <result column="admin_adminpassword" property="admin_adminpassword"/>
+    <result column="admin_jurisdiction" property="admin_jurisdiction"/>
+    <result column="admin_status" property="admin_status"/>
+    <result column="admin_adminName" property="admin_adminName"/>
+    <result column="admin_addtime" property="admin_addtime"/>
+    <result column="admin_uptime" property="admin_uptime"/>
+    <result column="admin_Explain" property="admin_Explain"/>
+    <result column="admin_Thatadd" property="admin_Thatadd"/>
+    <result column="admin_shrio" property="admin_shrio"/>
+    <result column="admin_loginIp1" property="admin_loginIp1"/>
+    <result column="admin_loginIp2" property="admin_loginIp2"/>
+    <result column="admin_loginIp3" property="admin_loginIp3"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    admin_id, admin_adminAccountNumber, admin_adminpassword, admin_jurisdiction,admin_adminName,admin_uptime,admin_status,admin_Explain,admin_Thatadd,admin_shrio
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.AdminZaiXinJian" >
+    insert into adminzaixinjian
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="admin_id != null" >
+        admin_id,
+      </if>
+      <if test="admin_adminAccountNumber != null" >
+        admin_adminAccountNumber,
+      </if>
+      <if test="admin_adminpassword != null" >
+        admin_adminpassword,
+      </if>
+      <if test="admin_jurisdiction != null and admin_jurisdiction!=''" >
+        admin_jurisdiction,
+      </if>
+      <if test="admin_adminName != null" >
+        admin_adminName,
+      </if>
+      <if test="admin_status != null and admin_status != ''" >
+        admin_status,
+      </if>
+      <if test="admin_Explain != null" >
+        admin_Explain,
+      </if>
+      <if test="admin_Thatadd != null" >
+        admin_Thatadd,
+      </if>
+      <if test="admin_addtime != null" >
+        admin_addtime,
+      </if>
+      <if test="admin_shrio != null" >
+        admin_shrio
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="admin_id != null" >
+        #{admin_id,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_adminAccountNumber != null" >
+        #{admin_adminAccountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_adminpassword != null" >
+        #{admin_adminpassword},
+      </if>
+      <if test="admin_jurisdiction != null and admin_jurisdiction!=''" >
+        #{admin_jurisdiction},
+      </if>
+       <if test="admin_adminName != null" >
+        #{admin_adminName},
+      </if>
+      <if test="admin_status != null and admin_status != ''" >
+        #{admin_status},
+      </if>
+      <if test="admin_Explain != null" >
+        #{admin_Explain},
+      </if>
+      <if test="admin_Thatadd != null" >
+        #{admin_Thatadd},
+      </if>
+      <if test="admin_addtime != null" >
+        #{admin_addtime},
+      </if>
+      <if test="admin_shrio != null" >
+        #{admin_shrio}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.AdminZaiXinJian" >
+    update adminzaixinjian
+    <set>
+      <if test="admin_adminAccountNumber != null" >
+        admin_adminAccountNumber = #{admin_adminAccountNumber},
+      </if>
+      <if test="admin_adminpassword != null" >
+        admin_adminpassword = #{admin_adminpassword},
+      </if>
+      <if test="admin_jurisdiction != null and admin_jurisdiction!=''" >
+        admin_jurisdiction = #{admin_jurisdiction},
+      </if>
+      <if test="admin_adminName != null" >
+        admin_adminName = #{admin_adminName},
+      </if>
+      <if test="admin_status != null and admin_status != '' " >
+        admin_status = #{admin_status},
+      </if>
+      <if test="admin_Explain != null" >
+        admin_Explain = #{admin_Explain},
+      </if>
+      <if test="admin_Thatadd != null" >
+        admin_Thatadd = #{admin_Thatadd},
+      </if>
+      <if test="admin_uptime != null" >
+        admin_uptime = #{admin_uptime},
+      </if>
+      <if test="admin_shrio != null" >
+        admin_shrio = #{admin_shrio},
+      </if>
+      <if test="admin_loginIp1 != null and admin_loginIp1 != ''" >
+        admin_loginIp1 = #{admin_loginIp1},
+      </if>
+      <if test="admin_loginIp2 != null and admin_loginIp2 != ''" >
+        admin_loginIp2 = #{admin_loginIp2},
+      </if>
+      <if test="admin_loginIp3 != null and admin_loginIp3 != ''" >
+        admin_loginIp3 = #{admin_loginIp3},
+      </if>
+      <if test="admin_status != null and admin_status != ''" >
+        admin_status = #{admin_status},
+      </if>
+    </set>
+    where admin_id = #{admin_id,jdbcType=VARCHAR}
+  </update>
+  <!-- 查询所有管理员 -->
+  <select id="queryAll" resultMap="BaseResultMap">
+		select a.admin_shrio,a.admin_Explain,a.admin_status,a.admin_id,a.admin_adminAccountNumber,a.admin_Jurisdiction,a.admin_adminName,a.admin_addtime,a.admin_uptime,s.admin_adminName up,a.admin_Thatadd from(select * from adminzaixinjian)s,adminzaixinjian a where s.admin_id=a.admin_Thatadd
+  </select>
+  
+  <!-- 管理员登陆查询 -->
+  <select id="adminLogin" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from adminzaixinjian where admin_adminAccountNumber=#{0} and admin_adminpassword=#{1}
+  </select>
+  
+  <!-- 删除管理员 -->
+  <delete id="deleteByAdminID" parameterType="java.lang.String">
+  	delete from adminzaixinjian where admin_id=#{0}
+  </delete>
+  <!-- 查询管理员账号 -->
+  <select id="queryByAccount" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from adminzaixinjian where admin_adminAccountNumber=#{0}
+  </select>
+  <!-- 根据id查询管理员 -->
+  <select id="queryByAid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from adminzaixinjian where admin_id=#{0}
+  </select>
+  
+  <select id="queryByABystatus" resultMap="BaseResultMap">
+  	select * from adminzaixinjian where admin_jurisdiction=1
+  </select>
+  
+</mapper>

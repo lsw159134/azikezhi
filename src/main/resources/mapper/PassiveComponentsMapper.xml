@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.PassiveComponentsMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.PassiveComponents" >
+    <id column="passiveComponentsUid" property="passivecomponentsuid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="phone1" property="phone1" jdbcType="VARCHAR" />
+    <result column="phone2" property="phone2" jdbcType="VARCHAR" />
+    <result column="down" property="down" jdbcType="INTEGER" />
+    <result column="up" property="up" jdbcType="INTEGER" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="cellphone1" property="cellphone1" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="qq1" property="qq1" jdbcType="VARCHAR" />
+    <result column="qq2" property="qq2" jdbcType="VARCHAR" />
+    <result column="qq3" property="qq3" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="illustration" property="illustration" jdbcType="VARCHAR" />
+    <result column="explain1" property="explain1" jdbcType="VARCHAR" />
+    <result column="explain2" property="explain2" jdbcType="VARCHAR" />
+    <result column="explain3" property="explain3" jdbcType="VARCHAR" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="label1" property="label1" jdbcType="VARCHAR" />
+    <result column="passive_cid" property="passive_cid" jdbcType="VARCHAR" />
+    <result column="passive_sid" property="passive_sid" jdbcType="VARCHAR" />
+    <result column="time" property="time"/>
+    <association property="subcategory" javaType="com.zikezhi.entity.Subcategory">
+		<id column="subcategory_id" property="subcategory_id" />
+    	<result column="subcategory_name" property="subcategory_name" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    passiveComponentsUid, name, phone, phone1, phone2, down, up, cellphone, cellphone1, 
+    qq, qq1, qq2, qq3, address, illustration, explain1, explain2, explain3, label, label1,
+    passive_cid, passive_sid
+  </sql>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select * from passivecomponents left join subcategory on passive_sid=subcategory_id
+    <where>
+    	<if test="supplier!=null">
+    		name like CONCAT('%',#{supplier},'%')
+    	</if>
+    	<if test="name!=null">
+    		and (passive_cid in(select classification_id from classification where classification_name like CONCAT('%',#{name},'%')) or passive_sid in(select subcategory_id from subcategory where subcategory_name like CONCAT('%',#{name},'%')))
+    	</if>
+    </where>
+    order by down
+    <if test="start!=null and size!=null">
+		limit #{start},#{size}
+	</if>
+  </select>
+  
+  <select id="getCidTotal" resultType="int" parameterType="java.lang.Integer">
+  	select count(*) from passivecomponents where passive_cid=#{0}
+  </select>
+  
+  <select id="selectByCidandSid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from passivecomponents where passive_cid=#{0} and passive_sid=#{1} order by down
+  </select>
+  
+  <select id="queryByid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from passivecomponents where passiveComponentsUid=#{0}
+  </select>
+  
+  <select id="getTotal" resultType="int" parameterType="java.util.Map">
+    select count(*) from passivecomponents
+    <where>
+    	<if test="supplier!=null">
+    		name like CONCAT('%',#{supplier},'%')
+    	</if>
+    	<if test="name!=null">
+    		and (passive_cid in(select classification_id from classification where classification_name like CONCAT('%',#{name},'%')) or passive_sid in(select subcategory_id from subcategory where subcategory_name like CONCAT('%',#{name},'%')))
+    	</if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from passivecomponents
+    where passiveComponentsUid = #{passivecomponentsuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zikezhi.entity.PassiveComponents" >
+    insert into passivecomponents (passiveComponentsUid, name, phone, 
+      phone1, phone2, down, 
+      up, cellphone, cellphone1, 
+      qq, qq1, qq2, qq3, 
+      address, illustration, explain1,
+      explain2, explain3, label, 
+      label1, passive_cid, passive_sid)
+    values (#{passivecomponentsuid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, #{down,jdbcType=INTEGER}, 
+      #{up,jdbcType=INTEGER}, #{cellphone,jdbcType=VARCHAR}, #{cellphone1,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{qq1,jdbcType=VARCHAR}, #{qq2,jdbcType=VARCHAR}, #{qq3,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{illustration,jdbcType=VARCHAR}, #{explain1,jdbcType=VARCHAR},
+      #{explain2,jdbcType=VARCHAR}, #{explain3,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, 
+      #{label1,jdbcType=VARCHAR}, #{passive_cid,jdbcType=VARCHAR}, #{passive_sid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.PassiveComponents" >
+    insert into passivecomponents
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="passivecomponentsuid != null" >
+        passiveComponentsUid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="phone1 != null" >
+        phone1,
+      </if>
+      <if test="phone2 != null" >
+        phone2,
+      </if>
+      <if test="down != null" >
+        down,
+      </if>
+      <if test="up != null" >
+        up,
+      </if>
+      <if test="cellphone != null" >
+        cellphone,
+      </if>
+      <if test="cellphone1 != null" >
+        cellphone1,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="qq1 != null" >
+        qq1,
+      </if>
+      <if test="qq2 != null" >
+        qq2,
+      </if>
+      <if test="qq3 != null" >
+        qq3,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="illustration != null" >
+        illustration,
+      </if>
+      <if test="explain1 != null" >
+        explain1,
+      </if>
+      <if test="explain2 != null" >
+        explain2,
+      </if>
+      <if test="explain3 != null" >
+        explain3,
+      </if>
+      <if test="label != null" >
+        label,
+      </if>
+      <if test="label1 != null" >
+        label1,
+      </if>
+      <if test="passive_cid != null" >
+        passive_cid,
+      </if>
+      <if test="passive_sid != null" >
+        passive_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="passivecomponentsuid != null" >
+        #{passivecomponentsuid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone1 != null" >
+        #{phone1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone2 != null" >
+        #{phone2,jdbcType=VARCHAR},
+      </if>
+      <if test="down != null" >
+        #{down,jdbcType=INTEGER},
+      </if>
+      <if test="up != null" >
+        #{up,jdbcType=INTEGER},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone1 != null" >
+        #{cellphone1,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="qq1 != null" >
+        #{qq1,jdbcType=VARCHAR},
+      </if>
+      <if test="qq2 != null" >
+        #{qq2,jdbcType=VARCHAR},
+      </if>
+      <if test="qq3 != null" >
+        #{qq3,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="illustration != null" >
+        #{illustration,jdbcType=VARCHAR},
+      </if>
+      <if test="explain1 != null" >
+        #{explain1,jdbcType=VARCHAR},
+      </if>
+      <if test="explain2 != null" >
+        #{explain2,jdbcType=VARCHAR},
+      </if>
+      <if test="explain3 != null" >
+        #{explain3,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="label1 != null" >
+        #{label1,jdbcType=VARCHAR},
+      </if>
+      <if test="passive_cid != null" >
+        #{passive_cid,jdbcType=VARCHAR},
+      </if>
+      <if test="passive_sid != null" >
+        #{passive_sid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.PassiveComponents" >
+    update passivecomponents
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone1 != null" >
+        phone1 = #{phone1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone2 != null" >
+        phone2 = #{phone2,jdbcType=VARCHAR},
+      </if>
+      <if test="down != null" >
+        down = #{down,jdbcType=INTEGER},
+      </if>
+      <if test="up != null" >
+        up = #{up,jdbcType=INTEGER},
+      </if>
+      <if test="cellphone != null" >
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone1 != null" >
+        cellphone1 = #{cellphone1,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="qq1 != null" >
+        qq1 = #{qq1,jdbcType=VARCHAR},
+      </if>
+      <if test="qq2 != null" >
+        qq2 = #{qq2,jdbcType=VARCHAR},
+      </if>
+      <if test="qq3 != null" >
+        qq3 = #{qq3,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="illustration != null" >
+        illustration = #{illustration,jdbcType=VARCHAR},
+      </if>
+      <if test="explain1 != null" >
+        explain1 = #{explain1,jdbcType=VARCHAR},
+      </if>
+      <if test="explain2 != null" >
+        explain2 = #{explain2,jdbcType=VARCHAR},
+      </if>
+      <if test="explain3 != null" >
+        explain3 = #{explain3,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="label1 != null" >
+        label1 = #{label1,jdbcType=VARCHAR},
+      </if>
+      <if test="passive_cid != null" >
+        passive_cid = #{passive_cid,jdbcType=VARCHAR},
+      </if>
+      <if test="passive_sid != null" >
+        passive_sid = #{passive_sid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where passiveComponentsUid = #{passivecomponentsuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.PassiveComponents" >
+    update passivecomponents
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      phone1 = #{phone1,jdbcType=VARCHAR},
+      phone2 = #{phone2,jdbcType=VARCHAR},
+      down = #{down,jdbcType=INTEGER},
+      up = #{up,jdbcType=INTEGER},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      cellphone1 = #{cellphone1,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      qq1 = #{qq1,jdbcType=VARCHAR},
+      qq2 = #{qq2,jdbcType=VARCHAR},
+      qq3 = #{qq3,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      illustration = #{illustration,jdbcType=VARCHAR},
+      explain1 = #{explain1,jdbcType=VARCHAR},
+      explain2 = #{explain2,jdbcType=VARCHAR},
+      explain3 = #{explain3,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      label1 = #{label1,jdbcType=VARCHAR},
+      passive_cid = #{passive_cid,jdbcType=VARCHAR},
+      passive_sid = #{passive_sid,jdbcType=VARCHAR}
+    where passiveComponentsUid = #{passivecomponentsuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

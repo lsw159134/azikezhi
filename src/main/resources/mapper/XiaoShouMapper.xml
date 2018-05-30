@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.XiaoShouMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.XiaoShou" >
+    <id column="xs_id" property="xs_id"/>
+    <result column="xs_type" property="xs_type" jdbcType="VARCHAR" />
+    <result column="xs_kehu" property="xs_kehu"/>
+    <result column="xs_name" property="xs_name"/>
+    <result column="xs_phone" property="xs_phone"/>
+    <result column="xs_address" property="xs_address"/>
+    <result column="xs_yingshou" property="xs_yingshou"/>
+    <result column="xs_shishou" property="xs_shishou"/>
+    <result column="xs_othermoney" property="xs_othermoney"/>
+    <result column="xs_pay" property="xs_pay"/>
+    <result column="xs_shoukuandate" property="xs_shoukuandate"/>
+    <result column="xs_beizhu" property="xs_beizhu"/>
+    <result column="xs_uid" property="xs_uid"/>
+    <result column="xs_addtime" property="xs_addtime"/>
+    <result column="xs_status" property="xs_status"/>
+    <collection property="rkreportList" javaType="list" ofType="com.zikezhi.entity.Rkreport">
+    	<id column="id" property="id" />
+	    <result column="rkreport_status" property="rkreport_status"/>
+	    <result column="rkreport_num" property="rkreport_num"/>
+	    <result column="rkreport_supplier" property="rkreport_supplier"/>
+	    <result column="rkreport_fangshi" property="rkreport_fangshi"/>
+		<result column="rkreport_time" property="rkreport_time" />
+		<result column="rkreport_address" property="rkreport_address" />
+		<result column="rkreport_uid" property="rkreport_uid" />
+		<result column="rkreport_stockid" property="rkreport_stockid" />
+		<result column="rkreport_price" property="rkreport_price" />
+		<result column="rkreport_xsid" property="rkreport_xsid" />
+		<association property="stock" javaType="com.zikezhi.entity.Stock">
+			<id column="stock_id" property="stock_id" jdbcType="VARCHAR" />
+		    <result column="stock_product" property="stock_product" jdbcType="VARCHAR" />
+		    <result column="stock_brand" property="stock_brand"/>
+		    <result column="stock_package" property="stock_package"/>
+		    <result column="stock_lotnumber" property="stock_lotnumber"/>
+		    <result column="stock_number" property="stock_number"/>
+		    <result column="stock_price" property="stock_price"/>
+		    <result column="stock_position" property="stock_position"/>
+		    <result column="stock_addtime" property="stock_addtime"/>
+		    <result column="stock_uptime" property="stock_uptime"/>
+		    <result column="stock_danwei1" property="stock_danwei1"/>
+		    <result column="stock_huoqi" property="stock_huoqi"/>
+		    <result column="stock_beizhu" property="stock_beizhu"/>
+		    <result column="stock_danwei2" property="stock_danwei2"/>
+		    <result column="stock_baozhuangnum" property="stock_baozhuangnum"/>
+		    <result column="stock_quality" property="stock_quality"/>
+		</association>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cart_id, cart_pid, cart_uid, cart_number,cart_date
+  </sql>
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.XiaoShou" >
+    insert into xiaoshou
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="xs_id != null" >
+        xs_id,
+      </if>
+      <if test="xs_type != null" >
+        xs_type,
+      </if>
+      <if test="xs_kehu != null" >
+        xs_kehu,
+      </if>
+      <if test="xs_name != null" >
+        xs_name,
+      </if>
+      <if test="xs_phone != null" >
+        xs_phone,
+      </if>
+      <if test="xs_address != null" >
+        xs_address,
+      </if>
+      <if test="xs_yingshou != null" >
+        xs_yingshou,
+      </if>
+      <if test="xs_shishou != null" >
+        xs_shishou,
+      </if>
+      <if test="xs_othermoney != null" >
+        xs_othermoney,
+      </if>
+      <if test="xs_pay != null" >
+        xs_pay,
+      </if>
+      <if test="xs_shoukuandate != null" >
+        xs_shoukuandate,
+      </if>
+      <if test="xs_beizhu != null" >
+        xs_beizhu,
+      </if>
+      <if test="xs_uid != null" >
+        xs_uid,
+      </if>
+      <if test="xs_status != null" >
+        xs_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="xs_id != null" >
+        #{xs_id},
+      </if>
+      <if test="xs_type != null" >
+        #{xs_type},
+      </if>
+      <if test="xs_kehu != null" >
+        #{xs_kehu},
+      </if>
+      <if test="xs_name != null" >
+        #{xs_name},
+      </if>
+      <if test="xs_phone != null" >
+        #{xs_phone},
+      </if>
+      <if test="xs_address != null" >
+        #{xs_address},
+      </if>
+      <if test="xs_yingshou != null" >
+        #{xs_yingshou},
+      </if>
+      <if test="xs_shishou != null" >
+        #{xs_shishou},
+      </if>
+      <if test="xs_othermoney != null" >
+        #{xs_othermoney},
+      </if>
+      <if test="xs_pay != null" >
+        #{xs_pay},
+      </if>
+      <if test="xs_shoukuandate != null" >
+        #{xs_shoukuandate},
+      </if>
+      <if test="xs_beizhu != null" >
+        #{xs_beizhu},
+      </if>
+      <if test="xs_uid != null" >
+        #{xs_uid},
+      </if>
+      <if test="xs_status != null" >
+        #{xs_status},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zikezhi.entity.XiaoShou" >
+    update xiaoshou
+    <set >
+      <if test="xs_type != null" >
+        xs_type=#{xs_type},
+      </if>
+      <if test="xs_kehu != null" >
+        xs_kehu=#{xs_kehu},
+      </if>
+      <if test="xs_name != null" >
+        xs_name=#{xs_name},
+      </if>
+      <if test="xs_phone != null" >
+        xs_phone=#{xs_phone},
+      </if>
+      <if test="xs_address != null" >
+        xs_address=#{xs_address},
+      </if>
+      <if test="xs_yingshou != null" >
+        xs_yingshou=#{xs_yingshou},
+      </if>
+      <if test="xs_shishou != null" >
+        xs_shishou=#{xs_shishou},
+      </if>
+      <if test="xs_othermoney != null" >
+        xs_othermoney=#{xs_othermoney},
+      </if>
+      <if test="xs_pay != null" >
+        xs_pay=#{xs_pay},
+      </if>
+      <if test="xs_shoukuandate != null" >
+        xs_shoukuandate=#{xs_shoukuandate},
+      </if>
+      <if test="xs_beizhu != null" >
+        xs_beizhu=#{xs_beizhu},
+      </if>
+      <if test="xs_uid != null" >
+        xs_uid=#{xs_uid},
+      </if>
+      <if test="xs_status != null" >
+        xs_status=#{xs_status},
+      </if>
+    </set>
+    where xs_id = #{xs_id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询购物车是否有产品相同 -->
+  <select id="queryByPid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from cart where cart_pid=#{0} and cart_uid=#{1}
+  </select>
+  
+  <!-- 删除购物产品 -->
+  <delete id="deleteByPid" parameterType="java.lang.String">
+  	delete from cart where cart_id=#{0}
+  </delete>
+  
+  <!-- 清空购物车 -->
+  <delete id="deleteByUid" parameterType="java.lang.String">
+  	delete from cart where cart_uid=#{cart_uid}
+  </delete>
+  
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="Map" useCache="false">
+  	select * from xiaoshou where xs_uid=#{uid}
+  	<if test="name!=null">
+  		and (xs_kehu like CONCAT(#{name},'%') or xs_phone like CONCAT(#{xs_phone},'%'))
+  	</if>
+  	order by xs_addtime desc
+  	<if test="start!=null and size != null">
+  		limit #{start},#{size}
+  	</if>
+  </select>
+  <select id="countCart" parameterType="Map" resultType="int">
+  	select count(*) from xiaoshou where xs_uid=#{uid}
+  	<if test="name!=null">
+  		and (xs_kehu like CONCAT(#{name},'%') or xs_phone like CONCAT(#{xs_phone},'%'))
+  	</if>
+  </select>
+  
+  <select id="seleByid" resultMap="BaseResultMap" parameterType="java.lang.String" useCache="false">
+  	select * from xiaoshou left join rkreport on xs_id=rkreport_xsid left join stock on stock_id=rkreport_stockid
+  	where xs_id=#{0} 
+  </select>
+  
+</mapper>

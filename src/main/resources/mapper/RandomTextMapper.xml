@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zikezhi.dao.RandomTextMapper" >
+  <resultMap id="BaseResultMap" type="com.zikezhi.entity.RandomText" >
+    <id column="id" property="id"/>
+    <result column="timertask" property="timertask" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <insert id="insertSelective" parameterType="com.zikezhi.entity.RandomText">
+		insert into random
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="timertask != null">
+				timertask,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="timertask != null">
+				#{timertask,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.zikezhi.entity.RandomText" >
+    update random
+    set timertask = #{timertask,jdbcType=VARCHAR}
+    where id = #{id}
+  </update>
+  <delete id="deleterandomtext" parameterType="int">
+  	delete from random where id = #{0}
+  </delete>
+  <select id="query" resultMap="BaseResultMap" parameterType="Map">
+  	select id,timertask from random
+  	<where>
+  		<if test="product!=null and product!=''">
+  			timertask like CONCAT('%',#{product},'%')
+  		</if>
+  	</where>
+  	order by time desc
+  </select>
+  
+</mapper>
